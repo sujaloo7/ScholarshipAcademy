@@ -1,0 +1,99 @@
+
+
+ .container-fluid{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 6rem;
+  background-color: #f5f5f5;
+  font-family: "Inter", sans-serif;
+  background-image: url("https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/03/06/15/university-of-sydney.jpg?width=1200");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* height: 100vh; */
+  /* position: relative; */
+  background-attachment: fixed;
+}
+
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+/* Design */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+.cards_item {
+  display: flex;
+  padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .cards_item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .cards_item {
+    width: 33.3333%;
+  }
+}
+
+
+
+.card_content {
+  padding: 1rem;
+  /* background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%); */
+  background-image: -webkit-linear-gradient(83deg, #465b98 0%, #69347f 43%, #11253b 100%);
+  opacity: 9;
+}
+
+.card_title {
+  color: #ffffff;
+  /* font-size: 2rem; */
+  /* font-weight: 700; */
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.card_text {
+  color: #ffffff;
+  /* font-size: 0.875rem; */
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
+}
+.made_by{
+  font-weight: 400;
+  /* font-size: 13px; */
+  margin-top: 35px;
+  text-align: center;
+}
+@media screen and (max-width:425px) {
+  .cards{
+    display: block !important;
+  }
+}
+
+.card{
+  margin: 5% 0%;
+}
+
+.card-body{
+  margin: 0% 0% 0% 3%;
+  padding: 6% 0%;
+}
+
+

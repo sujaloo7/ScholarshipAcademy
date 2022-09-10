@@ -1,0 +1,112 @@
+
+  @media (min-width: 1024px) {
+    section {
+      display: flex;
+    }
+  }
+.this {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+  }
+  @media (min-width: 1024px) {
+    .this {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      transition: all 1.1s cubic-bezier(0.8, 0, 0.2, 1);
+    }
+  }
+  @media (min-width: 1024px) {
+    .this:hover {
+      flex: 2;
+    }
+  }
+  .this:hover .this-image img {
+    transition-delay: 0.5s;
+    transform: scale(1);
+  }
+  .this-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .this-image img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center center;
+       object-position: center center;
+    transform: scale(1.2);
+    transition: all 1s cubic-bezier(0.8, 0, 0.2, 1);
+  }
+  @supports not ((-o-object-fit: cover) or (object-fit: cover)) {
+    .this-image img {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: auto;
+    }
+  }
+  .this-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    min-width: 800px;
+    padding: 0 40px;
+  }
+  .this-title h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: times;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+  }
+  @media (min-width: 1024px) {
+    .this-title h2 {
+      font-size: 3vw;
+    }
+  }
+  
+  .choose {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 100%;
+    text-align: center;
+  }
+  @media (min-width: 1024px) {
+    .choose {
+      display: none;
+    }
+  }
+  .choose h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+  }

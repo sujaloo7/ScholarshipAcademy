@@ -1,0 +1,22 @@
+@media only screen and (max-width: 600px) {
+    .back {
+      display: none !important;
+    }
+    .btn
+    {
+        width: 100%;
+    }
+    h4 small
+    {
+        text-align: center;
+    }
+  }
+
+/* input
+{
+    border-color: #F6AD55 !important;
+}   */
+label
+{
+    color: #F6AD55;
+}
