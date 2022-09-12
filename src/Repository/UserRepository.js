@@ -263,6 +263,15 @@ export function addCourse(payload) {
     } catch (error) {}
   });
 }
+export function getCourse(payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await Repository.post(`${baseUrl}/get_course`, payload);
+
+      return resolve(response.data);
+    } catch (error) {}
+  });
+}
 
 // export function getExternalApiCountries(payload) {
 //   return new Promise(async (resolve, reject) => {

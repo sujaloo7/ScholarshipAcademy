@@ -57,7 +57,7 @@ function App() {
             path="/universities-details"
             element={<Universitiesdetails />}
           />
-          <Route path="/apply" element={<Apply />} />
+          <Route path="/apply/:id" element={<Apply />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profiledetails" element={<Profiledetails />} />
           <Route path="/coaching" element={<Coaching />} />

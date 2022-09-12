@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Filterbar from "./Filterbar";
@@ -10,6 +10,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { getUniversityProfile } from "../Repository/UserRepository";
+import { imageUrl } from "../Repository/Repository";
 // import Box from '@mui/material/Box';
 // import Slider from '@mui/material/Slider';
 // import Slider from './Slider';
@@ -19,6 +21,28 @@ import Universitylist from "../country-university/Universitylist";
 // import { Button } from '@mui/material';
 
 const Outeruniverities = () => {
+  const [type, setType] = useState("");
+  const [universityList, setUniversityList] = useState([]);
+  const [countryName, setCountryName] = useState("");
+
+  useEffect(() => {
+    let typ = window.location.pathname.split("/").pop();
+
+    GetUniversity(typ);
+
+    setType(typ);
+  }, []);
+
+  const GetUniversity = async (typ) => {
+    let name = typ.toUpperCase();
+    console.log(name);
+    setCountryName(name);
+    let res = await getUniversityProfile({ country_id: typ });
+    if (res.status === 1) {
+      setUniversityList(res.data);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -26,7 +50,10 @@ const Outeruniverities = () => {
 
       {/* <Universitylist/> */}
       <div className="lists container-fluid ">
-        <h3 className="text-center">MBBS COLLEGES IN RUSSIA</h3>
+        <h3 className="text-center">
+          <br />
+          COLLEGES IN {countryName ? countryName : "Unknown"}
+        </h3>
         <Button
           className=" text-light"
           style={{ backgroundColor: "#a8203b" }}
@@ -320,879 +347,137 @@ const Outeruniverities = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-6  ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
+          {universityList?.map((ele, index) => {
+            return (
+              <div className="col-md-6  ">
+                <div
+                  class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
+                  style={{ maxWidth: "760px" }}
+                >
+                  <div class="row g-0">
+                    <div class="col-md-5 text-center">
+                      <img
+                        src={`${imageUrl}${
+                          ele.profile_picture
+                            ? ele.profile_picture
+                            : "/public/no-university-image.png"
+                        }`}
+                        class="img-fluid rounded-start"
+                        style={{ height: "120px" }}
+                        alt="..."
+                      />
+                      <h5 style={{ fontSize: "14px" }}>{ele?.name}</h5>
+                      <small className="text-muted fw-regular">
+                        {ele?.state_detail?.name} , {ele?.country_detail.name}
+                      </small>
+                      <br></br>
+                      {new Array(
+                        ele?.university_details?.rating
+                          ? ele?.university_details?.rating
+                          : 1
+                      )
+                        .fill(0)
+                        .map((_, index) => (
+                          <i
+                            class="fa-solid fa-star text-warning"
                             style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
+                          ></i>
+                        ))}
+                    </div>
+                    <div class="col-md-7">
+                      <div class="card-body">
+                        <div className="row inner-row">
+                          <div className="col-sm-6 col-md-6">
+                            <ul>
+                              <li
+                                className="fw-bold"
+                                style={{ fontSize: "13px" }}
+                              >
+                                Established Year
+                              </li>
+                              <li
+                                className="fw-bold"
+                                style={{ fontSize: "13px" }}
+                              >
+                                World Rank
+                              </li>
+                              <li
+                                className="fw-bold"
+                                style={{ fontSize: "13px" }}
+                              >
+                                Scholarship
+                              </li>
+                              <li
+                                className="fw-bold"
+                                style={{ fontSize: "13px" }}
+                              >
+                                University Type
+                              </li>
+                              <Link to={`/apply/${ele?._id}`}>
+                                {" "}
+                                <Button
+                                  className="text-light mt-2"
+                                  style={{ backgroundColor: "#a8203b" }}
+                                >
+                                  <i class="fa-solid fa-eye"></i>View Details
+                                </Button>
+                              </Link>
+                            </ul>
+                          </div>
+                          <div className="col-sm-6 col-md-6">
+                            <ul>
+                              <li
+                                className="fw-bold text-muted"
+                                style={{ fontSize: "13px" }}
+                              >
+                                {ele.university_details.established_year
+                                  ? ele.university_details.established_year
+                                  : "Not Mentioned"}
+                              </li>
+                              <li
+                                className="fw-bold text-muted"
+                                style={{ fontSize: "13px" }}
+                              >
+                                {ele.university_details.world_rank
+                                  ? ele.university_details.world_rank
+                                  : "Not Mentioned"}
+                              </li>
+                              <li
+                                className="fw-bold text-muted"
+                                style={{ fontSize: "13px" }}
+                              >
+                                {" "}
+                                {ele.university_details.scholarship
+                                  ? "Allowed"
+                                  : "Not Allowed"}
+                              </li>
+                              <li
+                                className="fw-bold text-muted"
+                                style={{ fontSize: "13px" }}
+                              >
+                                {ele.university_details.university_type
+                                  ? ele.university_details.university_type
+                                  : "Not Mentioned"}
+                              </li>
+                              <Link to="/apply">
+                                {" "}
+                                <Button
+                                  className="text-light mt-2"
+                                  style={{ backgroundColor: "#a8203b" }}
+                                >
+                                  Apply Now
+                                </Button>
+                              </Link>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="col-md-6 ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6  ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6  ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6  ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 ">
-            <div
-              class="card mb-3 border-0 shadow p-3 ms-auto me-auto"
-              style={{ maxWidth: "760px" }}
-            >
-              <div class="row g-0">
-                <div class="col-md-5 text-center">
-                  <img
-                    src="https://www.standyou.com/uploads/20200605180128Kazan-Federal-University-Russia.jpg"
-                    class="img-fluid rounded-start"
-                    style={{ height: "120px" }}
-                    alt="..."
-                  />
-                  <h5 style={{ fontSize: "14px" }}>Kazan Federal University</h5>
-                  <small className="text-muted fw-regular">
-                    Kazan , Russia
-                  </small>
-                  <br></br>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-star text-warning"
-                    style={{ fontSize: "13px" }}
-                  ></i>
-                  <i class="fa-solid fa-star " style={{ fontSize: "13px" }}></i>
-                </div>
-                <div class="col-md-7">
-                  <div class="card-body">
-                    <h5 class="card-title">MBBS</h5>
-                    <div className="row inner-row">
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Level
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Course Duration
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Total Course Fee
-                          </li>
-                          <li className="fw-bold" style={{ fontSize: "13px" }}>
-                            Application Fees
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              <i class="fa-solid fa-eye"></i>View Course
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-6">
-                        <ul>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Bachelor’s
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            6 Years
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            {" "}
-                            $ 37347(₹ 2726334)
-                          </li>
-                          <li
-                            className="fw-bold text-muted"
-                            style={{ fontSize: "13px" }}
-                          >
-                            Free
-                          </li>
-                          <Link to="/apply">
-                            {" "}
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </Link>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+            );
+          })}
         </div>
       </div>
 

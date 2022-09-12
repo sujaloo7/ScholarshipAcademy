@@ -53,7 +53,7 @@ const Universities = () => {
               {countryList.map((ele, index) => {
                 return (
                   <Link
-                    to={`/outeruniversities/${ele._id}`}
+                    to={`/outeruniversities/${ele.country_name}`}
                     className="col-sm-3"
                   >
                     <div className="  col-sm-12 mb-3 shadow">
