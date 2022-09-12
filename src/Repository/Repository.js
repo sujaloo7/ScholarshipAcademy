@@ -1,6 +1,6 @@
 import axios from "axios";
-// const baseDomain = "https://scholarshipbackend.herokuapp.com/api";
-const baseDomain = "http://localhost:4300/api";
+const baseDomain = "https://scholarshipbackend.herokuapp.com/api";
+// const baseDomain = "http://localhost:4300/api";
 const imageDomain = "https://scholarshipbackend.herokuapp.com";
 const authorization_prefix = "Bearer ";
 

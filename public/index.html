@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://rawcdn.githack.com/SochavaAG/example-mycode/master/_common/css/reset.css"> -->
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -45,6 +47,81 @@
   <div class="elfsight-app-6e5d0ed8-9995-44b6-9a54-5f3647708952"></div> -->
 
   <!-- GetButton.io widget -->
+
+  <script>
+    (function ($) {
+      $(function () {
+
+
+        $(window).on('scroll', function () {
+          fnOnScroll();
+        });
+
+        $(window).on('resize', function () {
+          fnOnResize();
+        });
+
+
+        var agTimeline = $('.js-timeline'),
+          agTimelineLine = $('.js-timeline_line'),
+          agTimelineLineProgress = $('.js-timeline_line-progress'),
+          agTimelinePoint = $('.js-timeline-card_point-box'),
+          agTimelineItem = $('.js-timeline_item'),
+          agOuterHeight = $(window).outerHeight(),
+          agHeight = $(window).height(),
+          f = -1,
+          agFlag = false;
+
+        function fnOnScroll() {
+          agPosY = $(window).scrollTop();
+
+          fnUpdateFrame();
+        }
+
+        function fnOnResize() {
+          agPosY = $(window).scrollTop();
+          agHeight = $(window).height();
+
+          fnUpdateFrame();
+        }
+
+        function fnUpdateWindow() {
+          agFlag = false;
+
+          agTimelineLine.css({
+            top: agTimelineItem.first().find(agTimelinePoint).offset().top - agTimelineItem.first().offset().top,
+            bottom: agTimeline.offset().top + agTimeline.outerHeight() - agTimelineItem.last().find(agTimelinePoint).offset().top
+          });
+
+          f !== agPosY && (f = agPosY, agHeight, fnUpdateProgress());
+        }
+
+        function fnUpdateProgress() {
+          var agTop = agTimelineItem.last().find(agTimelinePoint).offset().top;
+
+          i = agTop + agPosY - $(window).scrollTop();
+          a = agTimelineLineProgress.offset().top + agPosY - $(window).scrollTop();
+          n = agPosY - a + agOuterHeight / 2;
+          i <= agPosY + agOuterHeight / 2 && (n = i - a);
+          agTimelineLineProgress.css({ height: n + "px" });
+
+          agTimelineItem.each(function () {
+            var agTop = $(this).find(agTimelinePoint).offset().top;
+
+            (agTop + agPosY - $(window).scrollTop()) < agPosY + .5 * agOuterHeight ? $(this).addClass('js-ag-active') : $(this).removeClass('js-ag-active');
+          })
+        }
+
+        function fnUpdateFrame() {
+          agFlag || requestAnimationFrame(fnUpdateWindow);
+          agFlag = true;
+        }
+
+
+      });
+    })(jQuery);
+
+  </script>
   <script type="text/javascript">
     (function () {
       var options = {

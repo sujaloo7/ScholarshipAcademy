@@ -26,6 +26,7 @@ import Select from "@mui/material/Select";
 import { addGuestUser } from "../Repository/UserRepository";
 import "./home.css";
 import { useState } from "react";
+import Tomarrow from "../components/Tomarrow";
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -64,7 +65,8 @@ const Home = () => {
       <br></br>
       <Stream />
       <University />
-      {/* <Timeline/> */}
+      <Timeline />
+      <Tomarrow />
 
       <div class="sticky-icon">
         <a
