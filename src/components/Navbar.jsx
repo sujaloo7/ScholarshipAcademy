@@ -88,6 +88,12 @@ function Navbar() {
                   <a href=" https://germanshala.com/"> Aufnahmetest &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   <a href=" https://germanshala.com/">German Language &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   <a href=" https://germanshala.com/"> Test AS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href=" https://germanshala.com/"> ILETS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href=" https://germanshala.com/">GMAT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href=" https://germanshala.com/"> GRE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href=" https://germanshala.com/"> SAT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href=" https://germanshala.com/">TOEFL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href=" https://germanshala.com/"> PTE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   {/* <a href="#">SAT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   <a href="#">TOEFL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   <a href="#">PTE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
@@ -126,7 +132,7 @@ function Navbar() {
                 <div class="dropdown-content">
                   {/* <a href="#">About Us&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a> */}
                   <a href="/foruniversities">For Universities&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-
+                  <a href="/category">Explore&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                 </div>
               </li>
 
@@ -142,7 +148,22 @@ function Navbar() {
                       </div>
                   </li>
                </ul> --> */}
-            <input type="text" class=" search form-control w-25 me-3 border-0" style={{ backgroundColor: "#f5faff" }} placeholder="Search For Universities & Courses" />
+            {/* <input type="text" class=" search form-control w-25 me-3 border-0" style={{ backgroundColor: "#f5faff" }} placeholder="Search For Universities & Courses" /> */}
+            <ul className="navbar-nav ">
+              <li className="nav-item dropdown me-4">
+                <a className="nav-link dropbtn"><i class="fa-solid fa-phone p-2 " style={{ border: "2px solid black ", borderRadius: "6px" }}></i> </a>
+                <div className="dropdown-content-call">
+                  <a href="tel: 98870 20529">+91 98870 20529</a>
+                </div>
+
+
+              </li>
+              {/* <li className="nav-item  me-4">
+                <a href="" className="nav-link dropbtn"><i class="fa-brands fa-whatsapp p-2 fw-bold" style={{ border: "2px solid black " , borderRadius: "6px" }}></i> </a>
+
+
+              </li> */}
+            </ul>
 
 
             {isLoggedIn && localStorage.getItem("user_type") === "student" ? (

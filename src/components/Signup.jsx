@@ -20,7 +20,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const registerUser = async () => {
+  const registerUser = async (e) => {
+    e.preventDefault();
     let res = await userRegister({
       name: name,
       email: email,
