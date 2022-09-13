@@ -8,6 +8,7 @@ import { Button, CardActionArea } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getCategory } from "../Repository/UserRepository";
 
 const Course = () => {
@@ -36,7 +37,13 @@ const Course = () => {
         }}
       >
         <div className="w-100 p-4 text-center ">
-          <Button className="text-center  p-4  text-light" style={{ backgroundColor: "#FF723A" }} disabled>Select Courses</Button>
+          <Button
+            className="text-center  p-4  text-light"
+            style={{ backgroundColor: "#FF723A" }}
+            disabled
+          >
+            Select Courses
+          </Button>
         </div>
         <div className="row">
           <div className="container">
@@ -46,24 +53,30 @@ const Course = () => {
                   return (
                     <div className="col-sm-3 " style={{ color: "black " }}>
                       <div className="course-card col-sm-12">
-                        <Card
-                          className="   shadow border-0 text-center "
-                          style={{ height: "100px" }}
-                        >
-                          <CardActionArea>
-                            <CardContent>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              ><br></br>
-                                <small className="text-center mt-5 text-dark text-center" style={{ fontSize: "15px" }} >
-                                  {" "}
-                                  {ele?.category_name}
-                                </small>
-                              </Typography>
-                            </CardContent>
-                          </CardActionArea>
-                        </Card>
+                        <Link to={`/outeruniversities/${ele._id}`}>
+                          <Card
+                            className="   shadow border-0 text-center "
+                            style={{ height: "100px" }}
+                          >
+                            <CardActionArea>
+                              <CardContent>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  <br></br>
+                                  <small
+                                    className="text-center mt-5 text-dark text-center"
+                                    style={{ fontSize: "15px" }}
+                                  >
+                                    {" "}
+                                    {ele?.category_name}
+                                  </small>
+                                </Typography>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                        </Link>
                       </div>
                     </div>
                   );

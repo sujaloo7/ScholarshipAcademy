@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { getUniversityProfile } from "../Repository/UserRepository";
+import { getUniversitiesProfile } from "../Repository/UserRepository";
 import { imageUrl } from "../Repository/Repository";
 // import Box from '@mui/material/Box';
 // import Slider from '@mui/material/Slider';
@@ -34,12 +34,39 @@ const Outeruniverities = () => {
   }, []);
 
   const GetUniversity = async (typ) => {
-    let name = typ.toUpperCase();
-    console.log(name);
-    setCountryName(name);
-    let res = await getUniversityProfile({ country_id: typ });
-    if (res.status === 1) {
-      setUniversityList(res.data);
+    if (typ.length != 24 && typ != "all") {
+      console.log("inside this");
+      let name = "COLLEGES IN" + typ.toUpperCase();
+      console.log(name);
+      setCountryName(name);
+      let res = await getUniversitiesProfile({
+        country_id: typ,
+        for_country: true,
+      });
+      if (res.status === 1) {
+        setUniversityList(res.data);
+      }
+    } else if (typ === "all") {
+      let name = "University List";
+      console.log(name);
+      setCountryName(name);
+      let res = await getUniversitiesProfile({
+        is_all: true,
+        for_country: true,
+      });
+      if (res.status === 1) {
+        setUniversityList(res.data);
+      }
+    } else {
+      let name = "Related Colleges to the course";
+      console.log(name);
+      setCountryName(name);
+      let res = await getUniversitiesProfile({
+        category_id: typ,
+      });
+      if (res.status === 1) {
+        setUniversityList(res.data);
+      }
     }
   };
 
@@ -52,7 +79,7 @@ const Outeruniverities = () => {
       <div className="lists container-fluid ">
         <h3 className="text-center">
           <br />
-          COLLEGES IN {countryName ? countryName : "Unknown"}
+          {countryName ? countryName : "unknown"}
         </h3>
         <Button
           className=" text-light"
