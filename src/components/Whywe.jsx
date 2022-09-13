@@ -37,7 +37,7 @@ const Whywe = () => {
                             </li>
                         </ul>
                         <Link to="signup" className="text-decoration-none">
-                            <Button className='text-center mt-3 border-0 p-2 px-3 text-white' variant='outlined' style={{ borderRadius: "20px", backgroundColor: "#a8203b" }}>Register Now</Button>
+                            <button className=' brn btn-primary text-center mt-3 border-0 p-2 px-4 text-white' variant='outlined' style={{ borderRadius: "20px" }}>Register Now</button>
                         </Link>
                     </div>
                     <div className="  col-md-6" >

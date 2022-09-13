@@ -50,7 +50,7 @@ const Stream = () => {
 
 
         </div>
-        <div className='w-100 text-center'> <Link to="/" className='text-decoration-none text-white '> <Button className='px-4 p-3 text-white' style={{ fontSize: "12px", backgroundColor: "#a8203b", borderRadius: "20px" }}>All Categories</Button> </Link> </div>
+        <div className='w-100 text-center'> <Link to="/" className='  text-decoration-none text-white '> <button className='btn btn-primary px-4 p-3 text-white' style={{ fontSize: "15px", borderRadius: "20px" }}>All Categories</button> </Link> </div>
       </div>
     </>
   )

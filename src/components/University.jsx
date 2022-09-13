@@ -26,7 +26,7 @@ const University = () => {
                 <div className="row mt-5">
 
 
-                    <div className="col-md-4" data-aos={"fade-top"}>
+                    <div className="col-md-4 mb-3" data-aos={"fade-top"}>
                         <Card className='ms-auto me-auto h-100 shadow-sm mb-3' sx={{ maxWidth: 345 }}  >
                             <CardActionArea>
                                 <CardMedia
@@ -47,7 +47,7 @@ const University = () => {
                             </CardActionArea>
                         </Card>
                     </div>
-                    <div className="col-md-4" data-aos={"fade-top"}>
+                    <div className="col-md-4 mb-3" data-aos={"fade-top"}>
                         <Card className='ms-auto me-auto h-100 shadow-sm mb-3' sx={{ maxWidth: 345 }} >
                             <CardActionArea>
                                 <CardMedia
@@ -69,7 +69,7 @@ const University = () => {
                         </Card>
                     </div>
 
-                    <div className="col-md-4" data-aos={"fade-top"}>
+                    <div className="col-md-4 mb-3" data-aos={"fade-top"}>
                         <Card className='ms-auto me-auto h-100 shadow-sm mb-3' sx={{ maxWidth: 345 }}>
                             <CardActionArea>
                                 <CardMedia
@@ -94,7 +94,7 @@ const University = () => {
                 <div className="row mt-5">
 
 
-                    <div className="col-md-4" data-aos={"fade-top"}>
+                    <div className="col-md-4 mb-3" data-aos={"fade-top"}>
                         <Card className='ms-auto me-auto h-100 shadow-sm mb-3' sx={{ maxWidth: 345 }} >
                             <CardActionArea>
                                 <CardMedia
@@ -115,7 +115,7 @@ const University = () => {
                             </CardActionArea>
                         </Card>
                     </div>
-                    <div className="col-md-4" data-aos={"fade-top"}>
+                    <div className="col-md-4 mb-3" data-aos={"fade-top"}>
                         <Card className='ms-auto me-auto h-100 shadow-sm mb-3' sx={{ maxWidth: 345 }} >
                             <CardActionArea>
                                 <CardMedia
@@ -137,7 +137,7 @@ const University = () => {
                         </Card>
                     </div>
 
-                    <div className="col-md-4" data-aos={"fade-top"}>
+                    <div className="col-md-4 mb-3" data-aos={"fade-top"}>
                         <Card className='ms-auto me-auto h-100 shadow-sm mb-3' sx={{ maxWidth: 345 }} >
                             <CardActionArea>
                                 <CardMedia
@@ -158,7 +158,7 @@ const University = () => {
                             </CardActionArea>
                         </Card>
                     </div>
-                    <div className='w-100 text-center mt-4 p-4'> <Link to="/" className='text-decoration-none text-white'> <Button className=' px-4 p-3 text-white' style={{ fontSize: "12px", backgroundColor: "#a8203b", borderRadius: "20px" }}>All Universities</Button> </Link> </div>
+                    <div className='w-100 text-center mt-4 p-4'> <Link to="/" className='text-decoration-none text-white'> <button className='btn btn-primary px-4 p-3 text-white' style={{ fontSize: "15px", borderRadius: "20px" }}>All Universities</button> </Link> </div>
                 </div>
             </div>
         </>

@@ -6,7 +6,7 @@ const Foruniversities = () => {
     return (
         <>
             <Navbar />
-            <div className="container mt-5 p-5">
+            <div className="container mt-5 p-5 for-universities">
                 <div className="row">
                     <div className="col-sm-7 mt-5">
                         <h1 className='text-hero-bold text-dark' style={{ fontFamily: "Source Sans Pro,sans-serif !important" }}>University Operating System</h1>
@@ -19,7 +19,7 @@ const Foruniversities = () => {
 
                 </div>
             </div>
-            <div className="container mt-5 mb-5" >
+            <div className="container mt-5 mb-5 for-universities"  >
                 <div className="row mb-4">
                     <div className="col-sm-8 ms-auto me-auto shadow p-3 " style={{ borderRadius: "20px" }}>
                         <div className="row">
@@ -39,7 +39,7 @@ const Foruniversities = () => {
                     </div>
                 </div>
             </div>
-            <div className="container mt-5 p-4">
+            <div className="container mt-5 p-4 for-universities">
                 <div className="row mt-5">
                     <div className="col-sm-6 mt-5">
                         <h2 className='ms-5 mb-4' style={{ color: "#c44464" }}>International Student Recruitment</h2>
@@ -66,7 +66,7 @@ const Foruniversities = () => {
                     </div>
                 </div>
             </div>
-            <div className="container mt-5 p-4">
+            <div className="container mt-5 p-4 for-universities">
                 <div className="row mt-5">
                     <div className="col-sm-6 mt-5">
                         <h2 className='ms-5 mb-4' style={{ color: "#c44464" }}>Bespoke University Marketing</h2>

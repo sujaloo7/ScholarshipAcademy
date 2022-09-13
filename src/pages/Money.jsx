@@ -7,7 +7,7 @@ const Money = () => {
     return (
         <>
             <Navbar />
-            <div className="container-fluid p-5 mb-5" style={{ backgroundImage: "url('	https://leverageedunew.s3.us-east-1.amazonaws.com/assets/img/leverage-finance/map-bg.svg')", height: "450px", backgroundRepeat: "no-repeat", backgroundSize: "100% 100%", }}>
+            <div className="container-fluid p-5 mb-5 money-back" style={{ backgroundImage: "url('	https://leverageedunew.s3.us-east-1.amazonaws.com/assets/img/leverage-finance/map-bg.svg')", height: "450px", backgroundRepeat: "no-repeat", backgroundSize: "100% 100%", }}>
                 <div className="row p-5 mb-5">
                     <div className="col-sm-6">
 
@@ -18,7 +18,7 @@ const Money = () => {
                     </div>
 
                     <div className="col-sm-6">
-                        <div className="col-sm-6 shadow bg-white p-3 ms-auto me-auto " style={{ borderRadius: "20px" }}>
+                        <div className="col-sm-6 shadow bg-white p-3 ms-auto me-auto form" style={{ borderRadius: "20px" }}>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label text-muted mb-0" style={{ fontSize: "13px" }}>YOUR SEND</label>
                                 <input type="email" class="form-control p-2" id="exampleInputEmail1" aria-describedby="emailHelp" />
@@ -38,7 +38,7 @@ const Money = () => {
             </div>
 
 
-            <div className="container mt-5">
+            <div className="container mt-5 usp-using">
                 <div className="row mt-5">
                     <h1 className='text-center fw-bold mt-5'>USP of using our <span style={{ color: "#a8203b" }}>Forex Services.</span></h1>
 
@@ -111,7 +111,7 @@ const Money = () => {
 
                 </div>
             </div>
-            <div className="container mt-5">
+            <div className="container mt-5 how-it-work">
                 <div className="row">
                     <h1 className='fw-bold text-center p-5'>How it <span style={{ color: "#a8203b" }}>Works.</span></h1>
 

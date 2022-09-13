@@ -6,10 +6,10 @@ const Bankaccount = () => {
     return (
         <>
             <Navbar />
-            <div className="container p-5">
+            <div className="container p-5 bank-account">
                 <div className="row">
                     <div className="col-sm-6 mt-5">
-                        <h2 className='text-hero-bold text-dark'>Apply in minutes for an
+                        <h2 className='text-hero-bold text-dark'>Apply in minutes for<br></br>
                             <span className='' style={{ color: "#a8203b" }}>International Bank Account.</span></h2>
                         <h4 className='text-muted mt-3'>Zero application fee, completely online process, no branch visit required.</h4>
                         <button className='btn btn-primary py-3 mt-4' variant="contained">Request Callback</button>
@@ -20,7 +20,7 @@ const Bankaccount = () => {
                 </div>
             </div>
 
-            <div className="container mt-5">
+            <div className="container mt-5 usp-using">
                 <div className="row mt-5">
                     <h1 className='text-center fw-bold mt-5'>Benefits</h1>
 

@@ -26,7 +26,6 @@ const FAQ = () => {
         <div class=" container p-5">
           <div class=" conainer">
             <div class="row">
-              <h1 class="mb-5 fw-bold">FAQ's</h1>
               {/* {faq.map((ele, index) => {
                 return (
                   <Card>
@@ -44,41 +43,50 @@ const FAQ = () => {
                   </Card>
                 );
               })} */}
-              <div class="accordion" id="accordionExample">
-                {faq.map((ele, index) => {
-                  return (
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id={index}>
-                        <button
-                          class="accordion-button"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target={index}
-                          aria-expanded="true"
-                          aria-controls={index}
+              <div className="col-sm-12 text-center">
+                <img src="https://images.leverageedu.com/assets/img/scholarships/faq-ico.svg" alt="" />
+                <h1 class="mb-5 fw-bold mt-4">Frequently Asked Questions</h1>
+
+              </div>
+              <div className="col-sm-6">
+                <div class="accordion" id="accordionExample">
+                  {faq.map((ele, index) => {
+                    return (
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id={index}>
+                          <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="TARGET"
+                            aria-expanded="true"
+                            aria-controls={index}
+                          >
+                            Q.{index + 1} &nbsp;
+                            {ele?.question}
+                          </button>
+                        </h2>
+                        <div
+                          id="TARGET"
+                          class="accordion-collapse collapse show"
+                          aria-labelledby={index}
+                          data-bs-parent={index}
                         >
-                          Q.{index + 1} &nbsp;
-                          {ele?.question}
-                        </button>
-                      </h2>
-                      <div
-                        id={index}
-                        class="accordion-collapse collapse show"
-                        aria-labelledby={index}
-                        data-bs-parent={index}
-                      >
-                        <div class="accordion-body">
-                          <p
-                            dangerouslySetInnerHTML={{
-                              __html: ele?.answer,
-                            }}
-                          ></p>
+                          <div class="accordion-body">
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: ele?.answer,
+                              }}
+                            ></p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+
               </div>
+
             </div>
           </div>
         </div>

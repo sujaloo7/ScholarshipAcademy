@@ -12,7 +12,7 @@ const Finance = () => {
         <>
             <Navbar />
 
-            <div className="container p-5">
+            <div className="container p-5 finance">
                 <div className="row">
                     <div className="col-sm-6 mt-5">
                         <h2 className='text-hero-bold text-dark'>Finance your study
@@ -21,7 +21,7 @@ const Finance = () => {
                         <button className='btn btn-primary py-3 mt-4' variant="contained">Check Your Eligibility</button>
                     </div>
                     <div className="col-sm-6 text-center">
-                        <img src="https://clouddevs.com/3dbay/files/preview/1280x1066/11633023143hrov2clvc7brli5mtqrwbwkgwv55g6pvfpavbutv0qv6b4ljlvpymuux2osohji9bhbt7nisbdrshvas9gktlqh7yxwvk8fwmfkt.png" height={400} alt="" />
+                        <img src="https://clouddevs.com/3dbay/files/preview/1280x1066/11633023143hrov2clvc7brli5mtqrwbwkgwv55g6pvfpavbutv0qv6b4ljlvpymuux2osohji9bhbt7nisbdrshvas9gktlqh7yxwvk8fwmfkt.png" className='image' height={400} alt="" />
                     </div>
                 </div>
             </div>

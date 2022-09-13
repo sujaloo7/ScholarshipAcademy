@@ -3,7 +3,7 @@ import React from 'react'
 const Tomarrow = () => {
     return (
         <>
-            <div className="container-fluid" style={{ backgroundImage: "url(' https://leverageedu.s3.ap-south-1.amazonaws.com/about-us/about-us-bg-web.png')", backgroundRepeat: "no-repeat", backgroundSize: "cover", height: "600px", backgroundAttachment: "fixed" }}>
+            <div className="container-fluid tomarrow" style={{ backgroundImage: "url(' https://leverageedu.s3.ap-south-1.amazonaws.com/about-us/about-us-bg-web.png')", backgroundRepeat: "no-repeat", backgroundSize: "cover", height: "auto", backgroundAttachment: "fixed" }}>
                 <div className="row">
 
                     <div className="row p-5">
@@ -29,6 +29,7 @@ const Tomarrow = () => {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }

@@ -6,7 +6,7 @@ const Timeline = () => {
 
     return (
         <>
-            <div className="container-fluid" style={{ backgroundImage: "url(' https://leverageedu.s3.ap-south-1.amazonaws.com/about-us/about-us-bg-web.png')", backgroundRepeat: "no-repeat", backgroundSize: "" }}>
+            <div className="container-fluid" style={{ backgroundImage: "url(' https://leverageedu.s3.ap-south-1.amazonaws.com/about-us/about-us-bg-web.png')", backgroundRepeat: "no-repeat", backgroundSize: "", height: "auto" }}>
                 <div className="container p-5">
                     <div className="row mb-5" >
                         <h1 className="fw-bold text-center mt-5"> <span style={{ color: "#a8203b" }}> Our</span> Students</h1>
