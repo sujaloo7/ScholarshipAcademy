@@ -76,7 +76,7 @@ const Universityprofile = () => {
   };
 
   const GetProfile = async () => {
-    let res = await getUniversityProfile();
+    let res = await getUniversityProfile({ for_country: true });
     if (res.status === 1) {
       setPersonalData(res.data[0]);
       setDetailData(res.data[0].university_details);

@@ -173,6 +173,19 @@ export function getUniversityProfile(payload) {
     } catch (error) {}
   });
 }
+export function getUniversitiesProfile(payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await Repository.post(
+        `${baseUrl}/get_universities_profile`,
+        payload
+      );
+
+      return resolve(response.data);
+    } catch (error) {}
+  });
+}
+
 export function updateUniversityDetail(payload) {
   return new Promise(async (resolve, reject) => {
     try {

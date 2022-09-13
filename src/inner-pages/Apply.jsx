@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 // import react from "react-dom"
 import Carousel from "./Carousel";
 import Navbar from "../components/Navbar";
-import { getUniversityProfile, getCourse } from "../Repository/UserRepository";
+import {
+  getUniversitiesProfile,
+  getCourse,
+} from "../Repository/UserRepository";
 import { imageUrl } from "../Repository/Repository";
 // import Universitylist from '../country-university/universitylist';
 const Apply = () => {
@@ -21,7 +24,7 @@ const Apply = () => {
   }, []);
 
   const GetUniversity = async (typ) => {
-    let res = await getUniversityProfile({ user_id: typ });
+    let res = await getUniversitiesProfile({ user_id: typ, for_country: true });
     if (res.status === 1) {
       setUniversity(res.data[0]);
     }

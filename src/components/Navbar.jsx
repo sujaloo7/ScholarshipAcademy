@@ -62,61 +62,172 @@ function Navbar() {
   }, []);
   return (
     <>
-
       <nav class="navbar navbar-expand-lg bg-light p-0 text-dark shadow-sm px-4 sticky-top">
         <div class="container-fluid">
-          <Link class="navbar-brand" to="/"> <img src={logo} alt="" height="40" /> </Link>
-          <button class="navbar-toggler border-0 outline-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <Link class="navbar-brand" to="/">
+            {" "}
+            <img src={logo} alt="" height="40" />{" "}
+          </Link>
+          <button
+            class="navbar-toggler border-0 outline-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto me-auto">
-
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">Study Abroad                </a>
+                <a class="nav-link dropbtn" href="#">
+                  Study Abroad{" "}
+                </a>
                 <div class="dropdown-content">
-                  <a href="/universities"><img src="https://images.leverageedu.com/landing-pages/destinations1.svg" height="25" alt="" /> &nbsp;Destinations<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href="/universities"> <img src="https://images.leverageedu.com/landing-pages/university1.svg" height="25" alt="" />&nbsp; Universities<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href="/course"> <img src="https://images.leverageedu.com/landing-pages/content1.svg" height="25" alt="" /> &nbsp;&nbsp;Courses&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <Link to="/universities">
+                    <img
+                      src="https://images.leverageedu.com/landing-pages/destinations1.svg"
+                      height="25"
+                      alt=""
+                    />{" "}
+                    &nbsp;Destinations<i class="fa fa-arrow-right ms-5"></i>
+                  </Link>
+                  <Link to="/outeruniversities/all">
+                    {" "}
+                    <img
+                      src="https://images.leverageedu.com/landing-pages/university1.svg"
+                      height="25"
+                      alt=""
+                    />
+                    &nbsp; Universities<i class="fa fa-arrow-right ms-5"></i>
+                  </Link>
+                  <Link to="/course">
+                    {" "}
+                    <img
+                      src="https://images.leverageedu.com/landing-pages/content1.svg"
+                      height="25"
+                      alt=""
+                    />{" "}
+                    &nbsp;&nbsp;Courses&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </Link>
                   {/* <a href="#"> <img src="https://images.leverageedu.com/landing-pages/ebook1.svg" height="25" alt="" /> &nbsp;&nbsp;Ebook&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a> */}
-
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">Test Prep</a>
+                <a class="nav-link dropbtn" href="#">
+                  Test Prep
+                </a>
                 <div class="dropdown-content">
-                  <a href=" https://germanshala.com/"> Aufnahmetest &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/">German Language &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/"> Test AS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/"> ILETS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/">GMAT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/"> GRE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/"> SAT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/">TOEFL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href=" https://germanshala.com/"> PTE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href=" https://germanshala.com/">
+                    {" "}
+                    Aufnahmetest
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    German Language
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    {" "}
+                    Test AS
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    {" "}
+                    ILETS
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    GMAT
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    {" "}
+                    GRE
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    {" "}
+                    SAT
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    TOEFL
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href=" https://germanshala.com/">
+                    {" "}
+                    PTE
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
                   {/* <a href="#">SAT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   <a href="#">TOEFL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   <a href="#">PTE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
                   <a href="#">Need help? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a> */}
-
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">Finance
+                <a class="nav-link dropbtn" href="#">
+                  Finance
                 </a>
                 <div class="dropdown-content p-0">
-                  <a href="/finance"> <img src="https://images.leverageedu.com/landing-pages/loans_icon.svg" height="25" alt="" /> &nbsp; Loans</a>
+                  <a href="/finance">
+                    {" "}
+                    <img
+                      src="https://images.leverageedu.com/landing-pages/loans_icon.svg"
+                      height="25"
+                      alt=""
+                    />{" "}
+                    &nbsp; Loans
+                  </a>
                   {/* <!-- <small style="">Finance your study abroad dream</small> --> */}
-                  <a href="money"><img src="https://images.leverageedu.com/landing-pages/imt_icon.svg" height="25" alt="" />&nbsp;&nbsp;&nbsp;International Money Transfer</a>
-                  <a href="/bankaccount"><img src="https://images.leverageedu.com/landing-pages/ibt_icon.svg" height="25" alt="" />&nbsp;&nbsp;&nbsp;International Bank Account</a>
+                  <a href="money">
+                    <img
+                      src="https://images.leverageedu.com/landing-pages/imt_icon.svg"
+                      height="25"
+                      alt=""
+                    />
+                    &nbsp;&nbsp;&nbsp;International Money Transfer
+                  </a>
+                  <a href="/bankaccount">
+                    <img
+                      src="https://images.leverageedu.com/landing-pages/ibt_icon.svg"
+                      height="25"
+                      alt=""
+                    />
+                    &nbsp;&nbsp;&nbsp;International Bank Account
+                  </a>
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">Community</a>
+                <a class="nav-link dropbtn" href="#">
+                  Community
+                </a>
                 <div class="dropdown-content">
-                  <a href="#">Study Abroad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href="#">IETLS Prep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href="#">Offer Holders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href="#">
+                    Study Abroad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href="#">
+                    IETLS Prep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href="#">
+                    Offer Holders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
                 </div>
               </li>
               {/* <li class="nav-item dropdown">
@@ -128,15 +239,21 @@ function Navbar() {
                 </div>
               </li> */}
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">More                </a>
+                <a class="nav-link dropbtn" href="#">
+                  More{" "}
+                </a>
                 <div class="dropdown-content">
                   {/* <a href="#">About Us&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a> */}
-                  <a href="/foruniversities">For Universities&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
-                  <a href="/category">Explore&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a>
+                  <a href="/foruniversities">
+                    For Universities&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
+                  <a href="/category">
+                    Explore&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-right ms-5"></i>
+                  </a>
                 </div>
               </li>
-
-
             </ul>
             {/* <ul class="me-5">
                 <li class="nav-item dropdown">
@@ -151,12 +268,15 @@ function Navbar() {
             {/* <input type="text" class=" search form-control w-25 me-3 border-0" style={{ backgroundColor: "#f5faff" }} placeholder="Search For Universities & Courses" /> */}
             <ul className="navbar-nav ">
               <li className="nav-item dropdown me-4">
-                <a className="nav-link dropbtn"><i class="fa-solid fa-phone p-2 " style={{ border: "2px solid black ", borderRadius: "6px" }}></i> </a>
+                <a className="nav-link dropbtn">
+                  <i
+                    class="fa-solid fa-phone p-2 "
+                    style={{ border: "2px solid black ", borderRadius: "6px" }}
+                  ></i>{" "}
+                </a>
                 <div className="dropdown-content-call">
                   <a href="tel: 98870 20529">+91 98870 20529</a>
                 </div>
-
-
               </li>
               {/* <li className="nav-item  me-4">
                 <a href="" className="nav-link dropbtn"><i class="fa-brands fa-whatsapp p-2 fw-bold" style={{ border: "2px solid black " , borderRadius: "6px" }}></i> </a>
@@ -164,7 +284,6 @@ function Navbar() {
 
               </li> */}
             </ul>
-
 
             {isLoggedIn && localStorage.getItem("user_type") === "student" ? (
               <div>
@@ -252,7 +371,6 @@ function Navbar() {
                             </Button> */}
               </div>
             )}
-
           </div>
         </div>
       </nav>
