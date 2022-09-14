@@ -286,6 +286,15 @@ export function getCourse(payload) {
   });
 }
 
+export function getBlog(payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await Repository.post(`${baseUrl}/get_blog`, payload);
+      return resolve(response.data);
+    } catch (error) {}
+  });
+}
+
 // export function getExternalApiCountries(payload) {
 //   return new Promise(async (resolve, reject) => {
 //     try {

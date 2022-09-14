@@ -87,7 +87,7 @@ const Home = () => {
         aria-hidden="true"
       >
         <div class="modal-dialog ">
-          <div class="modal-content " >
+          <div class="modal-content ">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
                 Hyy!!
@@ -99,9 +99,7 @@ const Home = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <small className="text-center mt-3 mb-2">
-              Submit Your Detail
-            </small>
+            <small className="text-center mt-3 mb-2">Submit Your Detail</small>
             <div className="text-center">
               <img
                 src="https://images.leverageedu.com/assets/img/male.png"
@@ -159,7 +157,11 @@ const Home = () => {
                     </Select>
                   </FormControl>
 
-                  <button type="submit" class="btn btn-primary w-100 mt-4">
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-100 mt-4"
+                    data-bs-dismiss="modal"
+                  >
                     Submit
                   </button>
                 </div>

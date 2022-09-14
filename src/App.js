@@ -35,6 +35,7 @@ import Money from "./pages/Money";
 import Bankaccount from "./pages/Bankaccount";
 import Blogs from "./pages/Blogs";
 import Foruniversities from "./pages/Foruniversities";
+import Blogdetails from "./pages/Blogdetails";
 
 // import { Authcontextprovider } from './context/Authcontext';
 
@@ -77,6 +78,7 @@ function App() {
           <Route path="bankaccount" element={<Bankaccount />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="foruniversities" element={<Foruniversities />} />
+          <Route path="blogdetails/:id" element={<Blogdetails />} />
         </Routes>
       </BrowserRouter>
 

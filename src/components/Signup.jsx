@@ -12,11 +12,10 @@ import india from "../images/india.png";
 import { userRegister } from "../Repository/UserRepository";
 import "./signup.css";
 import user from "../images/signup.gif";
-import { useToast as toast } from '@chakra-ui/react'
-import 'antd/dist/antd.css';
-import { message } from 'antd';
+// import { useToast as toast } from '@chakra-ui/react'
+// import 'antd/dist/antd.css';
+// import { message } from 'antd';
 // import { omit } from 'lodash'
-
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -24,7 +23,7 @@ const Signup = () => {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const key = 'updatable';
+  const key = "updatable";
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -36,24 +35,12 @@ const Signup = () => {
       user_type: "student",
     });
 
-    // alert(res.message);
-    // message.info(res.message);
-    message.loading({ content: 'Loading...', key });
-    setTimeout(() => {
-      message.warning({ content: res.message, key, duration: 2 });
-    }, 1000);
+    alert(res.message);
 
     navigate("/signup");
   };
 
-
-
-
   //A method to handle form inputs
-
-
-
-
 
   return (
     <>
@@ -93,8 +80,6 @@ const Signup = () => {
                   class="input-field"
                   onChange={(e) => setName(e.target.value)}
                 />
-
-
               </div>
             </div>
             <div class="mb-3">
@@ -105,7 +90,6 @@ const Signup = () => {
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
-
             </div>
             <div class="row">
               <div class="col-sm-12 mb-3">
@@ -123,7 +107,6 @@ const Signup = () => {
                   class="input-field"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-
               </div>
             </div>
             <div
@@ -166,12 +149,7 @@ const Signup = () => {
             </div>
           </form>
         </div>
-
       </form>
-
-   
-
-
     </>
   );
 };
