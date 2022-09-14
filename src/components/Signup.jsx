@@ -12,9 +12,9 @@ import india from "../images/india.png";
 import { userRegister } from "../Repository/UserRepository";
 import "./signup.css";
 import user from "../images/signup.gif";
-import { useToast as toast } from '@chakra-ui/react'
-import 'antd/dist/antd.css';
-import { message } from 'antd';
+// import { useToast as toast } from '@chakra-ui/react'
+// import 'antd/dist/antd.css';
+// import { message } from 'antd';
 // import { omit } from 'lodash'
 
 
@@ -36,12 +36,12 @@ const Signup = () => {
       user_type: "student",
     });
 
-    // alert(res.message);
+    alert(res.message);
     // message.info(res.message);
-    message.loading({ content: 'Loading...', key });
-    setTimeout(() => {
-      message.warning({ content: res.message, key, duration: 2 });
-    }, 1000);
+    // message.loading({ content: 'Loading...', key });
+    // setTimeout(() => {
+    //   message.warning({ content: res.message, key, duration: 2 });
+    // }, 1000);
 
     navigate("/signup");
   };
@@ -169,7 +169,7 @@ const Signup = () => {
 
       </form>
 
-   
+
 
 
     </>

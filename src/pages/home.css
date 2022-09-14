@@ -650,9 +650,7 @@ body{
     .apply-con ul li
     {
        display: inline !important;
-    }
-    
-  
+    }  
   }
   @media only screen and (max-width: 600px) {
     .money-back
