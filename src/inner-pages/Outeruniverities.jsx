@@ -440,8 +440,10 @@ const Outeruniverities = () => {
                               >
                                 University Type
                               </li>
+
                               <Link to={`/apply/${ele?._id}`}>
                                 {" "}
+                                <br />
                                 <Button
                                   className="text-light mt-2"
                                   style={{ backgroundColor: "#a8203b" }}
@@ -486,7 +488,7 @@ const Outeruniverities = () => {
                                   ? ele.university_details.university_type
                                   : "Not Mentioned"}
                               </li>
-                              <Link to="/apply">
+                              {/* <Link to="/apply">
                                 {" "}
                                 <Button
                                   className="text-light mt-2"
@@ -494,7 +496,7 @@ const Outeruniverities = () => {
                                 >
                                   Apply Now
                                 </Button>
-                              </Link>
+                              </Link> */}
                             </ul>
                           </div>
                         </div>

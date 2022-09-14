@@ -1,90 +1,105 @@
-import React from 'react'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import React, { useState, useEffect } from "react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { getBlog } from "../Repository/UserRepository";
+import ReactPaginate from "react-paginate";
+import moment from "moment/moment";
+import { imageUrl } from "../Repository/Repository";
+import { Link } from "react-router-dom";
 
 const Blogs = () => {
+  const [blogList, setBlogList] = useState([]);
+  const [dataCount, setDataCount] = useState(0);
+  const [pageCount, setPageCount] = useState(10);
+  const [currentpage, setCurrentPage] = useState(1);
+  let pagesize = 10;
+
+  useEffect(() => {
+    GetBlog();
+  }, []);
+  const onPageSubmit = (value) => {
+    setCurrentPage(value.selected + 1);
+    console.log("value", value.selected + 1);
+  };
+
+  const GetBlog = async () => {
+    let res = await getBlog({ page: currentpage, pagesize: pagesize });
+    if (res.status === 1) {
+      setBlogList(res.data);
+      setDataCount(res.count);
+      let pageCount1 = Math.ceil(res.count / pagesize);
+      setPageCount(pageCount1);
+    }
+  };
+
   return (
     <>
       <Navbar />
       <div className="container">
         <div className="row">
-          <h1 className='text-center fw-bold p-5'>Our Blogs</h1>
+          <h1 className="text-center fw-bold p-5">Our Blogs</h1>
+          {blogList && blogList.length > 0 ? (
+            blogList.map((ele, index) => {
+              return (
+                <div className="col-sm-4 text-center">
+                  <div class="card border-0 bg-light mb-4">
+                    <img
+                      src={`${imageUrl}${ele.image}`}
+                      class="card-img-top"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5 class="card-title">{ele.title}</h5>
+                      <p class="card-text" style={{ fontSize: "13px" }}>
+                        {ele.subtitle}
+                      </p>
 
-          <div className="col-sm-4">
-            <div class="card border-0 bg-light mb-4">
-              <img src="https://s1.feedly.com/web/main/images/yoga-hero-v0.7247addc.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Best 5 IIT JEE Preparation Books</h5>
-                <p class="card-text" style={{ fontSize: "13px" }}>Check Out The List Of Best Books For JEE Mains & Advanced, Recommended By The Toppers.</p>
-                <p class="card-text" style={{ fontSize: "13px" }}> <img src="https://avatars.githubusercontent.com/u/80212019?v=4" height={40} alt="" style={{ borderRadius: "50%" }} /> Sujal Goswami </p>
-                <p class="card-text"><i class="fa-solid fa-thumbs-up" style={{ color: "#a8203b" }}></i> <small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
+                      <p class="card-text">
+                        <span>Created At -- </span>
+                        <strong class="text-muted">
+                          {moment(ele.createdAt).format("DD-MMM-YYYY")}
+                        </strong>
+                        <br></br>
+                        <Link to={`/blogdetails/${ele._id}`}>Read More</Link>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="col-sm-12 text-center">
+              <h4>No Blog Found</h4>
             </div>
-          </div>
-          <div className="col-sm-4">
-            <div class="card border-0 bg-light mb-4">
-              <img src="https://s1.feedly.com/web/main/images/yoga-hero-v0.7247addc.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Best 5 IIT JEE Preparation Books</h5>
-
-                <p class="card-text" style={{ fontSize: "13px" }}>Check Out The List Of Best Books For JEE Mains & Advanced, Recommended By The Toppers.</p>
-                <p class="card-text" style={{ fontSize: "13px" }}> <img src="https://avatars.githubusercontent.com/u/80212019?v=4" height={40} alt="" style={{ borderRadius: "50%" }} /> Sujal Goswami </p>
-                <p class="card-text"><i class="fa-solid fa-thumbs-up" style={{ color: "#a8203b" }}></i> <small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div class="card border-0 bg-light mb-4">
-              <img src="https://s1.feedly.com/web/main/images/yoga-hero-v0.7247addc.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Best 5 IIT JEE Preparation Books</h5>
-
-                <p class="card-text" style={{ fontSize: "13px" }}>Check Out The List Of Best Books For JEE Mains & Advanced, Recommended By The Toppers.</p>
-                <p class="card-text" style={{ fontSize: "13px" }}> <img src="https://avatars.githubusercontent.com/u/80212019?v=4" height={40} alt="" style={{ borderRadius: "50%" }} /> Sujal Goswami </p>
-                <p class="card-text"><i class="fa-solid fa-thumbs-up" style={{ color: "#a8203b" }}></i> <small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div class="card border-0 bg-light mb-4">
-              <img src="https://s1.feedly.com/web/main/images/yoga-hero-v0.7247addc.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Best 5 IIT JEE Preparation Books</h5>
-                <p class="card-text" style={{ fontSize: "13px" }}>Check Out The List Of Best Books For JEE Mains & Advanced, Recommended By The Toppers.</p>
-                <p class="card-text" style={{ fontSize: "13px" }}> <img src="https://avatars.githubusercontent.com/u/80212019?v=4" height={40} alt="" style={{ borderRadius: "50%" }} /> Sujal Goswami </p>
-                <p class="card-text"><i class="fa-solid fa-thumbs-up" style={{ color: "#a8203b" }}></i> <small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div class="card border-0 bg-light mb-4">
-              <img src="https://s1.feedly.com/web/main/images/yoga-hero-v0.7247addc.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Best 5 IIT JEE Preparation Books</h5>
-
-                <p class="card-text" style={{ fontSize: "13px" }}>Check Out The List Of Best Books For JEE Mains & Advanced, Recommended By The Toppers.</p>
-                <p class="card-text" style={{ fontSize: "13px" }}> <img src="https://avatars.githubusercontent.com/u/80212019?v=4" height={40} alt="" style={{ borderRadius: "50%" }} /> Sujal Goswami </p>
-                <p class="card-text"><i class="fa-solid fa-thumbs-up" style={{ color: "#a8203b" }}></i> <small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div class="card border-0 bg-light mb-4">
-              <img src="https://s1.feedly.com/web/main/images/yoga-hero-v0.7247addc.svg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Best 5 IIT JEE Preparation Books</h5>
-
-                <p class="card-text" style={{ fontSize: "13px" }}>Check Out The List Of Best Books For JEE Mains & Advanced, Recommended By The Toppers.</p>
-                <p class="card-text" style={{ fontSize: "13px" }}> <img src="https://avatars.githubusercontent.com/u/80212019?v=4" height={40} alt="" style={{ borderRadius: "50%" }} /> Sujal Goswami </p>
-                <p class="card-text"><i class="fa-solid fa-thumbs-up" style={{ color: "#a8203b" }}></i> <small class="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
+      </div>
+      <div style={{ display: "flex" }}>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={onPageSubmit}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+
+          //   renderOnZeroPageCount={null}
+        />
       </div>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Blogs
+export default Blogs;
