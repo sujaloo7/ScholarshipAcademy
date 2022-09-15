@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Avatar from "@mui/material/Avatar";
 import { getBlog } from "../Repository/UserRepository";
 import { imageUrl } from "../Repository/Repository";
@@ -46,6 +47,7 @@ const Blogdetails = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

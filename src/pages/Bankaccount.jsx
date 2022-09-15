@@ -9,12 +9,30 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { addGuestUser } from "../Repository/UserRepository";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Bankaccount = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
+  const [open1, setOpen1] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose1 = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen1(false);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,7 +52,9 @@ const Bankaccount = () => {
       from: "bank",
     });
     if (res.status === 1) {
-      alert(res.message);
+      setType("success");
+      setMessage("We will reach you soon");
+      setOpen1(true);
       setName("");
       setMobile("");
       setEmail("");
@@ -42,11 +62,27 @@ const Bankaccount = () => {
       document.getElementById("name").value = "";
       document.getElementById("mobile").value = "";
       handleClose();
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen1(true);
     }
   };
 
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open1}
+          autoHideDuration={3000}
+          onClose={handleClose1}
+        >
+          <Alert onClose={handleClose1} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <Navbar />
       <div className="container p-5 bank-account">
         <div className="row">

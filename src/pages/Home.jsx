@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Button } from "@mui/material";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
@@ -27,12 +28,44 @@ import { addGuestUser } from "../Repository/UserRepository";
 import "./home.css";
 import { useState } from "react";
 import Tomarrow from "../components/Tomarrow";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Home = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [type, setType] = useState("");
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const [type1, setType1] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose1 = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen1(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     AOS.init({
@@ -52,7 +85,14 @@ const Home = () => {
     });
 
     if (res.status === 1) {
-      alert("your details submit successfully...we will be in touch");
+      setType1("success");
+      setMessage("Your Information Submitted Successfully");
+      setOpen1(true);
+      handleClose();
+    } else {
+      setType1("error");
+      setMessage(res.message);
+      setOpen1(true);
     }
   };
   return (
@@ -67,19 +107,116 @@ const Home = () => {
       <University />
       <Timeline />
       <Tomarrow />
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open1}
+          autoHideDuration={3000}
+          onClose={handleClose1}
+        >
+          <Alert onClose={handleClose1} severity={type1} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
 
       <div class="sticky-icon">
-        <a
-          href="#"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          class="Instagram"
-        >
-          <i class="fa-solid fa-user"></i>Cunsult
+        <a href="#" onClick={handleClickOpen}>
+          {" "}
+          <i class="fa-solid fa-user" onClick={handleClickOpen}></i>Consult
         </a>
       </div>
+      <div className="">
+        <Dialog open={open} onClose={handleClose}>
+          <form action="" onSubmit={submitPopUp}>
+            <DialogTitle className="text-center">Contact</DialogTitle>
+            <DialogContent>
+              {/* <DialogContentText>
+              We will reach you as soon as possible...please keep in touch
+            </DialogContentText> */}
+              <div className="px-4">
+                <div className="text-center ">
+                  <img
+                    src="https://images.leverageedu.com/assets/img/male.png"
+                    style={{ borderRadius: "50%" }}
+                    height={100}
+                    width={100}
+                    alt=""
+                  />
+                </div>
 
-      <div
+                <div className="row mb-4  mt-4">
+                  <TextField
+                    id="filled-basic"
+                    label="Email"
+                    variant="filled"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="row mb-4">
+                  <TextField
+                    id="filled-basic"
+                    label="Full Name"
+                    variant="filled"
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="row mb-4">
+                  <TextField
+                    type="number"
+                    id="filled-basic"
+                    label="Phone Number"
+                    variant="filled"
+                    onChange={(e) => setMobile(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="row">
+                  <FormControl variant="filled">
+                    <InputLabel id="demo-simple-select-filled-label">
+                      Choose your Type
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-filled-label"
+                      id="demo-simple-select-filled"
+                      onChange={(e) => setType(e.target.value)}
+                      required
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value="student">Student</MenuItem>
+                      <MenuItem value="university">University</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+            </DialogContent>
+            <DialogActions className="text-center w-100 px-4 p">
+              <Button
+                onClick={handleClose}
+                className="w-50"
+                variant="contained"
+                style={{ background: "#a8203b" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                className="w-50"
+                style={{ background: "#a8203b" }}
+                variant="contained"
+              >
+                Submit
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
+      </div>
+
+      {/* <div
         class="modal fade"
         id="exampleModal"
         tabindex="-1"
@@ -160,7 +297,7 @@ const Home = () => {
                   <button
                     type="submit"
                     class="btn btn-primary w-100 mt-4"
-                    data-bs-dismiss="modal"
+                    // data-bs-dismiss="modal"
                   >
                     Submit
                   </button>
@@ -170,7 +307,7 @@ const Home = () => {
             <div class="modal-footer text-center"></div>
           </div>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </>
   );

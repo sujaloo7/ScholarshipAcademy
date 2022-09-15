@@ -78,7 +78,7 @@ const Universities = () => {
           </div> */}
         </div>
       </div>
-      {/* <Footer/> */}
+      <Footer />
     </>
   );
 };

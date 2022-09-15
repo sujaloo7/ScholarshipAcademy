@@ -7,12 +7,20 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 import {
   userRegister,
   getStudentCountry,
   getStudentState,
 } from "../Repository/UserRepository";
 import user from "../images/signup.gif";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Universitysignup = () => {
   const [name, setName] = useState("");
@@ -24,10 +32,21 @@ const Universitysignup = () => {
   const [website, setWebsite] = useState("");
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
 
   useEffect(() => {
     countries();
   }, []);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const countries = async () => {
     let res = await getStudentCountry();
@@ -59,13 +78,31 @@ const Universitysignup = () => {
       user_type: "university",
     });
 
-    alert(res.message);
     if (res.status === 1) {
-      navigate("/");
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+      setTimeout(() => navigate("/university"), 2000);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
     }
   };
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <div class="wrapper p-2">
         <div class="form-left bg-white text-center text-dark">
           <img src={user} height="350" alt="" />
@@ -95,6 +132,7 @@ const Universitysignup = () => {
               <input
                 type="text"
                 class="input-field"
+                required
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -123,6 +161,7 @@ const Universitysignup = () => {
                   variant="filled"
                   style={{ width: "100%" }}
                   onChange={onchangeCountry}
+                  required
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -159,6 +198,7 @@ const Universitysignup = () => {
                 style={{ width: "100%" }}
                 class="input-field form-select "
                 label="Default select example"
+                required
                 onChange={(e) => setState(e.target.value)}
               >
                 {stateList.map((ele, index) => {
@@ -178,6 +218,7 @@ const Universitysignup = () => {
               <input
                 type="text"
                 class="input-field"
+                required
                 onChange={(e) => setWebsite(e.target.value)}
               />
             </div>
@@ -186,6 +227,7 @@ const Universitysignup = () => {
               <input
                 type="number"
                 class="input-field"
+                required
                 onChange={(e) => setMobile(e.target.value)}
               />
             </div>
@@ -194,6 +236,7 @@ const Universitysignup = () => {
               <input
                 type="password"
                 class="input-field"
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
