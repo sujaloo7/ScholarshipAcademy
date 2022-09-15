@@ -4,11 +4,29 @@ import { TextField, Button, Divider, Chip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../Repository/UserRepository";
 import user from "../images/user.gif";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Universitylogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const LoginUser = async (e) => {
     e.preventDefault();
@@ -18,16 +36,35 @@ const Universitylogin = () => {
       password: password,
       user_type: "university",
     });
-    alert(res.message);
+
     if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
       localStorage.setItem("auth_token", res.data.token);
       localStorage.setItem("user_type", res.data.user_type);
-      navigate("/");
+      setTimeout(() => navigate("/"), 2000);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
     }
   };
 
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <div class="wrapper mt-5 " style={{ height: "85vh" }}>
         <div class="form-left mt-4 bg-white text-center text-dark">
           <img src={user} className="mt-5" height="350" alt="" />
@@ -51,6 +88,7 @@ const Universitylogin = () => {
               <input
                 type="password"
                 class="input-field"
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>

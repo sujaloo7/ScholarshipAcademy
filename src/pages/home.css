@@ -458,14 +458,17 @@ body{
     margin-top: 40px;
 	font-size:16px;
 	font-family:'Oswald', sans-serif;
+    background-color: #a8203b;
+    color: #fff;
 	transition:all 0.8s;}
 .sticky-icon a:hover  {
-	color:#FFF;
-	transform:translate(0px,0px);}	
+	/* color:#FFF; */
+    background-color: #a8203b;
+	transform:translate(50px,0px);}	
 .sticky-icon a:hover i  {
 	transform:rotate(360deg);}
-/*.search_icon a:hover i  {
-	transform:rotate(360deg);}*/
+.search_icon a:hover i  {
+	transform:rotate(360deg);}
 .Facebook  {
 	background-color:#2C80D3;
 	color:#FFF;}
@@ -486,17 +489,17 @@ body{
 	background-color:#d34836;
 	color:#FFF;}						
 .sticky-icon a i {
-	background-color:#FFF;
+	background-color:#fff;
 	height:40px;
 	width:40px;
-	color:#000;
+	color:rgb(0, 0, 0);
 	text-align:center;
 	line-height:40px;
 	border-radius:50%;
 	margin-right:20px;
 	transition:all 0.5s;}
 .sticky-icon a i.fa-facebook-f  {
-	background-color:#FFF;
+	background-color:black;
 	color:#2C80D3;}
 	
 .sticky-icon a i.fa-google-plus-g  {

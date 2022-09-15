@@ -27,6 +27,7 @@ const Outeruniverities = () => {
 
   useEffect(() => {
     let typ = window.location.pathname.split("/").pop();
+    console.log("hello hu");
 
     GetUniversity(typ);
 
@@ -36,7 +37,7 @@ const Outeruniverities = () => {
   const GetUniversity = async (typ) => {
     if (typ.length != 24 && typ != "all") {
       console.log("inside this");
-      let name = "COLLEGES IN" + typ.toUpperCase();
+      let name = "COLLEGES IN " + typ.toUpperCase();
       console.log(name);
       setCountryName(name);
       let res = await getUniversitiesProfile({

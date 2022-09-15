@@ -9,11 +9,29 @@ import "./main.css";
 import { userLogin } from "../Repository/UserRepository";
 import user from "../images/user.gif";
 import hide from "../images/hide.gif";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
   const navigate = useNavigate();
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -23,15 +41,35 @@ const Login = () => {
       user_type: "student",
     });
 
-    alert(res.message);
-
-    localStorage.setItem("auth_token", res.data.token);
-    localStorage.setItem("user_type", res.data.user_type);
-    navigate("/");
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+      localStorage.setItem("auth_token", res.data.token);
+      localStorage.setItem("user_type", res.data.user_type);
+      setTimeout(() => navigate("/"), 2000);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
 
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
+
       <div
         class="wrapper mt-5 "
         style={{ height: "85vh", overflowY: "hidden" }}
@@ -52,12 +90,14 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
           <div class="row">
             <div class="col-sm-12 mb-3">
               <label>Set Password</label>
               <input
                 type="password"
                 class="input-field"
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>

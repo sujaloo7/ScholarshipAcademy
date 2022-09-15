@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 import "./home.css";
 import { addGuestUser } from "../Repository/UserRepository";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Money = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
+
   const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-  const handleClose = () => {
     setOpen(false);
   };
 
@@ -35,17 +38,35 @@ const Money = () => {
       from: "money",
     });
     if (res.status === 1) {
-      alert(res.message);
+      setType("success");
+      setMessage("We will connect to you very soon");
+      setOpen(true);
       setName("");
       setMobile("");
       setEmail("");
       document.getElementById("exampleInputEmail1").value = "";
       document.getElementById("exampleInputEmail2").value = "";
       document.getElementById("exampleInputEmail3").value = "";
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
     }
   };
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <Navbar />
       <div
         className="container-fluid p-5 mb-5 money-back"

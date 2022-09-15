@@ -9,12 +9,31 @@ import { addGuestUser } from "../Repository/UserRepository";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const Finance = () => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   useEffect(() => {}, [refresh]);
   const navigate = useNavigate();
 
@@ -28,7 +47,9 @@ const Finance = () => {
       from: "loan",
     });
     if (res.status === 1) {
-      alert(res.message);
+      setType("success");
+      setMessage("We will provide feedback very soon");
+      setOpen(true);
       setRefresh(true);
       setName("");
       setAmount("");
@@ -39,10 +60,26 @@ const Finance = () => {
       document.getElementById("outlined-basic3").value = "";
       document.getElementById("outlined-basic4").value = "";
       navigate("/finance");
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
     }
   };
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <Navbar />
 
       <div className="container p-5 finance">
@@ -287,9 +324,9 @@ const Finance = () => {
             </span>
           </h1>
           <div className="col-sm-12">
-            <button className="btn btn-primary mt-3">
-              Check Your Eligibility
-            </button>
+            <a href="tel: 98870 20529">
+              <button className="btn btn-primary mt-3">Call Now</button>
+            </a>
           </div>
         </div>
       </div>

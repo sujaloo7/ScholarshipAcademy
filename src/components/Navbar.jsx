@@ -82,9 +82,9 @@ function Navbar() {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto me-auto">
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">
+                <Link class="nav-link dropbtn" to="#">
                   Study Abroad{" "}
-                </a>
+                </Link>
                 <div class="dropdown-content">
                   <Link to="/universities">
                     <img
@@ -117,9 +117,9 @@ function Navbar() {
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">
+                <Link class="nav-link dropbtn" to="#">
                   Test Prep
-                </a>
+                </Link>
                 <div class="dropdown-content">
                   <a href=" https://germanshala.com/">
                     {" "}
@@ -179,11 +179,11 @@ function Navbar() {
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">
+                <Link class="nav-link dropbtn" to="#">
                   Finance
-                </a>
+                </Link>
                 <div class="dropdown-content p-0">
-                  <a href="/finance">
+                  <Link to="/finance">
                     {" "}
                     <img
                       src="https://images.leverageedu.com/landing-pages/loans_icon.svg"
@@ -191,41 +191,37 @@ function Navbar() {
                       alt=""
                     />{" "}
                     &nbsp; Loans
-                  </a>
+                  </Link>
                   {/* <!-- <small style="">Finance your study abroad dream</small> --> */}
-                  <a href="money">
+                  <Link to="/money">
                     <img
                       src="https://images.leverageedu.com/landing-pages/imt_icon.svg"
                       height="25"
                       alt=""
                     />
                     &nbsp;&nbsp;&nbsp;International Money Transfer
-                  </a>
-                  <a href="/bankaccount">
+                  </Link>
+                  <Link to="/bankaccount">
                     <img
                       src="https://images.leverageedu.com/landing-pages/ibt_icon.svg"
                       height="25"
                       alt=""
                     />
                     &nbsp;&nbsp;&nbsp;International Bank Account
-                  </a>
+                  </Link>
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">
+                <Link class="nav-link dropbtn" to="#">
                   Community
-                </a>
+                </Link>
                 <div class="dropdown-content">
-                  <a href="#">
+                  <Link to="/category">
                     Study Abroad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="fa fa-arrow-right ms-5"></i>
-                  </a>
-                  <a href="#">
+                  </Link>
+                  <a href="https://germanshala.com/">
                     IETLS Prep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-arrow-right ms-5"></i>
-                  </a>
-                  <a href="#">
-                    Offer Holders&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="fa fa-arrow-right ms-5"></i>
                   </a>
                 </div>
@@ -239,9 +235,9 @@ function Navbar() {
                 </div>
               </li> */}
               <li class="nav-item dropdown">
-                <a class="nav-link dropbtn" href="#">
+                <Link class="nav-link dropbtn" to="#">
                   More{" "}
-                </a>
+                </Link>
                 <div class="dropdown-content">
                   {/* <a href="#">About Us&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right ms-5"></i></a> */}
                   <a href="/foruniversities">
@@ -353,7 +349,7 @@ function Navbar() {
                     {" "}
                     <Link to="/universityprofile" className="text-dark">
                       {" "}
-                      University{" "}
+                      Profile{" "}
                     </Link>
                   </MenuItem>
                   {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}

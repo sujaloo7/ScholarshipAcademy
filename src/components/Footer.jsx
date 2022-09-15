@@ -43,40 +43,65 @@ function Footer() {
 
                 <div class="footer_social_area">
                   <a
-                    href="#"
+                    href="https://www.facebook.com/germanshala"
                     data-toggle="tooltip"
                     data-placement="top"
                     title=""
+                    target="_blank"
                     data-original-title="Facebook"
                   >
                     <i class="fa-brands fa-facebook-f"></i>
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/eurocareer.jaipur/"
                     data-toggle="tooltip"
                     data-placement="top"
                     title=""
-                    data-original-title="Pinterest"
+                    data-original-title="Instagram"
+                    target="_blank"
                   >
-                    <i class="fa-brands fa-pinterest"></i>
+                    <i class="fa-brands fa-instagram"></i>
                   </a>
                   <a
-                    href="#"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title=""
-                    data-original-title="Skype"
-                  >
-                    <i class="fa-brands fa-skype"></i>
-                  </a>
-                  <a
-                    href="#"
+                    href="https://twitter.com/hitesh7sharma"
                     data-toggle="tooltip"
                     data-placement="top"
                     title=""
                     data-original-title="Twitter"
+                    target="_blank"
                   >
                     <i class="fa-brands fa-twitter"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/hitesh-sharma-deutschland/"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Linkedin"
+                    target="_blank"
+                  >
+                    <i class="fa-brands fa-linkedin"></i>
+                  </a>
+                  <a
+                    href="https://www.quora.com/profile/Hitesh-Sharma-619"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Quora"
+                    target="_blank"
+                  >
+                    <i class="fa-brands fa-quora"></i>
+                  </a>
+
+                  <a
+                    href="https://www.youtube.com/c/EurocareerInfo/videos"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title=""
+                    data-original-title="Youtube"
+                    target="_blank"
+                  >
+                    <i class="fa-brands fa-youtube"></i>
                   </a>
                 </div>
               </div>
@@ -89,7 +114,7 @@ function Footer() {
                 <div class="footer_menu">
                   <ul>
                     <li>
-                      <a href="/blogs">Blog</a>
+                      <Link to="/blogs">Blog</Link>
                     </li>
 
                     <li>
