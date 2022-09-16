@@ -148,6 +148,7 @@ const Home = () => {
                 <div className="row mb-4  mt-4">
                   <TextField
                     id="filled-basic"
+                    type="email"
                     label="Email"
                     variant="filled"
                     onChange={(e) => setEmail(e.target.value)}
@@ -169,6 +170,7 @@ const Home = () => {
                     type="number"
                     id="filled-basic"
                     label="Phone Number"
+                    inputProps={{ min: "0", max: "10", step: "1" }}
                     variant="filled"
                     onChange={(e) => setMobile(e.target.value)}
                     required
