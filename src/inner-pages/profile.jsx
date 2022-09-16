@@ -24,7 +24,7 @@ const Profile = () => {
               <Link to="/profiledetails" className="col-sm-4">
                 <div
                   className="col-sm-12 m-2 shadow-sm p-5 text-light"
-                  style={{ backgroundColor: "#FF723A" }}
+                  style={{ backgroundColor: "#a8203b" }}
                 >
                   <p className="text-center ">Profile Status</p>
                 </div>
@@ -32,7 +32,7 @@ const Profile = () => {
               <Link to="/" className="col-sm-4">
                 <div
                   className="col-sm-12 m-2 shadow-sm p-5 text-light"
-                  style={{ backgroundColor: "#FF723A" }}
+                  style={{ backgroundColor: "#a8203b" }}
                 >
                   <p className="text-center">Application Filled</p>
                 </div>
@@ -40,7 +40,7 @@ const Profile = () => {
               <Link to="/" className="col-sm-4">
                 <div
                   className="col-sm-12 m-2 shadow-sm p-5 text-light"
-                  style={{ backgroundColor: "#FF723A" }}
+                  style={{ backgroundColor: "#a8203b" }}
                 >
                   <p className="text-center">Application Accepted</p>
                 </div>
@@ -48,7 +48,7 @@ const Profile = () => {
               <Link to="/" className="col-sm-4">
                 <div
                   className="col-sm-12 m-2 shadow-sm p-5 text-light"
-                  style={{ backgroundColor: "#FF723A" }}
+                  style={{ backgroundColor: "#a8203b" }}
                 >
                   <p className="text-center">Confirmed Admission</p>
                 </div>

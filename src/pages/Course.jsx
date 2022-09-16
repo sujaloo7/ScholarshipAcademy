@@ -39,7 +39,7 @@ const Course = () => {
         <div className="w-100 p-4 text-center ">
           <Button
             className="text-center  p-4  text-light"
-            style={{ backgroundColor: "#FF723A" }}
+            style={{ backgroundColor: "#a8203b" }}
             disabled
           >
             Select Courses

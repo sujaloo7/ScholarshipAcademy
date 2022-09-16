@@ -216,69 +216,20 @@ const Universityprofile = () => {
           </div>
           <div className="col-sm-8 shadow">
             <div className="col-sm-12">
-              <ul
-                class="nav nav-pills mb-3 shadow "
-                id="pills-tab"
-                role="tablist"
-                style={{ borderRadius: "20px" }}
-              >
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button
-                    class="nav-link px-3 m-2"
-                    id="pills-contact-tab"
-                    style={{ borderRadius: "20px " }}
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-home"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-contact"
-                    aria-selected="false"
-                    //   onClick={testDetail}
-                  >
-                    Personal Details
-                  </button>
+                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" style={{ borderRadius: "20px " }}>Personal Details</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button
-                    class="nav-link active px-3 m-2 "
-                    style={{ borderRadius: "20px ", backgroundColor: "" }}
-                    id="pills-home-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-contact"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-home"
-                    aria-selected="true"
-                  >
-                    University Details
-                  </button>
+                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" style={{ borderRadius: "20px ", backgroundColor: "" }}>University Details</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button
-                    class="nav-link px-3 m-2"
-                    style={{ borderRadius: "20px " }}
-                    id="pills-profile-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-profile"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-profile"
-                    aria-selected="false"
-                    onClick={onclickUpload}
-                    //   onClick={educationDetail}
-                  >
-                    Upload course
-                  </button>
+                  <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" style={{ borderRadius: "20px " }}
+                  >Upload course</button>
                 </li>
               </ul>
-              <div
-                class="tab-pane fade p-2"
-                id="pills-home"
-                role="tabpanel"
-                aria-labelledby="pills-profile-tab"
-                tabindex="0"
-              >
-                <form action="" onSubmit={submitData}>
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> <form action="" onSubmit={submitData}>
                   <h6 className="ms-3 mt-2" style={{ color: "#FF723A" }}>
                     Personal Details
                   </h6>
@@ -309,7 +260,7 @@ const Universityprofile = () => {
                         value={personalData?.email}
                         label="university Email"
                         type="email"
-                        variant="filled"
+                        variant="outlined"
                         disabled
                         InputLabelProps={{
                           shrink: true,
@@ -337,8 +288,8 @@ const Universityprofile = () => {
                             });
                             setStateList(res.data);
                           }}
-                          //   value={age}
-                          //   onChange={handleChange}
+                        //   value={age}
+                        //   onChange={handleChange}
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -370,8 +321,8 @@ const Universityprofile = () => {
                         <Select
                           labelId="demo-simple-select-filled-label"
                           id="demo-simple-select-filled"
-                          //   value={age}
-                          //   onChange={handleChange}
+                        //   value={age}
+                        //   onChange={handleChange}
                         >
                           {stateList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
@@ -496,82 +447,73 @@ const Universityprofile = () => {
                     Submit
                   </Button>
                 </form>
-              </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">  <form action="" onSubmit={UpdateDetails}>
+                  <h6 className="ms-3 " style={{ color: "#FF723A" }}>
+                    university Details{" "}
+                  </h6>
+                  <div className="row p-3">
+                    <div className="col-md-6 mt-4">
+                      <TextField
+                        id="filled-basic"
+                        className="w-100"
+                        value={detailData?.university_type}
+                        onChange={(e) =>
+                          setDetailData({
+                            ...detailData,
+                            university_type: e.target.value,
+                          })
+                        }
+                        label="university Type"
+                        variant="filled"
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
 
-              <div class="tab-content" id="pills-tabContent">
-                <div
-                  class="tab-pane fade show active p-2"
-                  id="pills-contact"
-                  role="tabpanel"
-                  aria-labelledby="pills-home-tab"
-                  tabindex="0"
-                >
-                  <form action="" onSubmit={UpdateDetails}>
-                    <h6 className="ms-3 " style={{ color: "#FF723A" }}>
-                      university Details{" "}
-                    </h6>
-                    <div className="row p-3">
-                      <div className="col-md-6 mt-4">
-                        <TextField
-                          id="filled-basic"
-                          className="w-100"
-                          value={detailData?.university_type}
-                          onChange={(e) =>
-                            setDetailData({
-                              ...detailData,
-                              university_type: e.target.value,
-                            })
-                          }
-                          label="university Type"
-                          variant="filled"
-                          required
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                        />
-                      </div>
+                    <div className="col-md-6 mt-4">
+                      <TextField
+                        id="filled-basic"
+                        className="w-100"
+                        value={detailData?.world_rank}
+                        onChange={(e) =>
+                          setDetailData({
+                            ...detailData,
+                            world_rank: e.target.value,
+                          })
+                        }
+                        label="university Rank(World Rank)"
+                        variant="filled"
+                        type="number"
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
 
-                      <div className="col-md-6 mt-4">
-                        <TextField
-                          id="filled-basic"
-                          className="w-100"
-                          value={detailData?.world_rank}
-                          onChange={(e) =>
-                            setDetailData({
-                              ...detailData,
-                              world_rank: e.target.value,
-                            })
-                          }
-                          label="university Rank(World Rank)"
-                          variant="filled"
-                          type="number"
-                          required
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                        />
-                      </div>
-
-                      <div className="col-md-12 mt-4">
-                        <TextField
-                          id="filled-basic"
-                          className="w-100"
-                          value={detailData?.established_year}
-                          onChange={(e) =>
-                            setDetailData({
-                              ...detailData,
-                              established_year: e.target.value,
-                            })
-                          }
-                          label="Established  Year"
-                          variant="filled"
-                          type="number"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                        />
-                      </div>
-                      {/* <div className="col-md-6 mt-4">
+                    <div className="col-md-12 mt-4">
+                      <TextField
+                        id="filled-basic"
+                        className="w-100"
+                        value={detailData?.established_year}
+                        onChange={(e) =>
+                          setDetailData({
+                            ...detailData,
+                            established_year: e.target.value,
+                          })
+                        }
+                        label="Established  Year"
+                        variant="filled"
+                        type="number"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                    {/* <div className="col-md-6 mt-4">
                         <FormControl variant="filled" className="w-100">
                           <InputLabel id="demo-simple-select-filled-label">
                             Course Program{" "}
@@ -589,98 +531,90 @@ const Universityprofile = () => {
                           </Select>
                         </FormControl>
                       </div> */}
-                      <div class="form-check col-sm-3 mt-4 ms-3">
-                        <input
-                          class="form-check-input mt-2"
-                          type="checkbox"
-                          onChange={(e) => setAccomodation(!accomodation)}
-                          id="flexCheckDefault"
-                          checked={accomodation}
-                        />
-                        <label
-                          class="form-check-label text-dark"
-                          for="flexCheckDefault"
-                          style={{ fontSize: "13px" }}
-                        >
-                          Accomodation
-                        </label>
-                      </div>
-                      <div class="form-check col-sm-3 mt-4">
-                        <input
-                          class="form-check-input mt-2"
-                          type="checkbox"
-                          value=""
-                          onChange={(e) => setWork(!work)}
-                          id="flexCheckDefault"
-                          checked={work}
-                        />
-                        <label
-                          class="form-check-label text-dark"
-                          for="flexCheckDefault"
-                          style={{ fontSize: "13px" }}
-                        >
-                          Part Time Work
-                        </label>
-                      </div>
-                      <div class="form-check col-sm-3 mt-4">
-                        <input
-                          class="form-check-input mt-2"
-                          type="checkbox"
-                          value=""
-                          onChange={(e) => setScholarship(!scholarship)}
-                          id="flexCheckDefault"
-                          checked={scholarship}
-                        />
-                        <label
-                          class="form-check-label text-dark"
-                          for="flexCheckDefault"
-                          style={{ fontSize: "13px" }}
-                        >
-                          Scholarship
-                        </label>
-                      </div>
-
-                      <div className="col-sm-12  mt-4">
-                        <label
-                          for="exampleFormControlInput1"
-                          class="form-label text-muted"
-                        >
-                          About University
-                        </label>
-                        <CKEditor
-                          editor={ClassicEditor}
-                          data={detailData?.about}
-                          config={{ placeholder: "enter details ..." }}
-                          onChange={(event, editor) => {
-                            const data = editor.getData();
-                            setDetailData({ ...detailData, about: data });
-                          }}
-                        />
-                      </div>
-
-                      <Button
-                        variant="contained"
-                        type="submit"
-                        className=" mt-3 p-3 bg-dark"
+                    <div class="form-check col-sm-3 mt-4 ms-3">
+                      <input
+                        class="form-check-input mt-2"
+                        type="checkbox"
+                        onChange={(e) => setAccomodation(!accomodation)}
+                        id="flexCheckDefault"
+                        checked={accomodation}
+                      />
+                      <label
+                        class="form-check-label text-dark"
+                        for="flexCheckDefault"
+                        style={{ fontSize: "13px" }}
                       >
-                        Submit
-                      </Button>
+                        Accomodation
+                      </label>
                     </div>
-                  </form>
-                </div>
+                    <div class="form-check col-sm-3 mt-4">
+                      <input
+                        class="form-check-input mt-2"
+                        type="checkbox"
+                        value=""
+                        onChange={(e) => setWork(!work)}
+                        id="flexCheckDefault"
+                        checked={work}
+                      />
+                      <label
+                        class="form-check-label text-dark"
+                        for="flexCheckDefault"
+                        style={{ fontSize: "13px" }}
+                      >
+                        Part Time Work
+                      </label>
+                    </div>
+                    <div class="form-check col-sm-3 mt-4">
+                      <input
+                        class="form-check-input mt-2"
+                        type="checkbox"
+                        value=""
+                        onChange={(e) => setScholarship(!scholarship)}
+                        id="flexCheckDefault"
+                        checked={scholarship}
+                      />
+                      <label
+                        class="form-check-label text-dark"
+                        for="flexCheckDefault"
+                        style={{ fontSize: "13px" }}
+                      >
+                        Scholarship
+                      </label>
+                    </div>
 
-                <div
-                  class="tab-pane fade p-2"
-                  id="pills-profile"
-                  role="tabpanel"
-                  aria-labelledby="pills-profile-tab"
-                  tabindex="0"
-                >
-                  <div className="row">
-                    <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
-                      Upload Courses
-                    </h6>
+                    <div className="col-sm-12  mt-4">
+                      <label
+                        for="exampleFormControlInput1"
+                        class="form-label text-muted"
+                      >
+                        About University
+                      </label>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        data={detailData?.about}
+                        config={{ placeholder: "enter details ..." }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          setDetailData({ ...detailData, about: data });
+                        }}
+                      />
+                    </div>
+
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      className=" mt-3 p-3 bg-dark"
+                    >
+                      Submit
+                    </Button>
                   </div>
+                </form>
+                </div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"> <div className="row">
+                  <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
+                    Upload Courses
+                  </h6>
+                </div>
                   <form action="" onSubmit={onsubmitCourse}>
                     <div className="row p-3">
                       <div className="col-sm-6 mt-4">
@@ -693,8 +627,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourse(e.target.value)}
 
-                            //   value={age}
-                            //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                           >
                             {categoryList?.map((ele, index) => {
                               //   console.log("test", ele._id, "select", selectState);
@@ -737,8 +671,8 @@ const Universityprofile = () => {
                             labelId="demo-simple-select-filled-label"
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseLevel(e.target.value)}
-                            //   value={age}
-                            //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -766,8 +700,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseType(e.target.value)}
 
-                            //   value={age}
-                            //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -793,8 +727,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseExp(e.target.value)}
 
-                            //   value={age}
-                            //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -819,8 +753,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseProgram(e.target.value)}
 
-                            //   value={age}
-                            //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -845,8 +779,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseLang(e.target.value)}
 
-                            //   value={age}
-                            //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -871,8 +805,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseDegree(e.target.value)}
 
-                            //   value={age}
-                            //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -945,27 +879,6 @@ const Universityprofile = () => {
                     </Button>
                   </form>
                 </div>
-
-                {/* <div
-                class="tab-pane fade p-2"
-                id="pills-contact"
-                role="tabpanel"
-                aria-labelledby="pills-contact-tab"
-                tabindex="0"
-              >
-                
-               
-              </div>
-              <div
-                class="tab-pane fade p-2"
-                id="pills-disabled"
-                role="tabpanel"
-                aria-labelledby="pills-disabled-tab"
-                tabindex="0"
-              >
-              
-               
-              </div> */}
               </div>
             </div>
           </div>
