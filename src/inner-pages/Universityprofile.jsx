@@ -86,6 +86,38 @@ const Universityprofile = () => {
   }, []);
 
   useEffect(() => {
+    console.log("personalData.country", personalData.country);
+    const exec = async () => {
+      console.log("exec");
+      let isoCode;
+      // countryList.map((ele, index) => {
+      //   if (ele._id === personalData.country) {
+      //     isoCode = ele.isoCode;
+      //   }
+      // });
+
+      let selectedCountry = countryList.filter(
+        (element) => element._id == personalData.country
+      );
+
+      console.log("selected country", selectedCountry);
+
+      isoCode = selectedCountry[0].isoCode;
+
+      console.log("iso code", isoCode);
+
+      let res = await getStudentState({
+        countryCode: isoCode,
+      });
+      console.log("above set state list", res);
+      setStateList(res.data);
+    };
+    if (personalData.country && countryList.length != 0) {
+      exec();
+    }
+  }, [personalData.country, countryList]);
+
+  useEffect(() => {
     console.log("personal data ", personalData);
   }, [personalData]);
 
@@ -392,11 +424,6 @@ const Universityprofile = () => {
                                 ...personalData,
                                 country: e.target.value,
                               });
-
-                              // let res = await getStudentState({
-                              //   countryCode: e.target.value.isoCode,
-                              // });
-                              // setStateList(res.data);
                             }}
                             //   value={age}
                             //   onChange={handleChange}
@@ -420,17 +447,20 @@ const Universityprofile = () => {
                           <Select
                             labelId="demo-simple-select-filled-label"
                             id="demo-simple-select-filled"
+                            value={personalData.state ? personalData.state : ""}
+                            onChange={(e) =>
+                              setPersonalData({
+                                ...personalData,
+                                state: e.target.value,
+                              })
+                            }
                             //   value={age}
                             //   onChange={handleChange}
                           >
                             {stateList?.map((ele, index) => {
                               //   console.log("test", ele._id, "select", selectState);
                               return ele._id === personalData.state ? (
-                                <MenuItem
-                                  key={index}
-                                  value={ele._id}
-                                  style={{ backgroundColor: "grey" }}
-                                >
+                                <MenuItem key={index} value={ele._id}>
                                   {ele.name}
                                 </MenuItem>
                               ) : (
