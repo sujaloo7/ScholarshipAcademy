@@ -732,9 +732,11 @@ body{
 
   .profile-links .col-sm-12:hover
   {
-   background-color: #a8203b;
-   color: #fff;
+   background-color: #c3c3c3 !important;
+   
   }
+
+  
 
 
   
