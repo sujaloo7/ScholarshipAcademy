@@ -252,7 +252,7 @@ const Finance = () => {
         </h2>
         <form action="" onSubmit={submitForm}>
           <div className="row">
-            <div className="col-sm-6">
+            <div className="col-sm-6 mb-5">
               <TextField
                 id="outlined-basic1"
                 required
@@ -262,7 +262,7 @@ const Finance = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-6 mb-5">
               <TextField
                 id="outlined-basic2"
                 required
@@ -273,7 +273,7 @@ const Finance = () => {
                 onChange={(e) => setAmount(e.target.value)}
               />
             </div>
-            <div className="col-sm-6 mt-5">
+            <div className="col-sm-6 mb-5">
               <TextField
                 id="outlined-basic3"
                 required
@@ -284,7 +284,7 @@ const Finance = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="col-sm-6 mt-5">
+            <div className="col-sm-6 mb-5">
               <TextField
                 id="outlined-basic4"
                 required
