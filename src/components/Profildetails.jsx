@@ -255,7 +255,11 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={
+                            profileData.first_language
+                              ? profileData.first_language
+                              : ""
+                          }
                           onChange={(e) =>
                             setProfileData({
                               ...profileData,
@@ -275,19 +279,10 @@ const Prifildetails = () => {
                               "select",
                               ele.language_name
                             );
-                            return ele.language_name ===
-                              profileData.first_language ? (
-                              <MenuItem
-                                key={index}
-                                value={ele.language_name}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.language_name}
-                              </MenuItem>
-                            ) : (
+
+                            return (
                               <MenuItem key={index} value={ele.language_name}>
-                                {" "}
-                                {ele.language_name}{" "}
+                                {ele.language_name}
                               </MenuItem>
                             );
                           })}
@@ -304,6 +299,7 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
+                          value={profileData.gender ? profileData.gender : ""}
                           onChange={(e) =>
                             setProfileData({
                               ...profileData,
@@ -315,27 +311,9 @@ const Prifildetails = () => {
                           <MenuItem value="">
                             <em>None</em>
                           </MenuItem>
-                          {profileData.gender === "Male" ? (
-                            <>
-                              <MenuItem value="Female">Female</MenuItem>
-                              <MenuItem
-                                value="Male"
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                Male
-                              </MenuItem>
-                            </>
-                          ) : (
-                            <>
-                              <MenuItem
-                                value="Female"
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                Female
-                              </MenuItem>
-                              <MenuItem value="Male">Male</MenuItem>
-                            </>
-                          )}
+
+                          <MenuItem value="Female">Female</MenuItem>
+                          <MenuItem value="Male">Male</MenuItem>
                         </Select>
                       </FormControl>
 
@@ -397,13 +375,13 @@ const Prifildetails = () => {
                             return ele.name === profileData.state ? (
                               <MenuItem
                                 key={index}
-                                value={ele.name}
+                                value={ele._id}
                                 style={{ backgroundColor: "grey" }}
                               >
                                 {ele.name}
                               </MenuItem>
                             ) : (
-                              <MenuItem key={index} value={ele.name}>
+                              <MenuItem key={index} value={ele._id}>
                                 {ele.name}
                               </MenuItem>
                             );
@@ -543,16 +521,27 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
-                          // onChange={handleChange}
+                          value={
+                            profileData.marital_status
+                              ? profileData.marital_status
+                              : ""
+                          }
+                          onChange={(e) =>
+                            setProfileData({
+                              ...profileData,
+                              marital_status: e.target.value,
+                            })
+                          }
                           label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
                           </MenuItem>
-                          <MenuItem value={10}>Ten</MenuItem>
-                          <MenuItem value={20}>Twenty</MenuItem>
-                          <MenuItem value={30}>Thirty</MenuItem>
+                          <MenuItem value="Single">Single</MenuItem>
+                          <MenuItem value="Married">Married</MenuItem>
+                          <MenuItem value="Not Mentioned">
+                            Not Mentioned
+                          </MenuItem>
                         </Select>
                       </FormControl>
 
@@ -567,13 +556,13 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={profileData.country ? profileData.country : ""}
                           onChange={async (e) => {
                             console.log("data", e.target.value);
 
                             setProfileData({
                               ...profileData,
-                              country: e.target.value._id,
+                              country: e.target.value,
                             });
 
                             let res = await getStudentState({
@@ -588,16 +577,12 @@ const Prifildetails = () => {
                           </MenuItem>
                           {countryList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
-                            return ele.name === profileData.country ? (
-                              <MenuItem
-                                key={index}
-                                value={ele}
-                                style={{ backgroundColor: "grey" }}
-                              >
+                            return ele._id === profileData.country ? (
+                              <MenuItem key={index} value={ele._id}>
                                 {ele.name}
                               </MenuItem>
                             ) : (
-                              <MenuItem key={index} value={ele}>
+                              <MenuItem key={index} value={ele._id}>
                                 {ele.name}
                               </MenuItem>
                             );
@@ -699,7 +684,11 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={
+                            educationData.highest_education
+                              ? educationData.highest_education
+                              : ""
+                          }
                           onChange={(e) =>
                             setEducationData({
                               ...educationData,
@@ -713,18 +702,14 @@ const Prifildetails = () => {
                           </MenuItem>
                           {educationList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
-                            return ele._id ===
+                            return ele.attribute_value ===
                               profileData.education_details
                                 .highest_education ? (
-                              <MenuItem
-                                key={index}
-                                value={ele._id}
-                                style={{ backgroundColor: "grey" }}
-                              >
+                              <MenuItem key={index} value={ele.attribute_value}>
                                 {ele.attribute_value}
                               </MenuItem>
                             ) : (
-                              <MenuItem key={index} value={ele._id}>
+                              <MenuItem key={index} value={ele.attribute_value}>
                                 {ele.attribute_value}
                               </MenuItem>
                             );
@@ -744,7 +729,11 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={
+                            educationData.country_of_education
+                              ? educationData.country_of_education
+                              : ""
+                          }
                           onChange={async (e) => {
                             setEducationData({
                               ...educationData,
@@ -759,17 +748,9 @@ const Prifildetails = () => {
                           </MenuItem>
                           {countryList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
-                            return ele.name ===
-                              educationData.country_of_education ? (
-                              <MenuItem
-                                key={index}
-                                value={ele.name}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.name}
-                              </MenuItem>
-                            ) : (
-                              <MenuItem key={index} value={ele._id}>
+
+                            return (
+                              <MenuItem key={index} value={ele.name}>
                                 {ele.name}
                               </MenuItem>
                             );
@@ -995,7 +976,7 @@ const Prifildetails = () => {
                       <Select
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
-                        // value={age}
+                        value={testData.test_name ? testData.test_name : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
@@ -1009,16 +990,12 @@ const Prifildetails = () => {
                         </MenuItem>
                         {testName?.map((ele, index) => {
                           //   console.log("test", ele._id, "select", selectState);
-                          return ele._id === testData.test_name ? (
-                            <MenuItem
-                              key={index}
-                              value={ele._id}
-                              style={{ backgroundColor: "grey" }}
-                            >
+                          return ele.attribute_value === testData.test_name ? (
+                            <MenuItem key={index} value={ele.attribute_value}>
                               {ele.attribute_value}
                             </MenuItem>
                           ) : (
-                            <MenuItem key={index} value={ele._id}>
+                            <MenuItem key={index} value={ele.attribute_value}>
                               {ele.attribute_value}
                             </MenuItem>
                           );
