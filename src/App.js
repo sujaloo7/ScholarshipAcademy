@@ -54,10 +54,7 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/universities" element={<Universities />} />
           <Route path="/outeruniversities/:id" element={<Outeruniverities />} />
-          <Route
-            path="/universities-details"
-            element={<Universitiesdetails />}
-          />
+          <Route path="/universities-details"element={<Universitiesdetails />}/>
           <Route path="/apply/:id" element={<Apply />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profiledetails" element={<Profiledetails />} />

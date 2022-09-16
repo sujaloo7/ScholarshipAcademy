@@ -48,7 +48,7 @@ const FAQ = () => {
                 <h1 class="mb-5 fw-bold mt-4">Frequently Asked Questions</h1>
 
               </div>
-              <div className="col-sm-6">
+              <div className="col-sm-12">
                 <div class="accordion" id="accordionExample">
                   {faq.map((ele, index) => {
                     return (
@@ -58,16 +58,17 @@ const FAQ = () => {
                             class="accordion-button"
                             type="button"
                             data-bs-toggle="collapse"
-                            data-bs-target="TARGET"
+                            data-bs-target="#collapseOne"
                             aria-expanded="true"
                             aria-controls={index}
+                            style={{ color: "#c44464" }}
                           >
                             Q.{index + 1} &nbsp;
                             {ele?.question}
                           </button>
                         </h2>
                         <div
-                          id="TARGET"
+                          id="collapseOne"
                           class="accordion-collapse collapse show"
                           aria-labelledby={index}
                           data-bs-parent={index}
@@ -91,6 +92,8 @@ const FAQ = () => {
           </div>
         </div>
       </div>
+
+
       <Footer />
     </>
   );

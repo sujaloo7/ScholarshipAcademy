@@ -41,7 +41,7 @@ const Blogs = () => {
           {blogList && blogList.length > 0 ? (
             blogList.map((ele, index) => {
               return (
-                <div className="col-sm-4 text-center">
+                <div className="col-sm-4 ">
                   <div class="card border-0 bg-light mb-4">
                     <img
                       src={`${imageUrl}${ele.image}`}
@@ -49,18 +49,18 @@ const Blogs = () => {
                       alt="..."
                     />
                     <div class="card-body">
-                      <h5 class="card-title">{ele.title}</h5>
-                      <p class="card-text" style={{ fontSize: "13px" }}>
+                      <h4 class="card-title">{ele.title}</h4>
+                      <p class="card-text fw-bold" style={{ fontSize: "13px" }}>
                         {ele.subtitle}
                       </p>
 
                       <p class="card-text">
-                        <span>Created At -- </span>
-                        <strong class="text-muted">
+                        <span className="fw-bold">Created At :</span>
+                        <small class="text-muted">
                           {moment(ele.createdAt).format("DD-MMM-YYYY")}
-                        </strong>
+                        </small>
                         <br></br>
-                        <Link to={`/blogdetails/${ele._id}`}>Read More</Link>
+                        <Link to={`/blogdetails/${ele._id}`} className="btn btn-primary mt-2 p-0 px-3 py-2" style={{ fontSize: "13px" }}>Read More</Link>
                       </p>
                     </div>
                   </div>
@@ -74,7 +74,7 @@ const Blogs = () => {
           )}
         </div>
       </div>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" }}  >
         <ReactPaginate
           breakLabel="..."
           nextLabel="next >"
@@ -94,7 +94,8 @@ const Blogs = () => {
           activeClassName="active"
           renderOnZeroPageCount={null}
 
-          //   renderOnZeroPageCount={null}
+
+        //   renderOnZeroPageCount={null}
         />
       </div>
       <Footer />
