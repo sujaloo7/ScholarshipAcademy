@@ -262,7 +262,7 @@ const Prifildetails = () => {
                               first_language: e.target.value,
                             })
                           }
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -310,7 +310,7 @@ const Prifildetails = () => {
                               gender: e.target.value,
                             })
                           }
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -387,7 +387,7 @@ const Prifildetails = () => {
                               state: e.target.value,
                             })
                           }
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -505,7 +505,11 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={
+                            profileData.citizenship_country
+                              ? profileData.citizenship_country
+                              : ""
+                          }
                           onChange={(e) =>
                             setProfileData({
                               ...profileData,
@@ -517,27 +521,15 @@ const Prifildetails = () => {
                           <MenuItem value="">
                             <em>None</em>
                           </MenuItem>
-                          {countryList?.map((ele, index) => {
-                            //   console.log("test", ele._id, "select", selectState);
-                            return ele.name ===
-                              profileData.citizenship_country ? (
-                              <MenuItem
-                                key={index}
-                                value={ele.name}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.name}
-                              </MenuItem>
-                            ) : (
-                              <MenuItem
-                                key={index}
-                                value={ele.name}
-                                className="h-50"
-                              >
-                                {ele.name}
-                              </MenuItem>
-                            );
-                          })}
+                          {countryList?.map((ele, index) => (
+                            <MenuItem
+                              key={index}
+                              value={ele.name}
+                              className="h-50"
+                            >
+                              {ele.name}
+                            </MenuItem>
+                          ))}
                         </Select>
                       </FormControl>
                       <FormControl
@@ -714,7 +706,7 @@ const Prifildetails = () => {
                               highest_education: e.target.value,
                             })
                           }
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -760,7 +752,7 @@ const Prifildetails = () => {
                             });
                           }}
 
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>

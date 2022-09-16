@@ -105,6 +105,14 @@ const Universitysignup = () => {
       </Stack>
       <div class="wrapper p-2">
         <div class="form-left bg-white text-center text-dark">
+          <Link
+            to="/"
+            className="me-auto"
+            style={{ textDecoration: "underline" }}
+          >
+            {" "}
+            {"< back to home"}
+          </Link>
           <img src={user} height="350" alt="" />
           <h2 class="text-uppercase">University Registration</h2>
           <p className="mb-5">

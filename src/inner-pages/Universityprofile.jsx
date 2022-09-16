@@ -55,6 +55,8 @@ const Universityprofile = () => {
   const [courseLang, setCourseLang] = useState("");
   const [courseDegree, setCourseDegree] = useState("");
   const [courseIntake, setCourseIntake] = useState("");
+  const [eleg, setEleg] = useState("");
+
   useEffect(() => {
     let authToken = localStorage.getItem("auth_token");
     if (!authToken) {
@@ -64,6 +66,10 @@ const Universityprofile = () => {
       GetCountry();
     }
   }, []);
+
+  useEffect(() => {
+    console.log("personal data ", personalData);
+  }, [personalData]);
 
   const onchangeDuration = (e) => {
     setCourseDuration(e.target.value);
@@ -175,6 +181,7 @@ const Universityprofile = () => {
       course_level: courseLevel,
       course_name: courseName,
       admission: courseIntake,
+      eligibility: eleg,
       type: courseType,
       category_id: course,
       total_course_fees: totalFees,
@@ -323,19 +330,22 @@ const Universityprofile = () => {
                         </InputLabel>
                         <Select
                           labelId="demo-simple-select-filled-label"
+                          value={
+                            personalData.country ? personalData.country : ""
+                          }
                           id="demo-simple-select-filled"
                           onChange={async (e) => {
                             console.log("data", e.target.value);
 
                             setPersonalData({
                               ...personalData,
-                              country: e.target.value._id,
+                              country: e.target.value,
                             });
 
-                            let res = await getStudentState({
-                              countryCode: e.target.value.isoCode,
-                            });
-                            setStateList(res.data);
+                            // let res = await getStudentState({
+                            //   countryCode: e.target.value.isoCode,
+                            // });
+                            // setStateList(res.data);
                           }}
                           //   value={age}
                           //   onChange={handleChange}
@@ -343,22 +353,11 @@ const Universityprofile = () => {
                           <MenuItem value="">
                             <em>None</em>
                           </MenuItem>
-                          {countryList?.map((ele, index) => {
-                            //   console.log("test", ele._id, "select", selectState);
-                            return ele._id === personalData.country ? (
-                              <MenuItem
-                                key={index}
-                                value={ele}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.name}
-                              </MenuItem>
-                            ) : (
-                              <MenuItem key={index} value={ele}>
-                                {ele.name}
-                              </MenuItem>
-                            );
-                          })}
+                          {countryList?.map((ele, index) => (
+                            <MenuItem key={index} value={ele._id}>
+                              {ele.name}
+                            </MenuItem>
+                          ))}
                         </Select>
                       </FormControl>
                     </div>
@@ -904,6 +903,15 @@ const Universityprofile = () => {
                           label="Intake/Admission	"
                           variant="filled"
                           onChange={(e) => setCourseIntake(e.target.value)}
+                        />
+                      </div>
+                      <div className="col-sm-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          label="Eligibility	"
+                          variant="filled"
+                          onChange={(e) => setEleg(e.target.value)}
                         />
                       </div>
                       <div className="col-sm-12">

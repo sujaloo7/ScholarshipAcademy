@@ -75,6 +75,14 @@ const Login = () => {
         style={{ height: "85vh", overflowY: "hidden" }}
       >
         <div class="form-left mt-4 bg-white text-center text-dark">
+          <Link
+            to="/"
+            className="me-auto"
+            style={{ textDecoration: "underline" }}
+          >
+            {" "}
+            {"< back to home"}
+          </Link>
           <img src={user} className="mt-5" height="350" alt="" />
         </div>
 

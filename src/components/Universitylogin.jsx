@@ -67,6 +67,14 @@ const Universitylogin = () => {
       </Stack>
       <div class="wrapper mt-5 " style={{ height: "85vh" }}>
         <div class="form-left mt-4 bg-white text-center text-dark">
+          <Link
+            to="/"
+            className="me-auto"
+            style={{ textDecoration: "underline" }}
+          >
+            {" "}
+            {"< back to home"}
+          </Link>
           <img src={user} className="mt-5" height="350" alt="" />
         </div>
         <form class="form-right mt-5 " onSubmit={LoginUser}>
