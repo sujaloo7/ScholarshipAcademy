@@ -25,8 +25,16 @@ import {
   getAttributeVal,
   updateUserDetails,
 } from "../Repository/UserRepository";
+
 import { useEffect, useState } from "react";
 import moment from "moment";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Prifildetails = () => {
   const [profileData, setProfileData] = useState({});
@@ -54,6 +62,18 @@ const Prifildetails = () => {
   const [pincode, setPincode] = useState("");
   const [mobile, setMobile] = useState("");
   const [alterNumber, setAlterNNumber] = useState("");
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   useEffect(() => {
     GetProfile();
     GetLanguage();
@@ -108,6 +128,15 @@ const Prifildetails = () => {
     formd.append("data", JSON.stringify({ ...profileData, is_student: true }));
     formd.append("file", file);
     let res = await updateUserProfile(formd);
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
   const submitEducationData = async (e) => {
     e.preventDefault();
@@ -115,6 +144,15 @@ const Prifildetails = () => {
       education_detail: true,
       education_data: educationData,
     });
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
 
   const testScoreSubmit = async (e) => {
@@ -123,6 +161,15 @@ const Prifildetails = () => {
       test_score: true,
       test_data: testData,
     });
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
 
   function createData(name, calories, fat, carbs, protein) {
@@ -138,6 +185,18 @@ const Prifildetails = () => {
   ];
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <Navbar />
       <div className="container mt-4 mb-5">
         <div className="row">
@@ -255,7 +314,11 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={
+                            profileData.first_language
+                              ? profileData.first_language
+                              : ""
+                          }
                           onChange={(e) =>
                             setProfileData({
                               ...profileData,
@@ -275,19 +338,10 @@ const Prifildetails = () => {
                               "select",
                               ele.language_name
                             );
-                            return ele.language_name ===
-                              profileData.first_language ? (
-                              <MenuItem
-                                key={index}
-                                value={ele.language_name}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.language_name}
-                              </MenuItem>
-                            ) : (
+
+                            return (
                               <MenuItem key={index} value={ele.language_name}>
-                                {" "}
-                                {ele.language_name}{" "}
+                                {ele.language_name}
                               </MenuItem>
                             );
                           })}
@@ -304,6 +358,7 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
+                          value={profileData.gender ? profileData.gender : ""}
                           onChange={(e) =>
                             setProfileData({
                               ...profileData,
@@ -315,27 +370,9 @@ const Prifildetails = () => {
                           <MenuItem value="">
                             <em>None</em>
                           </MenuItem>
-                          {profileData.gender === "Male" ? (
-                            <>
-                              <MenuItem value="Female">Female</MenuItem>
-                              <MenuItem
-                                value="Male"
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                Male
-                              </MenuItem>
-                            </>
-                          ) : (
-                            <>
-                              <MenuItem
-                                value="Female"
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                Female
-                              </MenuItem>
-                              <MenuItem value="Male">Male</MenuItem>
-                            </>
-                          )}
+
+                          <MenuItem value="Female">Female</MenuItem>
+                          <MenuItem value="Male">Male</MenuItem>
                         </Select>
                       </FormControl>
 
@@ -397,13 +434,13 @@ const Prifildetails = () => {
                             return ele.name === profileData.state ? (
                               <MenuItem
                                 key={index}
-                                value={ele.name}
+                                value={ele._id}
                                 style={{ backgroundColor: "grey" }}
                               >
                                 {ele.name}
                               </MenuItem>
                             ) : (
-                              <MenuItem key={index} value={ele.name}>
+                              <MenuItem key={index} value={ele._id}>
                                 {ele.name}
                               </MenuItem>
                             );
@@ -447,17 +484,6 @@ const Prifildetails = () => {
                         label="Phone Number *"
                         variant="filled"
                       />
-                      <TextField
-                        id="standard-basic"
-                        className="w-100 mb-5"
-                        type="file"
-                        onChange={fileFunction}
-                        label="Upload Profile Picture"
-                        variant="filled"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
                     </div>
                     <div className="col-sm-6">
                       <TextField
@@ -476,11 +502,12 @@ const Prifildetails = () => {
                         label="Father's Name"
                         variant="filled"
                       />
+
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        type="date"
-                        value={moment(profileData?.dob).format("DD-MMM-YYYY")}
+                        placeholder="MM/DD/YYYY"
+                        value={profileData?.dob}
                         onChange={(e) =>
                           setProfileData({
                             ...profileData,
@@ -543,16 +570,27 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
-                          // onChange={handleChange}
+                          value={
+                            profileData.marital_status
+                              ? profileData.marital_status
+                              : ""
+                          }
+                          onChange={(e) =>
+                            setProfileData({
+                              ...profileData,
+                              marital_status: e.target.value,
+                            })
+                          }
                           label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
                           </MenuItem>
-                          <MenuItem value={10}>Ten</MenuItem>
-                          <MenuItem value={20}>Twenty</MenuItem>
-                          <MenuItem value={30}>Thirty</MenuItem>
+                          <MenuItem value="Single">Single</MenuItem>
+                          <MenuItem value="Married">Married</MenuItem>
+                          <MenuItem value="Not Mentioned">
+                            Not Mentioned
+                          </MenuItem>
                         </Select>
                       </FormControl>
 
@@ -567,13 +605,13 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={profileData.country ? profileData.country : ""}
                           onChange={async (e) => {
                             console.log("data", e.target.value);
 
                             setProfileData({
                               ...profileData,
-                              country: e.target.value._id,
+                              country: e.target.value,
                             });
 
                             let res = await getStudentState({
@@ -588,16 +626,12 @@ const Prifildetails = () => {
                           </MenuItem>
                           {countryList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
-                            return ele.name === profileData.country ? (
-                              <MenuItem
-                                key={index}
-                                value={ele}
-                                style={{ backgroundColor: "grey" }}
-                              >
+                            return ele._id === profileData.country ? (
+                              <MenuItem key={index} value={ele._id}>
                                 {ele.name}
                               </MenuItem>
                             ) : (
-                              <MenuItem key={index} value={ele}>
+                              <MenuItem key={index} value={ele._id}>
                                 {ele.name}
                               </MenuItem>
                             );
@@ -663,6 +697,17 @@ const Prifildetails = () => {
                         label="Alternate Phone Number *"
                         variant="filled"
                       />
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="file"
+                        onChange={fileFunction}
+                        label="Upload Profile Picture"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
                     </div>
                   </div>
                   <Button
@@ -699,7 +744,11 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={
+                            educationData.highest_education
+                              ? educationData.highest_education
+                              : ""
+                          }
                           onChange={(e) =>
                             setEducationData({
                               ...educationData,
@@ -713,18 +762,14 @@ const Prifildetails = () => {
                           </MenuItem>
                           {educationList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
-                            return ele._id ===
+                            return ele.attribute_value ===
                               profileData.education_details
                                 .highest_education ? (
-                              <MenuItem
-                                key={index}
-                                value={ele._id}
-                                style={{ backgroundColor: "grey" }}
-                              >
+                              <MenuItem key={index} value={ele.attribute_value}>
                                 {ele.attribute_value}
                               </MenuItem>
                             ) : (
-                              <MenuItem key={index} value={ele._id}>
+                              <MenuItem key={index} value={ele.attribute_value}>
                                 {ele.attribute_value}
                               </MenuItem>
                             );
@@ -744,7 +789,11 @@ const Prifildetails = () => {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          // value={age}
+                          value={
+                            educationData.country_of_education
+                              ? educationData.country_of_education
+                              : ""
+                          }
                           onChange={async (e) => {
                             setEducationData({
                               ...educationData,
@@ -759,17 +808,9 @@ const Prifildetails = () => {
                           </MenuItem>
                           {countryList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
-                            return ele.name ===
-                              educationData.country_of_education ? (
-                              <MenuItem
-                                key={index}
-                                value={ele.name}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.name}
-                              </MenuItem>
-                            ) : (
-                              <MenuItem key={index} value={ele._id}>
+
+                            return (
+                              <MenuItem key={index} value={ele.name}>
                                 {ele.name}
                               </MenuItem>
                             );
@@ -804,7 +845,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        type="date"
+                        value={educationData?.school_end}
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
@@ -812,6 +853,7 @@ const Prifildetails = () => {
                           });
                         }}
                         label="Attended School To * "
+                        placeholder="MM/DD/YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -864,7 +906,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        type="date"
+                        value={educationData?.school_start}
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
@@ -873,6 +915,7 @@ const Prifildetails = () => {
                         }}
                         label="Attended School from * "
                         variant="filled"
+                        placeholder="MM/DD/YYYY"
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -995,7 +1038,7 @@ const Prifildetails = () => {
                       <Select
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
-                        // value={age}
+                        value={testData.test_name ? testData.test_name : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
@@ -1009,16 +1052,12 @@ const Prifildetails = () => {
                         </MenuItem>
                         {testName?.map((ele, index) => {
                           //   console.log("test", ele._id, "select", selectState);
-                          return ele._id === testData.test_name ? (
-                            <MenuItem
-                              key={index}
-                              value={ele._id}
-                              style={{ backgroundColor: "grey" }}
-                            >
+                          return ele.attribute_value === testData.test_name ? (
+                            <MenuItem key={index} value={ele.attribute_value}>
                               {ele.attribute_value}
                             </MenuItem>
                           ) : (
-                            <MenuItem key={index} value={ele._id}>
+                            <MenuItem key={index} value={ele.attribute_value}>
                               {ele.attribute_value}
                             </MenuItem>
                           );
@@ -1030,12 +1069,12 @@ const Prifildetails = () => {
                     <TextField
                       id="standard-basic"
                       className="w-100 mb-5"
-                      type="date"
                       value={testData?.test_date}
                       onChange={(e) =>
                         setTestData({ ...testData, test_date: e.target.value })
                       }
                       label="Date of Exam *"
+                      placeholder="MM/DD/YYYY"
                       variant="filled"
                       InputLabelProps={{
                         shrink: true,

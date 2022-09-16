@@ -152,7 +152,6 @@ const Home = () => {
                     variant="filled"
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    type="email"
                   />
                 </div>
                 <div className="row mb-4">
@@ -172,8 +171,6 @@ const Home = () => {
                     variant="filled"
                     onChange={(e) => setMobile(e.target.value)}
                     required
-                    
-
                   />
                 </div>
                 <div className="row">

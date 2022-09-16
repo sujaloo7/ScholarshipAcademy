@@ -26,6 +26,13 @@ import { imageUrl } from "../Repository/Repository";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { type } from "@testing-library/user-event/dist/type";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Universityprofile = () => {
   const [personalData, setPersonalData] = useState({});
@@ -56,6 +63,17 @@ const Universityprofile = () => {
   const [courseDegree, setCourseDegree] = useState("");
   const [courseIntake, setCourseIntake] = useState("");
   const [eleg, setEleg] = useState("");
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   useEffect(() => {
     let authToken = localStorage.getItem("auth_token");
@@ -158,6 +176,15 @@ const Universityprofile = () => {
     );
     formd.append("file", file);
     let res = await updateUserProfile(formd);
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
   const UpdateDetails = async (e) => {
     e.preventDefault();
@@ -168,6 +195,15 @@ const Universityprofile = () => {
       part_time_work: work,
       scholarship: scholarship,
     });
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
 
   const onsubmitCourse = async (e) => {
@@ -187,6 +223,15 @@ const Universityprofile = () => {
       total_course_fees: totalFees,
     };
     let res = await addCourse(obj);
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
     console.log("this is res", res);
     console.log(
       courseDegree,
@@ -205,6 +250,18 @@ const Universityprofile = () => {
 
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <Navbar />
       <div className="container mt-5">
         <div className="row">
@@ -225,294 +282,363 @@ const Universityprofile = () => {
             <div className="col-sm-12">
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" style={{ borderRadius: "20px " }}>Personal Details</button>
+                  <button
+                    class="nav-link active"
+                    id="pills-home-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-home"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-home"
+                    aria-selected="true"
+                    style={{ borderRadius: "20px " }}
+                  >
+                    Personal Details
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" style={{ borderRadius: "20px ", backgroundColor: "" }}>University Details</button>
+                  <button
+                    class="nav-link"
+                    id="pills-profile-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-profile"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-profile"
+                    aria-selected="false"
+                    style={{ borderRadius: "20px ", backgroundColor: "" }}
+                  >
+                    University Details
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" style={{ borderRadius: "20px " }}
-                  >Upload course</button>
+                  <button
+                    class="nav-link"
+                    id="pills-contact-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-contact"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-contact"
+                    aria-selected="false"
+                    style={{ borderRadius: "20px " }}
+                    onClick={onclickUpload}
+                  >
+                    Upload course
+                  </button>
                 </li>
               </ul>
               <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> <form action="" onSubmit={submitData}>
-                  <h6 className="ms-3 mt-2" style={{ color: "#FF723A" }}>
-                    Personal Details
-                  </h6>
-                  <div className="row p-3">
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        id="filled-basic"
-                        className="w-100"
-                        label="University Name"
-                        value={personalData?.name}
-                        onChange={(e) =>
-                          setPersonalData({
-                            ...personalData,
-                            name: e.target.value,
-                          })
-                        }
-                        variant="filled"
-                        required
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        id="filled-basic"
-                        className="w-100"
-                        value={personalData?.email}
-                        label="university Email"
-                        type="email"
-                        variant="outlined"
-                        disabled
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
-                    <div className="col-md-6 mt-4">
-                      <FormControl variant="filled" className="w-100">
-                        <InputLabel id="demo-simple-select-filled-label">
-                          Country{" "}
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-filled-label"
-                          value={
-                            personalData.country ? personalData.country : ""
-                          }
-                          id="demo-simple-select-filled"
-                          onChange={async (e) => {
-                            console.log("data", e.target.value);
-
+                <div
+                  class="tab-pane fade show active"
+                  id="pills-home"
+                  role="tabpanel"
+                  aria-labelledby="pills-home-tab"
+                >
+                  {" "}
+                  <form action="" onSubmit={submitData}>
+                    <h6 className="ms-3 mt-2" style={{ color: "#FF723A" }}>
+                      Personal Details
+                    </h6>
+                    <div className="row p-3">
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          label="University Name"
+                          value={personalData?.name}
+                          onChange={(e) =>
                             setPersonalData({
                               ...personalData,
-                              country: e.target.value,
-                            });
-
-                            // let res = await getStudentState({
-                            //   countryCode: e.target.value.isoCode,
-                            // });
-                            // setStateList(res.data);
+                              name: e.target.value,
+                            })
+                          }
+                          variant="filled"
+                          required
+                          InputLabelProps={{
+                            shrink: true,
                           }}
-                        //   value={age}
-                        //   onChange={handleChange}
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          {countryList?.map((ele, index) => (
-                            <MenuItem key={index} value={ele._id}>
-                              {ele.name}
+                        />
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          value={personalData?.email}
+                          label="university Email"
+                          type="email"
+                          variant="filled"
+                          disabled
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <FormControl variant="filled" className="w-100">
+                          <InputLabel id="demo-simple-select-filled-label">
+                            Country{" "}
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-filled-label"
+                            value={
+                              personalData.country ? personalData.country : ""
+                            }
+                            id="demo-simple-select-filled"
+                            onChange={async (e) => {
+                              console.log("data", e.target.value);
+
+                              setPersonalData({
+                                ...personalData,
+                                country: e.target.value,
+                              });
+
+                              // let res = await getStudentState({
+                              //   countryCode: e.target.value.isoCode,
+                              // });
+                              // setStateList(res.data);
+                            }}
+                            //   value={age}
+                            //   onChange={handleChange}
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
                             </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </div>
-                    <div className="col-md-6 mt-4">
-                      <FormControl variant="filled" className="w-100">
-                        <InputLabel id="demo-simple-select-filled-label">
-                          State{" "}
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-filled-label"
-                          id="demo-simple-select-filled"
-                        //   value={age}
-                        //   onChange={handleChange}
-                        >
-                          {stateList?.map((ele, index) => {
-                            //   console.log("test", ele._id, "select", selectState);
-                            return ele._id === personalData.state ? (
-                              <MenuItem
-                                key={index}
-                                value={ele._id}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.name}
-                              </MenuItem>
-                            ) : (
+                            {countryList?.map((ele, index) => (
                               <MenuItem key={index} value={ele._id}>
                                 {ele.name}
                               </MenuItem>
-                            );
-                          })}
-                        </Select>
-                      </FormControl>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <FormControl variant="filled" className="w-100">
+                          <InputLabel id="demo-simple-select-filled-label">
+                            State{" "}
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-filled-label"
+                            id="demo-simple-select-filled"
+                            //   value={age}
+                            //   onChange={handleChange}
+                          >
+                            {stateList?.map((ele, index) => {
+                              //   console.log("test", ele._id, "select", selectState);
+                              return ele._id === personalData.state ? (
+                                <MenuItem
+                                  key={index}
+                                  value={ele._id}
+                                  style={{ backgroundColor: "grey" }}
+                                >
+                                  {ele.name}
+                                </MenuItem>
+                              ) : (
+                                <MenuItem key={index} value={ele._id}>
+                                  {ele.name}
+                                </MenuItem>
+                              );
+                            })}
+                          </Select>
+                        </FormControl>
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          value={personalData?.mobile}
+                          onChange={(e) =>
+                            setPersonalData({
+                              ...personalData,
+                              mobile: e.target.value,
+                            })
+                          }
+                          label="Phone Number"
+                          variant="filled"
+                          type="number"
+                          required
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          value={personalData?.official_website}
+                          onChange={(e) =>
+                            setPersonalData({
+                              ...personalData,
+                              official_website: e.target.value,
+                            })
+                          }
+                          label="Official Website"
+                          variant="filled"
+                          type="link"
+                          required
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          placeholder="Address"
+                          className="w-100 "
+                          value={personalData?.address}
+                          onChange={(e) =>
+                            setPersonalData({
+                              ...personalData,
+                              address: e.target.value,
+                            })
+                          }
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          label="Address"
+                          multiline
+                          variant="filled"
+                          rows={1}
+                          maxRows={4}
+                        />
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          placeholder="ZipCode"
+                          value={personalData?.pincode}
+                          onChange={(e) =>
+                            setPersonalData({
+                              ...personalData,
+                              pincode: e.target.value,
+                            })
+                          }
+                          className="w-100 "
+                          label="ZipCode"
+                          variant="filled"
+                          type="number"
+                          rows={1}
+                          maxRows={4}
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="standard-basic"
+                          className="w-100 mb-5"
+                          type="file"
+                          onChange={fileFunction}
+                          label="Upload Profile Picture"
+                          variant="filled"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        id="filled-basic"
-                        className="w-100"
-                        value={personalData?.mobile}
-                        onChange={(e) =>
-                          setPersonalData({
-                            ...personalData,
-                            mobile: e.target.value,
-                          })
-                        }
-                        label="Phone Number"
-                        variant="filled"
-                        type="number"
-                        required
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        id="filled-basic"
-                        className="w-100"
-                        value={personalData?.official_website}
-                        onChange={(e) =>
-                          setPersonalData({
-                            ...personalData,
-                            official_website: e.target.value,
-                          })
-                        }
-                        label="Official Website"
-                        variant="filled"
-                        type="link"
-                        required
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        placeholder="Address"
-                        className="w-100 "
-                        value={personalData?.address}
-                        onChange={(e) =>
-                          setPersonalData({
-                            ...personalData,
-                            address: e.target.value,
-                          })
-                        }
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        label="Address"
-                        multiline
-                        variant="filled"
-                        rows={1}
-                        maxRows={4}
-                      />
-                    </div>
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        placeholder="ZipCode"
-                        value={personalData?.pincode}
-                        onChange={(e) =>
-                          setPersonalData({
-                            ...personalData,
-                            pincode: e.target.value,
-                          })
-                        }
-                        className="w-100 "
-                        label="ZipCode"
-                        variant="filled"
-                        type="number"
-                        rows={1}
-                        maxRows={4}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        id="standard-basic"
-                        className="w-100 mb-5"
-                        type="file"
-                        onChange={fileFunction}
-                        label="Upload Profile Picture"
-                        variant="filled"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    className=" mt-3 p-3 bg-dark w-100"
-                  >
-                    Submit
-                  </Button>
-                </form>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      className=" mt-3 p-3 bg-dark w-100"
+                    >
+                      Submit
+                    </Button>
+                  </form>
                 </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">  <form action="" onSubmit={UpdateDetails}>
-                  <h6 className="ms-3 " style={{ color: "#FF723A" }}>
-                    university Details{" "}
-                  </h6>
-                  <div className="row p-3">
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        id="filled-basic"
-                        className="w-100"
-                        value={detailData?.university_type}
-                        onChange={(e) =>
-                          setDetailData({
-                            ...detailData,
-                            university_type: e.target.value,
-                          })
-                        }
-                        label="university Type"
-                        variant="filled"
-                        required
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
+                <div
+                  class="tab-pane fade"
+                  id="pills-profile"
+                  role="tabpanel"
+                  aria-labelledby="pills-profile-tab"
+                >
+                  {" "}
+                  <form action="" onSubmit={UpdateDetails}>
+                    <h6 className="ms-3 " style={{ color: "#FF723A" }}>
+                      university Details{" "}
+                    </h6>
+                    <div className="row p-3">
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          value={detailData?.university_type}
+                          onChange={(e) =>
+                            setDetailData({
+                              ...detailData,
+                              university_type: e.target.value,
+                            })
+                          }
+                          label="university Type"
+                          variant="filled"
+                          required
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
 
-                    <div className="col-md-6 mt-4">
-                      <TextField
-                        id="filled-basic"
-                        className="w-100"
-                        value={detailData?.world_rank}
-                        onChange={(e) =>
-                          setDetailData({
-                            ...detailData,
-                            world_rank: e.target.value,
-                          })
-                        }
-                        label="university Rank(World Rank)"
-                        variant="filled"
-                        type="number"
-                        required
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          value={detailData?.world_rank}
+                          onChange={(e) =>
+                            setDetailData({
+                              ...detailData,
+                              world_rank: e.target.value,
+                            })
+                          }
+                          label="university Rank(World Rank)"
+                          variant="filled"
+                          type="number"
+                          required
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
 
-                    <div className="col-md-12 mt-4">
-                      <TextField
-                        id="filled-basic"
-                        className="w-100"
-                        value={detailData?.established_year}
-                        onChange={(e) =>
-                          setDetailData({
-                            ...detailData,
-                            established_year: e.target.value,
-                          })
-                        }
-                        label="Established  Year"
-                        variant="filled"
-                        type="number"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
-                    {/* <div className="col-md-6 mt-4">
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          value={detailData?.established_year}
+                          onChange={(e) =>
+                            setDetailData({
+                              ...detailData,
+                              established_year: e.target.value,
+                            })
+                          }
+                          label="Established  Year"
+                          variant="filled"
+                          type="number"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
+                      <div className="col-md-6 mt-4">
+                        <TextField
+                          id="filled-basic"
+                          className="w-100"
+                          value={detailData?.rating}
+                          onChange={(e) =>
+                            setDetailData({
+                              ...detailData,
+                              rating: e.target.value,
+                            })
+                          }
+                          label="Rating"
+                          variant="filled"
+                          type="number"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </div>
+                      {/* <div className="col-md-6 mt-4">
                         <FormControl variant="filled" className="w-100">
                           <InputLabel id="demo-simple-select-filled-label">
                             Course Program{" "}
@@ -530,90 +656,97 @@ const Universityprofile = () => {
                           </Select>
                         </FormControl>
                       </div> */}
-                    <div class="form-check col-sm-3 mt-4 ms-3">
-                      <input
-                        class="form-check-input mt-2"
-                        type="checkbox"
-                        onChange={(e) => setAccomodation(!accomodation)}
-                        id="flexCheckDefault"
-                        checked={accomodation}
-                      />
-                      <label
-                        class="form-check-label text-dark"
-                        for="flexCheckDefault"
-                        style={{ fontSize: "13px" }}
-                      >
-                        Accomodation
-                      </label>
-                    </div>
-                    <div class="form-check col-sm-3 mt-4">
-                      <input
-                        class="form-check-input mt-2"
-                        type="checkbox"
-                        value=""
-                        onChange={(e) => setWork(!work)}
-                        id="flexCheckDefault"
-                        checked={work}
-                      />
-                      <label
-                        class="form-check-label text-dark"
-                        for="flexCheckDefault"
-                        style={{ fontSize: "13px" }}
-                      >
-                        Part Time Work
-                      </label>
-                    </div>
-                    <div class="form-check col-sm-3 mt-4">
-                      <input
-                        class="form-check-input mt-2"
-                        type="checkbox"
-                        value=""
-                        onChange={(e) => setScholarship(!scholarship)}
-                        id="flexCheckDefault"
-                        checked={scholarship}
-                      />
-                      <label
-                        class="form-check-label text-dark"
-                        for="flexCheckDefault"
-                        style={{ fontSize: "13px" }}
-                      >
-                        Scholarship
-                      </label>
-                    </div>
+                      <div class="form-check col-sm-3 mt-4 ms-3">
+                        <input
+                          class="form-check-input mt-2"
+                          type="checkbox"
+                          onChange={(e) => setAccomodation(!accomodation)}
+                          id="flexCheckDefault"
+                          checked={accomodation}
+                        />
+                        <label
+                          class="form-check-label text-dark"
+                          for="flexCheckDefault"
+                          style={{ fontSize: "13px" }}
+                        >
+                          Accomodation
+                        </label>
+                      </div>
+                      <div class="form-check col-sm-3 mt-4">
+                        <input
+                          class="form-check-input mt-2"
+                          type="checkbox"
+                          value=""
+                          onChange={(e) => setWork(!work)}
+                          id="flexCheckDefault"
+                          checked={work}
+                        />
+                        <label
+                          class="form-check-label text-dark"
+                          for="flexCheckDefault"
+                          style={{ fontSize: "13px" }}
+                        >
+                          Part Time Work
+                        </label>
+                      </div>
+                      <div class="form-check col-sm-3 mt-4">
+                        <input
+                          class="form-check-input mt-2"
+                          type="checkbox"
+                          value=""
+                          onChange={(e) => setScholarship(!scholarship)}
+                          id="flexCheckDefault"
+                          checked={scholarship}
+                        />
+                        <label
+                          class="form-check-label text-dark"
+                          for="flexCheckDefault"
+                          style={{ fontSize: "13px" }}
+                        >
+                          Scholarship
+                        </label>
+                      </div>
 
-                    <div className="col-sm-12  mt-4">
-                      <label
-                        for="exampleFormControlInput1"
-                        class="form-label text-muted"
-                      >
-                        About University
-                      </label>
-                      <CKEditor
-                        editor={ClassicEditor}
-                        data={detailData?.about}
-                        config={{ placeholder: "enter details ..." }}
-                        onChange={(event, editor) => {
-                          const data = editor.getData();
-                          setDetailData({ ...detailData, about: data });
-                        }}
-                      />
-                    </div>
+                      <div className="col-sm-12  mt-4">
+                        <label
+                          for="exampleFormControlInput1"
+                          class="form-label text-muted"
+                        >
+                          About University
+                        </label>
+                        <CKEditor
+                          editor={ClassicEditor}
+                          data={detailData?.about}
+                          config={{ placeholder: "enter details ..." }}
+                          onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setDetailData({ ...detailData, about: data });
+                          }}
+                        />
+                      </div>
 
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      className=" mt-3 p-3 bg-dark"
-                    >
-                      Submit
-                    </Button>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        className=" mt-3 p-3 bg-dark"
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                  </form>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="pills-contact"
+                  role="tabpanel"
+                  aria-labelledby="pills-contact-tab"
+                >
+                  {" "}
+                  <div className="row">
+                    <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
+                      Upload Courses
+                    </h6>
                   </div>
-                </form>
-                </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"> <div className="row">
-                  <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
-                    Upload Courses
-                  </h6>
-                </div>
                   <form action="" onSubmit={onsubmitCourse}>
                     <div className="row p-3">
                       <div className="col-sm-6 mt-4">
@@ -626,8 +759,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourse(e.target.value)}
 
-                          //   value={age}
-                          //   onChange={handleChange}
+                            //   value={age}
+                            //   onChange={handleChange}
                           >
                             {categoryList?.map((ele, index) => {
                               //   console.log("test", ele._id, "select", selectState);
@@ -670,8 +803,8 @@ const Universityprofile = () => {
                             labelId="demo-simple-select-filled-label"
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseLevel(e.target.value)}
-                          //   value={age}
-                          //   onChange={handleChange}
+                            //   value={age}
+                            //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -699,8 +832,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseType(e.target.value)}
 
-                          //   value={age}
-                          //   onChange={handleChange}
+                            //   value={age}
+                            //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -726,8 +859,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseExp(e.target.value)}
 
-                          //   value={age}
-                          //   onChange={handleChange}
+                            //   value={age}
+                            //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -752,8 +885,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseProgram(e.target.value)}
 
-                          //   value={age}
-                          //   onChange={handleChange}
+                            //   value={age}
+                            //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -778,8 +911,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseLang(e.target.value)}
 
-                          //   value={age}
-                          //   onChange={handleChange}
+                            //   value={age}
+                            //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -804,8 +937,8 @@ const Universityprofile = () => {
                             id="demo-simple-select-filled"
                             onChange={(e) => setCourseDegree(e.target.value)}
 
-                          //   value={age}
-                          //   onChange={handleChange}
+                            //   value={age}
+                            //   onChange={handleChange}
                           >
                             <MenuItem value="">
                               <em>None</em>
