@@ -25,8 +25,16 @@ import {
   getAttributeVal,
   updateUserDetails,
 } from "../Repository/UserRepository";
+
 import { useEffect, useState } from "react";
 import moment from "moment";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Prifildetails = () => {
   const [profileData, setProfileData] = useState({});
@@ -54,6 +62,18 @@ const Prifildetails = () => {
   const [pincode, setPincode] = useState("");
   const [mobile, setMobile] = useState("");
   const [alterNumber, setAlterNNumber] = useState("");
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   useEffect(() => {
     GetProfile();
     GetLanguage();
@@ -108,6 +128,15 @@ const Prifildetails = () => {
     formd.append("data", JSON.stringify({ ...profileData, is_student: true }));
     formd.append("file", file);
     let res = await updateUserProfile(formd);
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
   const submitEducationData = async (e) => {
     e.preventDefault();
@@ -115,6 +144,15 @@ const Prifildetails = () => {
       education_detail: true,
       education_data: educationData,
     });
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
 
   const testScoreSubmit = async (e) => {
@@ -123,6 +161,15 @@ const Prifildetails = () => {
       test_score: true,
       test_data: testData,
     });
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
   };
 
   function createData(name, calories, fat, carbs, protein) {
@@ -138,6 +185,18 @@ const Prifildetails = () => {
   ];
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       <Navbar />
       <div className="container mt-4 mb-5">
         <div className="row">
@@ -425,17 +484,6 @@ const Prifildetails = () => {
                         label="Phone Number *"
                         variant="filled"
                       />
-                      <TextField
-                        id="standard-basic"
-                        className="w-100 mb-5"
-                        type="file"
-                        onChange={fileFunction}
-                        label="Upload Profile Picture"
-                        variant="filled"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
                     </div>
                     <div className="col-sm-6">
                       <TextField
@@ -454,11 +502,12 @@ const Prifildetails = () => {
                         label="Father's Name"
                         variant="filled"
                       />
+
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        type="date"
-                        value={moment(profileData?.dob).format("DD-MMM-YYYY")}
+                        placeholder="MM/DD/YYYY"
+                        value={profileData?.dob}
                         onChange={(e) =>
                           setProfileData({
                             ...profileData,
@@ -648,6 +697,17 @@ const Prifildetails = () => {
                         label="Alternate Phone Number *"
                         variant="filled"
                       />
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="file"
+                        onChange={fileFunction}
+                        label="Upload Profile Picture"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
                     </div>
                   </div>
                   <Button
@@ -785,7 +845,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        type="date"
+                        value={educationData?.school_end}
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
@@ -793,6 +853,7 @@ const Prifildetails = () => {
                           });
                         }}
                         label="Attended School To * "
+                        placeholder="MM/DD/YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -845,7 +906,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        type="date"
+                        value={educationData?.school_start}
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
@@ -854,6 +915,7 @@ const Prifildetails = () => {
                         }}
                         label="Attended School from * "
                         variant="filled"
+                        placeholder="MM/DD/YYYY"
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -1007,12 +1069,12 @@ const Prifildetails = () => {
                     <TextField
                       id="standard-basic"
                       className="w-100 mb-5"
-                      type="date"
                       value={testData?.test_date}
                       onChange={(e) =>
                         setTestData({ ...testData, test_date: e.target.value })
                       }
                       label="Date of Exam *"
+                      placeholder="MM/DD/YYYY"
                       variant="filled"
                       InputLabelProps={{
                         shrink: true,
