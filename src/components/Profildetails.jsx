@@ -361,7 +361,7 @@ const Prifildetails = () => {
                               first_language: e.target.value,
                             })
                           }
-                          // label="Age"
+                        // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -401,7 +401,7 @@ const Prifildetails = () => {
                               gender: e.target.value,
                             })
                           }
-                          // label="Age"
+                        // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -460,8 +460,8 @@ const Prifildetails = () => {
                               state: e.target.value,
                             })
                           }
-                          //   value={age}
-                          //   onChange={handleChange}
+                        //   value={age}
+                        //   onChange={handleChange}
                         >
                           {stateList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
@@ -676,8 +676,8 @@ const Prifildetails = () => {
                               country: e.target.value,
                             });
                           }}
-                          //   value={age}
-                          //   onChange={handleChange}
+                        //   value={age}
+                        //   onChange={handleChange}
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -841,7 +841,7 @@ const Prifildetails = () => {
                               highest_education: e.target.value,
                             })
                           }
-                          // label="Age"
+                        // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -887,7 +887,7 @@ const Prifildetails = () => {
                             });
                           }}
 
-                          // label="Age"
+                        // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -988,8 +988,8 @@ const Prifildetails = () => {
                               school_country: e.target.value,
                             });
                           }}
-                          //   value={age}
-                          //   onChange={handleChange}
+                        //   value={age}
+                        //   onChange={handleChange}
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -1038,6 +1038,32 @@ const Prifildetails = () => {
                         </Select> */}
                       </FormControl>
 
+
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        placeholder="Address"
+                        className="w-100 mb-5"
+                        label="Address"
+                        value={educationData?.school_address}
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            school_address: e.target.value,
+                          });
+                        }}
+                        multiline
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        variant="filled"
+                        rows={2}
+                        maxRows={2}
+                      />
+
+                    </div>
+                    <div className="col-sm-6">
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
@@ -1057,25 +1083,8 @@ const Prifildetails = () => {
                       />
                     </div>
 
-                    <TextField
-                      placeholder="Address"
-                      className=" mb-5"
-                      label="Address"
-                      value={educationData?.school_address}
-                      onChange={(e) => {
-                        setEducationData({
-                          ...educationData,
-                          school_address: e.target.value,
-                        });
-                      }}
-                      multiline
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      variant="filled"
-                      rows={2}
-                      maxRows={2}
-                    />
+
+
                     <Button
                       type="submit"
                       style={{ backgroundColor: "#FF723A" }}

@@ -16,6 +16,7 @@ const Blogs = () => {
 
   useEffect(() => {
     GetBlog();
+    window.scroll(0,0)
   }, []);
   const onPageSubmit = (value) => {
     setCurrentPage(value.selected + 1);

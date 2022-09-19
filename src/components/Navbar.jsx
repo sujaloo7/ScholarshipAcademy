@@ -82,7 +82,7 @@ function Navbar() {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto me-auto">
               <li class="nav-item dropdown">
-                <Link class="nav-link dropbtn" to="#">
+                <Link class="nav-link dropbtn text-dark" to="#">
                   Study Abroad{" "}
                 </Link>
                 <div class="dropdown-content">
@@ -117,7 +117,7 @@ function Navbar() {
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <Link class="nav-link dropbtn" to="#">
+                <Link class="nav-link dropbtn text-dark" to="#">
                   Test Prep
                 </Link>
                 <div class="dropdown-content">
@@ -179,7 +179,7 @@ function Navbar() {
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <Link class="nav-link dropbtn" to="#">
+                <Link class="nav-link dropbtn text-dark" to="#">
                   Finance
                 </Link>
                 <div class="dropdown-content p-0">
@@ -212,7 +212,7 @@ function Navbar() {
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <Link class="nav-link dropbtn" to="#">
+                <Link class="nav-link dropbtn text-dark" to="#">
                   Community
                 </Link>
                 <div class="dropdown-content">
@@ -235,7 +235,7 @@ function Navbar() {
                 </div>
               </li> */}
               <li class="nav-item dropdown">
-                <Link class="nav-link dropbtn" to="#">
+                <Link class="nav-link dropbtn text-dark" to="#">
                   More{" "}
                 </Link>
                 <div class="dropdown-content">

@@ -8,6 +8,7 @@ const Workingpolicy = () => {
   const [working, setWorking] = useState("");
   useEffect(() => {
     GetWorking();
+    window.scrollTo(0, 0)
   }, []);
 
   const GetWorking = async () => {
