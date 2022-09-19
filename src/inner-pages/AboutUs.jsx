@@ -8,6 +8,7 @@ const AboutUs = () => {
   const [about, setAbout] = useState("");
   useEffect(() => {
     GetAbout();
+    window.scrollTo(0, 0);
   }, []);
 
   const GetAbout = async () => {
@@ -31,7 +32,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-     
+
       <Footer />
     </>
   );
