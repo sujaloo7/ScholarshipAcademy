@@ -8,6 +8,7 @@ const ContactUs = () => {
   const [contact, setContact] = useState("");
   useEffect(() => {
     GetContact();
+    window.scrollTo(0, 0);
   }, []);
 
   const GetContact = async () => {
