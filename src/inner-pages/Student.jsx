@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 import Navbar from '../components/Navbar';
 import "../pages/home.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import multi from "../images/multi.gif"
 import { Button } from '@mui/material'
 import best from "../images/best.gif";
+import { useEffect } from 'react';
 
 const Student = () => {
 

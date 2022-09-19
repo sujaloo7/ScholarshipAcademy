@@ -169,6 +169,7 @@ const Home = () => {
                     id="filled-basic"
                     label="Phone Number"
                     variant="filled"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                     onChange={(e) => setMobile(e.target.value)}
                     required
                   />
