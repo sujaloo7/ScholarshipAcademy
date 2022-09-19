@@ -21,7 +21,7 @@ const Student = () => {
                         <h3 className=' text-light fw-bold fs-1' style={{ marginTop: "100px !important" }}>
                             Increase Your Chance Of Section At World’s Best Universities</h3>
                         <p className='text-light w-100 ' style={{ fontSize: "14px" }}>Fulfill Your Dream Of Studying Abroad, Enroll For The Best Suited Course Program For You By Submitting The Common Application. Get Complete End-To-End Support By Our Experts</p>
-                        <Link to="/course">   <Button variant='contained' className='mt-4 p-3 mb-3' style={{ backgroundColor: "#FF723A" }}>GET STARTED</Button></Link>
+                        <Link to="/course">   <Button variant='contained' className='mt-4 p-3 mb-3' style={{ backgroundColor: "#a8203b" }}>GET STARTED</Button></Link>
                     </div>
                 </div>
             </div>
@@ -110,10 +110,10 @@ const Student = () => {
                         <div className="col-sm-9 mt-5">
                             <p style={{ fontSize: "14px" }}>Discover And Apply For The Best Course Program For You, Offered By Any Of The Institute In The World.</p>
                             <p style={{ fontSize: "14px" }}>Get Access To Our Scholarship Programs, Financial Support And End To End Support To Realize Your Higher Education Dreams.</p>
-                            <Link to="/course">   <Button variant='contained' className='mt-4 p-3 mb-3' style={{ backgroundColor: "#FF723A" }}>Discover Now</Button></Link>
+                            <Link to="/course">   <Button variant='contained' className='mt-4 p-3 mb-3' style={{ backgroundColor: "#a8203b" }}>Discover Now</Button></Link>
                         </div>
                     </div>
-                    <div className="col-md-6 text-center">
+                    <div className="col-md-6 partner1 text-center">
                         <img src={best} style={{ borderRadius: "100%" }} className="multi" height={400} alt="" />
                     </div>
                 </div>

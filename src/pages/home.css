@@ -153,14 +153,14 @@ section.hero
 }
 /* desktop version only */
 
-@media only screen and (max-width:1399.98px) {
+/* @media only screen and (max-width:1399.98px) {
     .container
     {
-        /* width: 84%; */
+        width: 84%;
     }
     
     
-}
+} */
 
 
 
@@ -300,10 +300,10 @@ body{
 {
     font-size: 13px !important;
 }
-.offcanvas
+/* .offcanvas
 {
-    /* width: 30% !important;  */
-}
+    width: 30% !important; 
+} */
 
 @media only screen and (max-width:339px) {
    
@@ -337,6 +337,7 @@ body{
     background-color: rgba(255, 255, 255, 0.383) !important;
     /* border-bottom: 1px solid #FF723A; */
   }
+ 
   
 
   .desti {
@@ -569,20 +570,21 @@ body{
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #E1F1FE;
+      background-color: #f5b2bd;
       min-width: 250px;
+      
       /* box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.2); */
       z-index: 999;
-      border-radius: 5px;
+      /* border-radius: 5px; */
     }
     .dropdown-content-call {
         display: none;
         position: absolute;
-        background-color: #E1F1FE;
+        background-color: #f5b2bd;
         min-width: 150px;
         /* box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.2); */
         z-index: 999;
-        border-radius: 5px;
+        /* border-radius: 5px; */
       }
     
     .dropdown-content  a {
@@ -601,14 +603,14 @@ body{
         display: block;
         font-size: 12px;
         font-weight: 600;
-        transition: 3s;
+        transition: 0.5s;
       }
     
-    .dropdown-content a:hover {background-color: #ddd;}
+    .dropdown-content a:hover {background-color: #a8203b;}
     
     .dropdown:hover .dropdown-content {display: block;}
     
-    .dropdown:hover .dropbtn {background-color: #E1F1FE; color: #b4273f;}
+    .dropdown:hover .dropbtn {background-color: #f5b2bd; color: #FFF;}
 
     .dropdown:hover .dropdown-content-call
     {
@@ -622,7 +624,7 @@ body{
     .dropdown-content  a:hover .fa-arrow-right
     {
       visibility: visible;
-      color: #b4273f;
+      color: white;
     }
     ::placeholder
     {
@@ -725,6 +727,11 @@ body{
     .for-universities img
     {
         height: 200px;
+    }
+    .partner1
+    {
+      margin-left: auto;
+      margin-right: auto;
     }
   
   }
