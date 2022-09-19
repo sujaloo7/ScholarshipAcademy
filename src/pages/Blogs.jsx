@@ -16,7 +16,7 @@ const Blogs = () => {
 
   useEffect(() => {
     GetBlog();
-    window.scroll(0,0)
+    window.scroll(0, 0)
   }, []);
   const onPageSubmit = (value) => {
     setCurrentPage(value.selected + 1);
@@ -43,11 +43,12 @@ const Blogs = () => {
             blogList.map((ele, index) => {
               return (
                 <div className="col-sm-4 ">
-                  <div class="card border-0 bg-light mb-4">
+                  <div class="card border-0 bg-light mb-4 shadow">
                     <img
                       src={`${imageUrl}${ele.image}`}
                       class="card-img-top"
                       alt="..."
+                      height={300}
                     />
                     <div class="card-body">
                       <h4 class="card-title">{ele.title}</h4>
@@ -75,7 +76,7 @@ const Blogs = () => {
           )}
         </div>
       </div>
-      <div style={{ display: "flex" }}  >
+      <div style={{ display: "flex", marginLeft: "auto", marginRight: "auto" }}  >
         <ReactPaginate
           breakLabel="..."
           nextLabel="next >"
@@ -92,7 +93,7 @@ const Blogs = () => {
           breakClassName="page-item"
           breakLinkClassName="page-link"
           containerClassName="pagination"
-          activeClassName="active"
+          activeClassName="active " style={{}}
           renderOnZeroPageCount={null}
 
 
