@@ -10,7 +10,10 @@ const Blogdetails = () => {
   const [type, setType] = useState({});
   useEffect(() => {
     callApi();
+    window.scrollTo(0, 0)
+   
   }, []);
+
 
   let callApi = async () => {
     let typ = window.location.pathname.split("/").pop();

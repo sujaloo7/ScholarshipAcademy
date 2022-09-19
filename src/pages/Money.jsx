@@ -53,6 +53,9 @@ const Money = () => {
       setOpen(true);
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Stack spacing={2} sx={{ width: "100%" }}>

@@ -32,6 +32,7 @@ const Outeruniverities = () => {
     GetUniversity(typ);
 
     setType(typ);
+    window.scrollTo(0, 0)
   }, []);
 
   const GetUniversity = async (typ) => {

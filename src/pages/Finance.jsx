@@ -34,7 +34,7 @@ const Finance = () => {
 
     setOpen(false);
   };
-  useEffect(() => {}, [refresh]);
+  useEffect(() => { }, [refresh]);
   const navigate = useNavigate();
 
   const submitForm = async (e) => {
@@ -66,6 +66,10 @@ const Finance = () => {
       setOpen(true);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <Stack spacing={2} sx={{ width: "100%" }}>

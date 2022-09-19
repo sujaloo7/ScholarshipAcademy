@@ -8,6 +8,7 @@ const Termandconditions = () => {
   const [term, setTerm] = useState("");
   useEffect(() => {
     GetTerm();
+    window.scroll(0,0)
   }, []);
 
   const GetTerm = async () => {

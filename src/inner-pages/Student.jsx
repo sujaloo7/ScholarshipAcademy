@@ -12,6 +12,10 @@ import { Button } from '@mui/material'
 import best from "../images/best.gif";
 
 const Student = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     return (
         <>
             <Navbar />

@@ -16,6 +16,7 @@ const Course = () => {
 
   useEffect(() => {
     GetCourse();
+    window.scroll(0,0)
   }, []);
 
   const GetCourse = async () => {

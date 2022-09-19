@@ -8,6 +8,7 @@ const Privacypolicy = () => {
   const [privacy, setPrivacy] = useState("");
   useEffect(() => {
     GetPrivacy();
+    window.scrollTo(0, 0)
   }, []);
 
   const GetPrivacy = async () => {

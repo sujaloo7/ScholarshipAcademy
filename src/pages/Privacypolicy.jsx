@@ -1,6 +1,9 @@
 import React from 'react'
 
 const Privacypolicy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
      <div class="container-fluid p-0">

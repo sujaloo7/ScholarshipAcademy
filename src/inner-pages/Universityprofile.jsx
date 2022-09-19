@@ -83,6 +83,7 @@ const Universityprofile = () => {
       GetProfile();
       GetCountry();
     }
+    window.scroll(0,0)
   }, []);
 
   useEffect(() => {
