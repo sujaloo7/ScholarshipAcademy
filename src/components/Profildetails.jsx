@@ -80,6 +80,42 @@ const Prifildetails = () => {
     GetCountry();
   }, []);
 
+  useEffect(() => {
+    console.log("personalData.country", profileData.country);
+    const exec = async () => {
+      console.log("exec");
+      let isoCode;
+      // countryList.map((ele, index) => {
+      //   if (ele._id === personalData.country) {
+      //     isoCode = ele.isoCode;
+      //   }
+      // });
+
+      let selectedCountry = countryList.filter(
+        (element) => element._id == profileData.country
+      );
+
+      console.log("selected country", selectedCountry);
+
+      isoCode = selectedCountry[0].isoCode;
+
+      console.log("iso code", isoCode);
+
+      let res = await getStudentState({
+        countryCode: isoCode,
+      });
+      console.log("above set state list", res);
+      setStateList(res.data);
+    };
+    if (profileData.country && countryList.length != 0) {
+      exec();
+    }
+  }, [profileData.country, countryList]);
+
+  useEffect(() => {
+    console.log("personal data ", profileData);
+  }, [profileData]);
+
   const GetProfile = async () => {
     let res = await getProfile();
     setProfileData(res.data);
@@ -415,6 +451,32 @@ const Prifildetails = () => {
                           Province/State *
                         </InputLabel>
                         <Select
+                          labelId="demo-simple-select-filled-label"
+                          id="demo-simple-select-filled"
+                          value={profileData.state ? profileData.state : ""}
+                          onChange={(e) =>
+                            setProfileData({
+                              ...profileData,
+                              state: e.target.value,
+                            })
+                          }
+                          //   value={age}
+                          //   onChange={handleChange}
+                        >
+                          {stateList?.map((ele, index) => {
+                            //   console.log("test", ele._id, "select", selectState);
+                            return ele._id === profileData.state ? (
+                              <MenuItem key={index} value={ele._id}>
+                                {ele.name}
+                              </MenuItem>
+                            ) : (
+                              <MenuItem key={index} value={ele._id}>
+                                {ele.name}
+                              </MenuItem>
+                            );
+                          })}
+                        </Select>
+                        {/* <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
                           // value={age}
@@ -445,7 +507,7 @@ const Prifildetails = () => {
                               </MenuItem>
                             );
                           })}
-                        </Select>
+                        </Select> */}
                       </FormControl>
 
                       <TextField
@@ -603,6 +665,30 @@ const Prifildetails = () => {
                           Country *
                         </InputLabel>
                         <Select
+                          labelId="demo-simple-select-filled-label"
+                          value={profileData.country ? profileData.country : ""}
+                          id="demo-simple-select-filled"
+                          onChange={async (e) => {
+                            console.log("data", e.target.value);
+
+                            setProfileData({
+                              ...profileData,
+                              country: e.target.value,
+                            });
+                          }}
+                          //   value={age}
+                          //   onChange={handleChange}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          {countryList?.map((ele, index) => (
+                            <MenuItem key={index} value={ele._id}>
+                              {ele.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        {/* <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
                           value={profileData.country ? profileData.country : ""}
@@ -636,7 +722,7 @@ const Prifildetails = () => {
                               </MenuItem>
                             );
                           })}
-                        </Select>
+                        </Select> */}
                       </FormControl>
                       {/* 
                       <FormControl
@@ -794,7 +880,7 @@ const Prifildetails = () => {
                               ? educationData.country_of_education
                               : ""
                           }
-                          onChange={async (e) => {
+                          onChange={(e) => {
                             setEducationData({
                               ...educationData,
                               country_of_education: e.target.value,
@@ -859,48 +945,6 @@ const Prifildetails = () => {
                           shrink: true,
                         }}
                       />
-
-                      <FormControl
-                        variant="filled"
-                        className="w-100 mb-5"
-                        sx={{}}
-                      >
-                        <InputLabel id="demo-simple-select-standard-label">
-                          Province/State *
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          // value={age}
-                          onChange={async (e) => {
-                            setEducationData({
-                              ...educationData,
-                              school_state: e.target.value,
-                            });
-                          }}
-                          label="Age"
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          {stateList1?.map((ele, index) => {
-                            //   console.log("test", ele._id, "select", selectState);
-                            return ele._id === educationData.school_state ? (
-                              <MenuItem
-                                key={index}
-                                value={ele._id}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.state_name}
-                              </MenuItem>
-                            ) : (
-                              <MenuItem key={index} value={ele._id}>
-                                {ele.state_name}
-                              </MenuItem>
-                            );
-                          })}
-                        </Select>
-                      </FormControl>
                     </div>
                     <div className="col-sm-6">
                       <TextField
@@ -929,6 +973,34 @@ const Prifildetails = () => {
                           Country *
                         </InputLabel>
                         <Select
+                          labelId="demo-simple-select-filled-label"
+                          value={
+                            educationData.school_country
+                              ? educationData.school_country
+                              : ""
+                          }
+                          id="demo-simple-select-filled"
+                          onChange={async (e) => {
+                            console.log("data", e.target.value);
+
+                            setEducationData({
+                              ...educationData,
+                              school_country: e.target.value,
+                            });
+                          }}
+                          //   value={age}
+                          //   onChange={handleChange}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          {countryList?.map((ele, index) => (
+                            <MenuItem key={index} value={ele._id}>
+                              {ele.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        {/* <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
                           // value={age}
@@ -963,7 +1035,7 @@ const Prifildetails = () => {
                               </MenuItem>
                             );
                           })}
-                        </Select>
+                        </Select> */}
                       </FormControl>
 
                       <TextField
@@ -1002,7 +1074,7 @@ const Prifildetails = () => {
                       }}
                       variant="filled"
                       rows={2}
-                      maxRows={4}
+                      maxRows={2}
                     />
                     <Button
                       type="submit"
