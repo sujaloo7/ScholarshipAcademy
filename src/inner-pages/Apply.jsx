@@ -228,11 +228,12 @@ const Apply = () => {
                   About University
                 </h4>
                 <p
+                  dangerouslySetInnerHTML={{
+                    __html: university?.university_details?.about,
+                  }}
                   className="text-muted"
                   style={{ textAlign: "justify", fontSize: "14px" }}
-                >
-                  {university?.university_details?.about}
-                </p>
+                ></p>
               </div>
               <div
                 class="tab-pane fade"

@@ -32,7 +32,7 @@ const Outeruniverities = () => {
     GetUniversity(typ);
 
     setType(typ);
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }, []);
 
   const GetUniversity = async (typ) => {
@@ -402,7 +402,7 @@ const Outeruniverities = () => {
                       <br></br>
                       {new Array(
                         ele?.university_details?.rating
-                          ? ele?.university_details?.rating
+                          ? Math.ceil(ele?.university_details?.rating)
                           : 1
                       )
                         .fill(0)

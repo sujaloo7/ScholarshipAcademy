@@ -64,6 +64,7 @@ const Universityprofile = () => {
   const [courseIntake, setCourseIntake] = useState("");
   const [eleg, setEleg] = useState("");
   const [open, setOpen] = useState(false);
+  const [feeArray, setFeeArray] = useState({});
   const [type, setType] = useState("success");
   const [message, setMessage] = useState("message");
 
@@ -76,6 +77,10 @@ const Universityprofile = () => {
   };
 
   useEffect(() => {
+    console.log("fees structure ", tableList);
+  }, [tableList]);
+
+  useEffect(() => {
     let authToken = localStorage.getItem("auth_token");
     if (!authToken) {
       Navigate("/");
@@ -83,7 +88,7 @@ const Universityprofile = () => {
       GetProfile();
       GetCountry();
     }
-    window.scroll(0,0)
+    window.scroll(0, 0);
   }, []);
 
   useEffect(() => {
@@ -126,9 +131,8 @@ const Universityprofile = () => {
     setCourseDuration(e.target.value);
     let array = [];
     for (let i = 0; i < Math.ceil(e.target.value); i++) {
-      array.push(i);
+      array.push({ year: i + 1, fees: "" });
     }
-    console.log("array", array);
     setTableList(array);
   };
 
@@ -197,7 +201,9 @@ const Universityprofile = () => {
   };
 
   const onchangeFees = (e, index) => {
-    console.log(index, e.target.value);
+    let obj = { index: e.target.value };
+    // setFeeArray({ ...feeArray, index: e.target.value });
+    console.log("sdsadsd", obj);
   };
 
   const submitData = async (e) => {
@@ -241,6 +247,8 @@ const Universityprofile = () => {
 
   const onsubmitCourse = async (e) => {
     e.preventDefault();
+    console.log("fees array", feeArray);
+
     let obj = {
       required_degress: courseDegree,
       work_experience: courseExp,
@@ -1031,9 +1039,17 @@ const Universityprofile = () => {
                                   className="w-100"
                                   label={`${index + 1} Year Fees`}
                                   variant="filled"
-                                  onchange={(e) => {
-                                    console.log("running");
-                                    onchangeFees(e, index);
+                                  value={ele.fees}
+                                  onChange={(e) => {
+                                    let object = JSON.parse(
+                                      JSON.stringify(ele)
+                                    );
+                                    let array = JSON.parse(
+                                      JSON.stringify(tableList)
+                                    );
+                                    object.fees = e.target.value;
+                                    array[index] = object;
+                                    setTableList(array);
                                   }}
                                 />
                               </div>
