@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Carousel from "./Carousel";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Fee from "../components/Fee";
 import {
   getUniversitiesProfile,
   getCourse,
@@ -16,6 +17,7 @@ const Apply = () => {
   const [type, setType] = useState("");
   const [university, setUniversity] = useState({});
   const [courseList, setCourseList] = useState([]);
+  const [fee, setFee] = useState(false);
   useEffect(() => {
     let typ = window.location.pathname.split("/").pop();
 
@@ -262,163 +264,7 @@ const Apply = () => {
                     </Button>
                   </div>
                   {courseList.map((ele, index) => {
-                    return (
-                      <div className="row inner-row ">
-                        <h5 className="mt-5" style={{ color: "#a8203b" }}>
-                          {ele?.course_name}
-                        </h5>
-                        <div className="col-sm-4 ">
-                          <ul>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Course Level
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Course Duration
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Total Course Fee
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Course Program
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Intake/Admission
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Work Experience
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Course Language
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Required Degree
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Eligibility
-                            </li>
-                            <li
-                              className="fw-bold"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Application Fees
-                            </li>
-                            <Link to="/apply">
-                              {" "}
-                              <Button
-                                className="text-light mt-2"
-                                style={{ backgroundColor: "#a8203b" }}
-                              >
-                                <i class="fa-solid fa-eye"></i>View Course
-                              </Button>
-                            </Link>
-                          </ul>
-                        </div>
-                        <div className="col-sm-4 ">
-                          <ul>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {ele?.course_level?.attribute_value}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {ele?.course_duration}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {" "}
-                              {ele?.total_course_fees}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {" "}
-                              {ele?.course_program?.attribute_value}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {" "}
-                              {ele?.admission}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {" "}
-                              {ele?.work_experience?.attribute_value}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {" "}
-                              {ele?.course_language?.language_name}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {" "}
-                              {ele?.required_degress?.attribute_value}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              {" "}
-                              {ele?.eligibility ? ele?.eligibility : "Unknown"}
-                            </li>
-                            <li
-                              className="fw-bold text-muted"
-                              style={{ fontSize: "13px" }}
-                            >
-                              Free
-                            </li>
-                            <Button
-                              className="text-light mt-2"
-                              style={{ backgroundColor: "#a8203b" }}
-                            >
-                              Apply Now
-                            </Button>
-                          </ul>
-                        </div>
-                      </div>
-                    );
+                    return <Fee ele={ele} />;
                   })}
                   <Carousel />
                 </div>
