@@ -13,9 +13,6 @@ const Profile = () => {
 
     window.scrollTo(0, 0)
   }, []);
-
- 
-
   return (
     <>
       {/* <h1>hello</h1> */}
@@ -61,7 +58,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };

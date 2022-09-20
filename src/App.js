@@ -36,10 +36,14 @@ import Bankaccount from "./pages/Bankaccount";
 import Blogs from "./pages/Blogs";
 import Foruniversities from "./pages/Foruniversities";
 import Blogdetails from "./pages/Blogdetails";
+import { useEffect } from "react";
 
 // import { Authcontextprovider } from './context/Authcontext';
 
 function App() {
+
+
+
   return (
     <>
       {/* <Authcontextprovider> */}
@@ -54,7 +58,7 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/universities" element={<Universities />} />
           <Route path="/outeruniversities/:id" element={<Outeruniverities />} />
-          <Route path="/universities-details"element={<Universitiesdetails />}/>
+          <Route path="/universities-details" element={<Universitiesdetails />} />
           <Route path="/apply/:id" element={<Apply />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profiledetails" element={<Profiledetails />} />

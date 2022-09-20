@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Stack from "@mui/material/Stack";
@@ -120,7 +120,9 @@ const Money = () => {
                     aria-describedby="emailHelp"
                     required
                     onChange={(e) => setEmail(e.target.value)}
+
                   />
+                  <small style={{ fontSize: "12px" }} className="m-0">Enter Your Valid Email Transcation</small>
                 </div>
                 <div class="mb-3">
                   <label

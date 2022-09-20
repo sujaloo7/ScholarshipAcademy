@@ -281,7 +281,7 @@ function Navbar() {
               </li> */}
             </ul>
 
-            {isLoggedIn && localStorage.getItem("user_type") === "student" ? (
+            {isLoggedIn && localStorage.getItem("user_type") === "student" ? (  
               <div>
                 {/* <NavLink to="/profile">
                   <button className='btn btn-dark text-light'>account</button>

@@ -666,18 +666,96 @@ body{
     width: 100% !important;
   }
 } */
- @media only screen and (min-width: 922px) {
+ @media only screen and (min-width: 422px) {
 
-    .usp-using .col-sm-6
+    .usp-using .col-sm-6 .row
     {
         width: 100% !important;
+        height: auto !important;
+        text-align: center;
+        /* margin-top: 200px !important; */
 
+    }
+    .usp-using
+    {
+        padding-top: 250px !important;
     }
     .usp-using h1
     {
         padding-top: 60px !important;
     }
   } 
+  @media only screen and (min-width: 378px) {
+
+    .usp-using .col-sm-6 .row
+    {
+        width: 100% !important;
+        height: auto !important;
+        text-align: center;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        /* margin-top: 200px !important; */
+
+    }
+    .usp-using
+    {
+        padding-top: 350px !important;
+    }
+    .money-back
+    {
+        padding: 0% !important;
+    }
+    .finance .col-sm-6 img
+    {
+     /* text-align: center !important; */
+    /* margin-left: -90px; */
+    height: 300px;
+    
+    }
+    
+    .money-back form
+    {
+      width: 100% !important;
+      /* padding: 0% !important; */
+      margin-top: 50px;
+    }
+    .usp-using h1
+    {
+        padding-top: 60px !important;
+    }
+  }
+  @media only screen and (min-width: 800px) {
+
+    .usp-using .col-sm-6 .row
+    {
+        width: 100% !important;
+        height: auto !important;
+        text-align: center;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        /* margin-top: 200px !important; */
+
+    }
+    .usp-using
+    {
+        padding-top: 350px !important;
+    }
+    .money-back
+    {
+        padding: 0% !important;
+    }
+    
+    .money-back form
+    {
+      width: 100% !important;
+      /* padding: 0% !important; */
+      margin-top: 50px;
+    }
+    .usp-using h1
+    {
+        padding-top: 60px !important;
+    }
+  }
 
   
 

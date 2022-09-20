@@ -13,6 +13,8 @@ const Hero = () => {
       duration: 1500,
     });
     AOS.refresh();
+
+    
   }, []);
   return (
     <>
@@ -29,7 +31,7 @@ const Hero = () => {
                 </div>
                 <div className="text-hero-regular">
                   There are so many variations passages of management Your
-                  mindset about <br></br> bussiness in your company or agency
+                  mindset about bussiness in your company or agency
                 </div>
                 <div className="cta">
                   <a
