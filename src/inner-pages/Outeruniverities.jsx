@@ -17,6 +17,8 @@ import { imageUrl } from "../Repository/Repository";
 // import Slider from './Slider';
 // import webroukCustomRange from "https://cdn.skypack.dev/webrouk-custom-range@latest";
 import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+
 import Universitylist from "../country-university/Universitylist";
 // import { Button } from '@mui/material';
 
@@ -24,6 +26,11 @@ const Outeruniverities = () => {
   const [type, setType] = useState("");
   const [universityList, setUniversityList] = useState([]);
   const [countryName, setCountryName] = useState("");
+  const [dataCount, setDataCount] = useState(0);
+  const [pageCount, setPageCount] = useState(10);
+  const [currentpage, setCurrentPage] = useState(1);
+
+  let pagesize = 10;
 
   useEffect(() => {
     let typ = window.location.pathname.split("/").pop();
@@ -33,7 +40,7 @@ const Outeruniverities = () => {
 
     setType(typ);
     window.scrollTo(0, 0);
-  }, []);
+  }, [currentpage]);
 
   const GetUniversity = async (typ) => {
     if (typ.length != 24 && typ != "all") {
@@ -44,9 +51,14 @@ const Outeruniverities = () => {
       let res = await getUniversitiesProfile({
         country_id: typ,
         for_country: true,
+        page: currentpage,
+        pagesize: pagesize,
       });
       if (res.status === 1) {
         setUniversityList(res.data);
+        setDataCount(res.count);
+        let pageCount1 = Math.ceil(res.count / pagesize);
+        setPageCount(pageCount1);
       }
     } else if (typ === "all") {
       let name = "University List";
@@ -55,9 +67,14 @@ const Outeruniverities = () => {
       let res = await getUniversitiesProfile({
         is_all: true,
         for_country: true,
+        page: currentpage,
+        pagesize: pagesize,
       });
       if (res.status === 1) {
         setUniversityList(res.data);
+        setDataCount(res.count);
+        let pageCount1 = Math.ceil(res.count / pagesize);
+        setPageCount(pageCount1);
       }
     } else {
       let name = "Related Colleges to the course";
@@ -65,11 +82,21 @@ const Outeruniverities = () => {
       setCountryName(name);
       let res = await getUniversitiesProfile({
         category_id: typ,
+        page: currentpage,
+        pagesize: pagesize,
       });
       if (res.status === 1) {
         setUniversityList(res.data);
+        setDataCount(res.count);
+        let pageCount1 = Math.ceil(res.count / pagesize);
+        setPageCount(pageCount1);
       }
     }
+  };
+
+  const onPageSubmit = (value) => {
+    setCurrentPage(value.selected + 1);
+    console.log("value", value.selected + 1);
   };
 
   return (
@@ -509,6 +536,29 @@ const Outeruniverities = () => {
               </div>
             );
           })}
+        </div>
+        <div style={{ display: "flex" }}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="next >"
+            onPageChange={onPageSubmit}
+            pageRangeDisplayed={5}
+            pageCount={pageCount ? pageCount : 1}
+            previousLabel="<div previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+
+            //   renderOnZeroPageCount={null}
+          />
         </div>
       </div>
 

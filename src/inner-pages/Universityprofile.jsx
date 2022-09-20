@@ -9,6 +9,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import ReactPaginate from "react-paginate";
+
 import {
   getUniversityProfile,
   getStudentCountry,
@@ -19,6 +21,8 @@ import {
   getAttributeVal,
   getLanguage,
   addCourse,
+  getCourse,
+  updateCourse,
 } from "../Repository/UserRepository";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
@@ -52,6 +56,7 @@ const Universityprofile = () => {
   const [file, setFile] = useState(null);
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
+  const [courseList, setCourseList] = useState([]);
   const [course, setCourse] = useState("");
   const [courseName, setCourseName] = useState("");
   const [totalFees, setTotalFees] = useState("");
@@ -67,6 +72,12 @@ const Universityprofile = () => {
   const [feeArray, setFeeArray] = useState({});
   const [type, setType] = useState("success");
   const [message, setMessage] = useState("message");
+  const [dataCount, setDataCount] = useState(0);
+  const [pageCount, setPageCount] = useState(10);
+  const [currentpage, setCurrentPage] = useState(1);
+  const [ref, setRef] = useState(false);
+
+  const pagesize = 5;
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -89,7 +100,7 @@ const Universityprofile = () => {
       GetCountry();
     }
     window.scroll(0, 0);
-  }, []);
+  }, [ref]);
 
   useEffect(() => {
     console.log("personalData.country", personalData.country);
@@ -126,6 +137,16 @@ const Universityprofile = () => {
   useEffect(() => {
     console.log("personal data ", personalData);
   }, [personalData]);
+
+  const onclickCourse = async () => {
+    let res = await getCourse({ page: currentpage, pagesize: 10 });
+    if (res.status === 1) {
+      setCourseList(res?.data);
+      setDataCount(res?.count);
+      let pageCount1 = Math.ceil(res?.count / pagesize);
+      setPageCount(pageCount1);
+    }
+  };
 
   const onchangeDuration = (e) => {
     setCourseDuration(e.target.value);
@@ -200,6 +221,27 @@ const Universityprofile = () => {
     setFile(e.target.files[0]);
   };
 
+  const onchangeCourseDelete = async (id) => {
+    let res = await updateCourse({
+      course_id: id,
+      is_delete: true,
+    });
+    console.log("why this is undefine", res);
+    if (res.status === 1) {
+      console.log("this is success", res);
+      setRef(true);
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      console.log("this is success", res.message);
+
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
+  };
+
   const onchangeFees = (e, index) => {
     let obj = { index: e.target.value };
     // setFeeArray({ ...feeArray, index: e.target.value });
@@ -262,6 +304,7 @@ const Universityprofile = () => {
       type: courseType,
       category_id: course,
       total_course_fees: totalFees,
+      fees: tableList,
     };
     let res = await addCourse(obj);
     if (res.status === 1) {
@@ -287,6 +330,11 @@ const Universityprofile = () => {
       course,
       totalFees
     );
+  };
+
+  const onPageSubmit = (value) => {
+    setCurrentPage(value.selected + 1);
+    console.log("value", value.selected + 1);
   };
 
   return (
@@ -366,6 +414,22 @@ const Universityprofile = () => {
                     onClick={onclickUpload}
                   >
                     Upload course
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="pills-course-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-course"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-contact"
+                    aria-selected="false"
+                    style={{ borderRadius: "20px " }}
+                    onClick={onclickCourse}
+                  >
+                    See Courses
                   </button>
                 </li>
               </ul>
@@ -1066,6 +1130,71 @@ const Universityprofile = () => {
                       Upload Course
                     </Button>
                   </form>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="pills-course"
+                  role="tabpanel"
+                  aria-labelledby="pills-contact-tab"
+                >
+                  <div className="col-sm-12 mt-3">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Course Name</th>
+                          <th scope="col">Course Category</th>
+                          <th scope="col">Total Fees</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {courseList.length > 0
+                          ? courseList.map((ele, index) => {
+                              return (
+                                <tr row="1">
+                                  <td>{ele?.course_name} </td>
+                                  <td>{ele?.category_id?.category_name}</td>
+                                  <td>{ele?.total_course_fees} </td>
+                                  <td>
+                                    <i
+                                      class="fa-solid fa-trash"
+                                      onClick={(e) => {
+                                        onchangeCourseDelete(ele._id);
+                                      }}
+                                    ></i>{" "}
+                                  </td>
+                                </tr>
+                              );
+                            })
+                          : ""}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style={{ display: "flex" }}>
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel="next >"
+                      onPageChange={onPageSubmit}
+                      pageRangeDisplayed={5}
+                      pageCount={pageCount ? pageCount : 1}
+                      previousLabel="< previous"
+                      pageClassName="page-item"
+                      pageLinkClassName="page-link"
+                      previousClassName="page-item"
+                      previousLinkClassName="page-link"
+                      nextClassName="page-item"
+                      nextLinkClassName="page-link"
+                      breakClassName="page-item"
+                      breakLinkClassName="page-link"
+                      containerClassName="pagination"
+                      activeClassName="active"
+                      renderOnZeroPageCount={null}
+
+                      //   renderOnZeroPageCount={null}
+                    />
+                    <br />
+                  </div>
+                  <br />
                 </div>
               </div>
             </div>
