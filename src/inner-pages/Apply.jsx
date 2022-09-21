@@ -19,6 +19,8 @@ const Apply = () => {
   const [courseList, setCourseList] = useState([]);
   const [fee, setFee] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     let typ = window.location.pathname.split("/").pop();
 
     GetUniversity(typ);

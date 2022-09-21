@@ -26,7 +26,11 @@ const Prililesidebar = () => {
         <div className="col-md-12 shadow">
           <div className="user-details text-center">
             <img
-              src={`${imageUrl}${image}`}
+              src={
+                image
+                  ? `${imageUrl}${image}`
+                  : `${imageUrl}/public/no-image-user.png`
+              }
               className="mb-0"
               height={150}
               style={{ borderRadius: "50%" }}
@@ -36,20 +40,27 @@ const Prililesidebar = () => {
             {/* <small style={{ color: "#FF723A" }}>ID: STY11142</small> */}
             <br></br>
             {/* <button onClick={logOut} style={{fontSize:"12px"}}  className=' btn btn-muted text-dark p-1 px-3 mb-2'>LogOut</button> */}
-
           </div>
           <div className="profile-links mt-5">
-            <div className="col-sm-12  bg-light py-3" >
-              <Link to="/profiledetails" className="ms-3 text-dark fw-regular">Profile Status</Link>
+            <div className="col-sm-12  bg-light py-3">
+              <Link to="/profiledetails" className="ms-3 text-dark fw-regular">
+                Profile Status
+              </Link>
             </div>
-            <div className="col-sm-12  bg-light py-3" >
-              <Link to="/" className="ms-3 text-dark fw-regular">Application Filled</Link>
+            <div className="col-sm-12  bg-light py-3">
+              <Link to="/" className="ms-3 text-dark fw-regular">
+                Application Filled
+              </Link>
             </div>
-            <div className="col-sm-12  bg-light py-3" >
-              <Link to="/" className="ms-3 text-dark fw-regular">Application Accepted</Link>
+            <div className="col-sm-12  bg-light py-3">
+              <Link to="/" className="ms-3 text-dark fw-regular">
+                Application Accepted
+              </Link>
             </div>
-            <div className="col-sm-12  bg-light py-3" >
-              <Link to="/" className="ms-3 text-dark fw-regular">Confirmed Admission</Link>
+            <div className="col-sm-12  bg-light py-3">
+              <Link to="/" className="ms-3 text-dark fw-regular">
+                Confirmed Admission
+              </Link>
             </div>
           </div>
         </div>

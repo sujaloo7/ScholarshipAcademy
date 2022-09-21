@@ -31,6 +31,7 @@ import moment from "moment";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -66,6 +67,8 @@ const Prifildetails = () => {
   const [type, setType] = useState("success");
   const [message, setMessage] = useState("message");
 
+  let navigate = useNavigate();
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -75,6 +78,7 @@ const Prifildetails = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     GetProfile();
     GetLanguage();
     GetCountry();
@@ -168,6 +172,10 @@ const Prifildetails = () => {
       setType("success");
       setMessage(res.message);
       setOpen(true);
+      window.location.reload(false);
+      // navigate("/");
+
+      // navigate("/profiledetails");
     } else {
       setType("error");
       setMessage(res.message);
@@ -361,7 +369,7 @@ const Prifildetails = () => {
                               first_language: e.target.value,
                             })
                           }
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -401,7 +409,7 @@ const Prifildetails = () => {
                               gender: e.target.value,
                             })
                           }
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -460,8 +468,8 @@ const Prifildetails = () => {
                               state: e.target.value,
                             })
                           }
-                        //   value={age}
-                        //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                         >
                           {stateList?.map((ele, index) => {
                             //   console.log("test", ele._id, "select", selectState);
@@ -676,8 +684,8 @@ const Prifildetails = () => {
                               country: e.target.value,
                             });
                           }}
-                        //   value={age}
-                        //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -841,7 +849,7 @@ const Prifildetails = () => {
                               highest_education: e.target.value,
                             })
                           }
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -887,7 +895,7 @@ const Prifildetails = () => {
                             });
                           }}
 
-                        // label="Age"
+                          // label="Age"
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -988,8 +996,8 @@ const Prifildetails = () => {
                               school_country: e.target.value,
                             });
                           }}
-                        //   value={age}
-                        //   onChange={handleChange}
+                          //   value={age}
+                          //   onChange={handleChange}
                         >
                           <MenuItem value="">
                             <em>None</em>
@@ -1037,8 +1045,6 @@ const Prifildetails = () => {
                           })}
                         </Select> */}
                       </FormControl>
-
-
                     </div>
 
                     <div className="col-sm-6">
@@ -1061,7 +1067,6 @@ const Prifildetails = () => {
                         rows={2}
                         maxRows={2}
                       />
-
                     </div>
                     <div className="col-sm-6">
                       <TextField
@@ -1082,8 +1087,6 @@ const Prifildetails = () => {
                         variant="filled"
                       />
                     </div>
-
-
 
                     <Button
                       type="submit"
