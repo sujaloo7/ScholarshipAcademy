@@ -1,9 +1,9 @@
 import axios from "axios";
 // const baseDomain = "https://scholarshipbackend.herokuapp.com/api";
-const baseDomain = "http://localhost:4300/api";
-const imageDomain = "http://localhost:4300";
-// const baseDomain = "https://scholarshipbackend.herokuapp.com/api";
-// const imageDomain = "https://scholarshipbackend.herokuapp.com";
+// const baseDomain = "http://localhost:4300/api";
+// const imageDomain = "http://localhost:4300";
+const baseDomain = "https://scholarshipbackend.herokuapp.com/api";
+const imageDomain = "https://scholarshipbackend.herokuapp.com";
 const authorization_prefix = "Bearer ";
 
 export const customHeaders = {
@@ -28,5 +28,5 @@ export const serializeQuery = (query) => {
         (key) => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
       )
       .join("&");
-  } catch {}
+  } catch { }
 };
