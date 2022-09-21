@@ -78,10 +78,10 @@ const Login = () => {
           <Link
             to="/"
             className="me-auto"
-            style={{ textDecoration: "underline" }}
+            style={{ textDecoration: "none", color: "#a8203b" }}
           >
             {" "}
-            {"< back to home"}
+            {"back to home"}
           </Link>
           <img src={user} className="mt-5" height="350" alt="" />
         </div>

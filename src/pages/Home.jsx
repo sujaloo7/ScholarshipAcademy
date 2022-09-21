@@ -50,6 +50,8 @@ const Home = () => {
   const [open1, setOpen1] = useState(false);
   const [type1, setType1] = useState("success");
   const [message, setMessage] = useState("message");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   const handleClose1 = (event, reason) => {
     if (reason === "clickaway") {
@@ -72,6 +74,13 @@ const Home = () => {
       duration: 1500,
     });
     AOS.refresh();
+
+    let authToken = localStorage.getItem("auth_token");
+    if (!authToken) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
   }, []);
 
   const submitPopUp = async (e) => {
@@ -95,6 +104,8 @@ const Home = () => {
       setOpen1(true);
     }
   };
+
+
   return (
     <>
       <Navbar />
@@ -119,13 +130,23 @@ const Home = () => {
           </Alert>
         </Snackbar>
       </Stack>
+      {isLoggedIn ? (
 
-      <div class="sticky-icon">
-        <a href="#" onClick={handleClickOpen}>
-          {" "}
-          <i class="fa-solid fa-user" onClick={handleClickOpen}></i>Consult
-        </a>
-      </div>
+        <div class="sticky-icon d-none">
+          <a href="#" onClick={handleClickOpen}>
+            {" "}
+            <i class="fa-solid fa-user" onClick={handleClickOpen}></i>Consult
+          </a>
+        </div>
+      ) : (
+        <div class="sticky-icon ">
+          <a href="#" onClick={handleClickOpen}>
+            {" "}
+            <i class="fa-solid fa-user" onClick={handleClickOpen}></i>Consult
+          </a>
+        </div>
+
+      )}
       <div className="">
         <Dialog open={open} onClose={handleClose}>
           <form action="" onSubmit={submitPopUp}>
@@ -152,6 +173,7 @@ const Home = () => {
                     variant="filled"
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    type="email"
                   />
                 </div>
                 <div className="row mb-4">
@@ -169,7 +191,6 @@ const Home = () => {
                     id="filled-basic"
                     label="Phone Number"
                     variant="filled"
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                     onChange={(e) => setMobile(e.target.value)}
                     required
                   />

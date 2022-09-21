@@ -300,7 +300,7 @@ const Finance = () => {
               />
             </div>
             <div className="col-sm-6">
-              <button className="btn btn-primary mt-4 px-5" type="submit">
+              <button className="btn btn-primary mt-2 px-5" type="submit">
                 Submit
               </button>
             </div>

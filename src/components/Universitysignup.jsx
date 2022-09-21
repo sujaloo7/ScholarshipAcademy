@@ -108,10 +108,10 @@ const Universitysignup = () => {
           <Link
             to="/"
             className="me-auto"
-            style={{ textDecoration: "underline" }}
+            style={{ textDecoration: "none", color: "#a8203b" }}
           >
             {" "}
-            {"< back to home"}
+            {"back to home"}
           </Link>
           <img src={user} height="350" alt="" />
           <h2 class="text-uppercase">University Registration</h2>
