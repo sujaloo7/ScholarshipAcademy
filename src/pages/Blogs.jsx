@@ -16,7 +16,7 @@ const Blogs = () => {
 
   useEffect(() => {
     GetBlog();
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   }, []);
   const onPageSubmit = (value) => {
     setCurrentPage(value.selected + 1);
@@ -48,10 +48,10 @@ const Blogs = () => {
                       src={`${imageUrl}${ele.image}`}
                       class="card-img-top"
                       alt="..."
-                      height={300}
+                      height={230}
                     />
                     <div class="card-body">
-                      <h4 class="card-title">{ele.title}</h4>
+                      <h6 class="card-title">{ele.title}</h6>
                       <p class="card-text fw-bold" style={{ fontSize: "13px" }}>
                         {ele.subtitle}
                       </p>
@@ -62,7 +62,13 @@ const Blogs = () => {
                           {moment(ele.createdAt).format("DD-MMM-YYYY")}
                         </small>
                         <br></br>
-                        <Link to={`/blogdetails/${ele._id}`} className="btn btn-primary mt-2 p-0 px-3 py-2" style={{ fontSize: "13px" }}>Read More</Link>
+                        <Link
+                          to={`/blogdetails/${ele._id}`}
+                          className="btn btn-primary mt-2 p-0 px-3 py-2"
+                          style={{ fontSize: "13px" }}
+                        >
+                          Read More
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -76,7 +82,7 @@ const Blogs = () => {
           )}
         </div>
       </div>
-      <div style={{ display: "flex", marginLeft: "auto", marginRight: "auto" }}  >
+      <div style={{ display: "flex", marginLeft: "auto", marginRight: "auto" }}>
         <ReactPaginate
           breakLabel="..."
           nextLabel="next >"
@@ -93,11 +99,11 @@ const Blogs = () => {
           breakClassName="page-item"
           breakLinkClassName="page-link"
           containerClassName="pagination"
-          activeClassName="active " style={{}}
+          activeClassName="active "
+          style={{}}
           renderOnZeroPageCount={null}
 
-
-        //   renderOnZeroPageCount={null}
+          //   renderOnZeroPageCount={null}
         />
       </div>
       <Footer />

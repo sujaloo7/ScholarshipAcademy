@@ -261,6 +261,7 @@ const Universityprofile = () => {
       setType("success");
       setMessage(res.message);
       setOpen(true);
+      window.location.reload(false);
     } else {
       setType("error");
       setMessage(res.message);

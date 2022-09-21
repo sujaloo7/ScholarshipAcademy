@@ -1106,150 +1106,1164 @@ const Prifildetails = () => {
                 aria-labelledby="pills-contact-tab"
                 tabindex="0"
               >
-                <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
-                  English Exam Score
-                </h6>
-                <div className="row p-2 mt-3">
-                  <div className="col-sm-6">
-                    <FormControl
-                      variant="filled"
-                      className="w-100 mb-5"
-                      sx={{}}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        English Exam Score *
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        value={testData.test_name ? testData.test_name : ""}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_name: e.target.value,
-                          })
-                        }
-                        label="Age"
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        {testName?.map((ele, index) => {
-                          //   console.log("test", ele._id, "select", selectState);
-                          return ele.attribute_value === testData.test_name ? (
-                            <MenuItem key={index} value={ele.attribute_value}>
-                              {ele.attribute_value}
-                            </MenuItem>
-                          ) : (
-                            <MenuItem key={index} value={ele.attribute_value}>
-                              {ele.attribute_value}
-                            </MenuItem>
-                          );
-                        })}
-                      </Select>
-                    </FormControl>
-                  </div>
-                  <div className="col-sm-6">
-                    <TextField
-                      id="standard-basic"
-                      className="w-100 mb-5"
-                      value={testData?.test_date}
-                      onChange={(e) =>
-                        setTestData({ ...testData, test_date: e.target.value })
-                      }
-                      label="Date of Exam *"
-                      placeholder="MM/DD/YYYY"
-                      variant="filled"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </div>
-                </div>
                 <form action="" onSubmit={testScoreSubmit}>
-                  <div className="row p-2">
-                    <div className="col-sm-3">
+                  <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
+                    IELTS Score
+                  </h6>
+                  <div className="row p-2 mt-3">
+                    <div className="col-sm-6">
                       <TextField
                         id="standard-basic"
-                        className="w-100 mb-5"
-                        value={testData?.reading_score}
-                        type="text"
-                        label="Reading *"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            reading_score: e.target.value,
+                            test_date: e.target.value,
                           })
                         }
+                        label="IELTS Score"
+                        placeholder="Enter Your Score"
                         variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
                       />
                     </div>
-                    <div className="col-sm-3">
+
+                    <div className="col-sm-6">
                       <TextField
                         id="standard-basic"
-                        className="w-100 mb-5"
-                        type="text"
-                        value={testData?.lisning_score}
-                        label="Listening *"
-                        variant="filled"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            lisning_score: e.target.value,
+                            test_date: e.target.value,
                           })
                         }
-                        I
+                        label="IELTS Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
                       />
                     </div>
-                    <div className="col-sm-3">
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
                       <TextField
                         id="standard-basic"
-                        className="w-100 mb-5"
-                        value={testData?.writing_score}
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            writing_score: e.target.value,
+                            test_date: e.target.value,
                           })
                         }
-                        type="text"
-                        label="Writing *"
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
                       />
                     </div>
-                    <div className="col-sm-3">
+
+                    <div className="col-sm-6">
                       <TextField
                         id="standard-basic"
-                        className="w-100 mb-5"
-                        value={testData?.speaking_score}
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            speaking_score: e.target.value,
+                            test_date: e.target.value,
                           })
                         }
-                        type="text"
-                        label="Speaking *"
+                        label="IELTS Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
                         variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    GRE Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="GRE Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="GRE Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="GRE Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    GMAT Score
+                  </h6>
+                  <div className="row p-2 mt-3">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="GMAT Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="GMAT Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="GMAT Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    TEST AS Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="TEST AS Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="TEST AS Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="TEST AS Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    NEET Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="NEET Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="NEET Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="NEET Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    IIT JEE Mains Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="IIT JEE Mains Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="IIT JEE Mains Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="IIT JEE Mains Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    IIT JEE Advanced Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="IIT JEE Advanced Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="IIT JEE Advanced Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="IIT JEE Advanced Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    German Language A1 Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language A1 Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language A1 Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language A1 Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    German Language A2 Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language A2 Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language A2 Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
                       />
                     </div>
                   </div>
                   <div className="row p-2">
-                    <TextField
-                      id="standard-basic"
-                      value={testData?.overall}
-                      onChange={(e) =>
-                        setTestData({
-                          ...testData,
-                          overall: e.target.value,
-                        })
-                      }
-                      className="w-100 mb-5"
-                      type="text"
-                      label="Over All *"
-                      variant="filled"
-                    />
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language A2 Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
                   </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    German Language B1 Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language B1 Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language B1 Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language B1 Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    German Language B2 Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language B2 Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language B2 Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language B2 Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    German Language C1 Score
+                  </h6>
+                  <div className="row p-2 mt-0">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language C1 Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language C1 Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language C1 Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-0" style={{ color: "#FF723A" }}>
+                    German Language C2 Score
+                  </h6>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language C2 Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language C2 Pass Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="row p-2 ">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="Pass Date As On Scorecard"
+                        placeholder="Enter Mentioned Date As On Scorecard"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={testData?.test_date}
+                        onChange={(e) =>
+                          setTestData({
+                            ...testData,
+                            test_date: e.target.value,
+                          })
+                        }
+                        label="German Language C2 Marksheet "
+                        // placeholder="MM/DD/YYYY"
+                        type="file"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
                   <Button
                     type="submit"
                     style={{ backgroundColor: "#FF723A" }}
