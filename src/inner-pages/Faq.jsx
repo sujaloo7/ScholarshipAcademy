@@ -8,6 +8,7 @@ import { Card, Cardbody } from "@mui/material";
 const FAQ = () => {
   const [faq, setFaq] = useState([]);
   useEffect(() => {
+    window.scrollTo(0, 0);
     GetFaq();
   }, []);
 
@@ -44,9 +45,11 @@ const FAQ = () => {
                 );
               })} */}
               <div className="col-sm-12 text-center">
-                <img src="https://images.leverageedu.com/assets/img/scholarships/faq-ico.svg" alt="" />
+                <img
+                  src="https://images.leverageedu.com/assets/img/scholarships/faq-ico.svg"
+                  alt=""
+                />
                 <h1 class="mb-5 fw-bold mt-4">Frequently Asked Questions</h1>
-
               </div>
               <div className="col-sm-12">
                 <div class="accordion" id="accordionExample">
@@ -54,30 +57,39 @@ const FAQ = () => {
                     return (
                       <div class="accordion-item">
                         <h2 class="accordion-header" id={index}>
-                          <button
-                            class="accordion-button"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne"
-                            aria-expanded="true"
+                          <p
+                            // class="accordion-button"
+                            // data-bs-toggle="collapse"
+                            // data-bs-target={`#${index}`}
+                            // aria-expanded="true"
                             aria-controls={index}
-                            style={{ color: "#c44464" }}
+                            disabled
+                            style={{
+                              color: "#c44464",
+                              fontSize: "13px",
+                              backgroundColor: "#cfe2ff",
+                            }}
+                            className=" p-4"
                           >
                             Q.{index + 1} &nbsp;
                             {ele?.question}
-                          </button>
+                          </p>
                         </h2>
                         <div
-                          id="collapseOne"
+                          id={index}
                           class="accordion-collapse collapse show"
                           aria-labelledby={index}
                           data-bs-parent={index}
                         >
-                          <div class="accordion-body">
+                          <div
+                            class="accordion-body p-0"
+                            style={{ fontSize: "13px" }}
+                          >
                             <p
                               dangerouslySetInnerHTML={{
                                 __html: ele?.answer,
                               }}
+                              className="ms-3"
                             ></p>
                           </div>
                         </div>
@@ -85,14 +97,11 @@ const FAQ = () => {
                     );
                   })}
                 </div>
-
               </div>
-
             </div>
           </div>
         </div>
       </div>
-
 
       <Footer />
     </>

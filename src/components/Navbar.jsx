@@ -36,7 +36,10 @@ function Navbar() {
   // }
   const logOut = () => {
     localStorage.clear();
+    // window.location.reload(false);
+
     // window.location.href = "/login";
+
     navigate("/login");
   };
   // const handleLogout = async () => {
@@ -311,12 +314,12 @@ function Navbar() {
                 >
                   <MenuItem>
                     {" "}
-                    <Link to="/profile" className="text-dark">
+                    <a href="/profile" className="text-dark">
                       {" "}
                       Profile{" "}
-                    </Link>
+                    </a>
                   </MenuItem>
-                  {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                  {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}{" "}
                   <MenuItem onClick={logOut}>Logout</MenuItem>
                 </Menu>
               </div>
@@ -347,10 +350,10 @@ function Navbar() {
                 >
                   <MenuItem>
                     {" "}
-                    <Link to="/universityprofile" className="text-dark">
+                    <a href="/universityprofile" className="text-dark">
                       {" "}
                       Profile{" "}
-                    </Link>
+                    </a>
                   </MenuItem>
                   {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                   <MenuItem onClick={logOut}>Logout</MenuItem>
