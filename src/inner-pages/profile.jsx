@@ -11,7 +11,7 @@ const Profile = () => {
       window.location.href = "/";
     }
 
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }, []);
   return (
     <>
@@ -30,7 +30,7 @@ const Profile = () => {
                   <p className="text-center ">Profile Status</p>
                 </div>
               </Link>
-              <Link to="/" className="col-sm-4">
+              <Link to="/all-applicaiton" className="col-sm-4">
                 <div
                   className="col-sm-12 m-2 shadow-sm p-5 text-light"
                   style={{ backgroundColor: "#a8203b" }}
@@ -38,7 +38,7 @@ const Profile = () => {
                   <p className="text-center">Application Filled</p>
                 </div>
               </Link>
-              <Link to="/" className="col-sm-4">
+              <Link to="/accepted-application" className="col-sm-4">
                 <div
                   className="col-sm-12 m-2 shadow-sm p-5 text-light"
                   style={{ backgroundColor: "#a8203b" }}
@@ -58,7 +58,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

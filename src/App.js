@@ -36,14 +36,13 @@ import Bankaccount from "./pages/Bankaccount";
 import Blogs from "./pages/Blogs";
 import Foruniversities from "./pages/Foruniversities";
 import Blogdetails from "./pages/Blogdetails";
+import ApplicationFilled from "./components/ApplicationFilled";
+import ApplicationAccepted from "./components/ApplicationAccepted";
 import { useEffect } from "react";
 
 // import { Authcontextprovider } from './context/Authcontext';
 
 function App() {
-
-
-
   return (
     <>
       {/* <Authcontextprovider> */}
@@ -58,7 +57,10 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/universities" element={<Universities />} />
           <Route path="/outeruniversities/:id" element={<Outeruniverities />} />
-          <Route path="/universities-details" element={<Universitiesdetails />} />
+          <Route
+            path="/universities-details"
+            element={<Universitiesdetails />}
+          />
           <Route path="/apply/:id" element={<Apply />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profiledetails" element={<Profiledetails />} />
@@ -80,6 +82,11 @@ function App() {
           <Route path="blogs" element={<Blogs />} />
           <Route path="foruniversities" element={<Foruniversities />} />
           <Route path="blogdetails/:id" element={<Blogdetails />} />
+          <Route path="all-applicaiton" element={<ApplicationFilled />} />
+          <Route
+            path="accepted-application"
+            element={<ApplicationAccepted />}
+          />
         </Routes>
       </BrowserRouter>
 

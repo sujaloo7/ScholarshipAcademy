@@ -48,12 +48,15 @@ const Prililesidebar = () => {
               </Link>
             </div>
             <div className="col-sm-12  bg-light py-3">
-              <Link to="/" className="ms-3 text-dark fw-regular">
+              <Link to="/all-applicaiton" className="ms-3 text-dark fw-regular">
                 Application Filled
               </Link>
             </div>
             <div className="col-sm-12  bg-light py-3">
-              <Link to="/" className="ms-3 text-dark fw-regular">
+              <Link
+                to="/accepted-application"
+                className="ms-3 text-dark fw-regular"
+              >
                 Application Accepted
               </Link>
             </div>

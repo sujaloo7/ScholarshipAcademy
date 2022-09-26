@@ -46,6 +46,23 @@ const Prifildetails = () => {
   const [stateList, setStateList] = useState([]);
   const [stateList1, setStateList1] = useState([]);
   const [educationList, setEducationList] = useState([]);
+  const [bachelorImage, setBachelorImage] = useState(null);
+  const [tenthImage, setTenthImage] = useState(null);
+  const [twelveImage, setTwelveImage] = useState(null);
+  const [masterImage, setMasterImage] = useState(null);
+  const [iletImage, setIletImage] = useState(null);
+  const [greImage, setGreImage] = useState(null);
+  const [gmatImage, setGmatImage] = useState(null);
+  const [testasImage, setTestasImage] = useState(null);
+  const [neetImage, setNeetImage] = useState(null);
+  const [mainsImage, setMainsImage] = useState(null);
+  const [advanceImage, setAdvanceImage] = useState(null);
+  const [a1Image, setA1Image] = useState(null);
+  const [a2Image, setA2Image] = useState(null);
+  const [b1Image, setB1Image] = useState(null);
+  const [b2Image, setB2Image] = useState(null);
+  const [c1Image, setC1Image] = useState(null);
+  const [c2Image, setC2Image] = useState(null);
   const [testName, setTestName] = useState([]);
   const [selectCountry, setSelectCountry] = useState("");
   const [file, setFile] = useState(null);
@@ -184,10 +201,21 @@ const Prifildetails = () => {
   };
   const submitEducationData = async (e) => {
     e.preventDefault();
-    let res = await updateUserDetails({
-      education_detail: true,
-      education_data: educationData,
-    });
+
+    let formd = new FormData();
+    formd.append(
+      "data",
+      JSON.stringify({
+        ...educationData,
+        education_detail: true,
+        education_data: educationData,
+      })
+    );
+    formd.append("bachelor", bachelorImage);
+    formd.append("tenth", tenthImage);
+    formd.append("twelfth", twelveImage);
+    formd.append("master", masterImage);
+    let res = await updateUserDetails(formd);
     if (res.status === 1) {
       setType("success");
       setMessage(res.message);
@@ -201,10 +229,30 @@ const Prifildetails = () => {
 
   const testScoreSubmit = async (e) => {
     e.preventDefault();
-    let res = await updateUserDetails({
-      test_score: true,
-      test_data: testData,
-    });
+    let formd = new FormData();
+    formd.append(
+      "data",
+      JSON.stringify({
+        ...educationData,
+        test_score: true,
+        test_data: testData,
+      })
+    );
+    formd.append("ilet", iletImage);
+    formd.append("gre", greImage);
+    formd.append("gmat", gmatImage);
+    formd.append("testas", testasImage);
+    formd.append("neet", neetImage);
+    formd.append("iit_mains", mainsImage);
+    formd.append("iit_advance", advanceImage);
+    formd.append("a1", a1Image);
+    formd.append("a2", a2Image);
+    formd.append("b1", b1Image);
+    formd.append("b2", b2Image);
+    formd.append("c1", c1Image);
+    formd.append("c2", c2Image);
+
+    let res = await updateUserDetails(formd);
     if (res.status === 1) {
       setType("success");
       setMessage(res.message);
@@ -821,56 +869,35 @@ const Prifildetails = () => {
                 aria-labelledby="pills-profile-tab"
                 tabindex="0"
               >
-                <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
-                  Education Details
-                </h6>
                 <form action="" onSubmit={submitEducationData}>
+                  <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
+                    Bachelor Degree Details
+                  </h6>
                   <div className="row p-2 mt-3">
                     <div className="col-sm-6">
-                      <FormControl
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={
+                          educationData?.bachelor_degree
+                            ? educationData?.bachelor_degree
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setEducationData({
+                            ...educationData,
+                            bachelor_degree: e.target.value,
+                          })
+                        }
+                        label="Name of Bachelor Degree"
+                        placeholder="Enter Degree Name"
                         variant="filled"
-                        className="w-100 mb-5"
-                        sx={{}}
-                      >
-                        <InputLabel id="demo-simple-select-standard-label">
-                          Highest level of education *
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          value={
-                            educationData.highest_education
-                              ? educationData.highest_education
-                              : ""
-                          }
-                          onChange={(e) =>
-                            setEducationData({
-                              ...educationData,
-                              highest_education: e.target.value,
-                            })
-                          }
-                          // label="Age"
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          {educationList?.map((ele, index) => {
-                            //   console.log("test", ele._id, "select", selectState);
-                            return ele.attribute_value ===
-                              profileData.education_details
-                                .highest_education ? (
-                              <MenuItem key={index} value={ele.attribute_value}>
-                                {ele.attribute_value}
-                              </MenuItem>
-                            ) : (
-                              <MenuItem key={index} value={ele.attribute_value}>
-                                {ele.attribute_value}
-                              </MenuItem>
-                            );
-                          })}
-                        </Select>
-                      </FormControl>
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
                     </div>
+
                     <div className="col-sm-6">
                       <FormControl
                         variant="filled"
@@ -913,6 +940,131 @@ const Prifildetails = () => {
                       </FormControl>
                     </div>
                   </div>
+
+                  <div className="row p-2 mt-3">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={
+                          educationData?.bachelor_degree_score
+                            ? educationData?.bachelor_degree_score
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setEducationData({
+                            ...educationData,
+                            bachelor_degree_score: e.target.value,
+                          })
+                        }
+                        label="Bachelor's Percentage / CGPA /Score"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={
+                          educationData?.bachelor_degree_year
+                            ? educationData?.bachelor_degree_year
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setEducationData({
+                            ...educationData,
+                            bachelor_degree_year: e.target.value,
+                          })
+                        }
+                        label="Pass Out Year "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="row p-2 mt-3">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="number"
+                        value={
+                          educationData?.bachelor_degree_date
+                            ? educationData?.bachelor_degree_date
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setEducationData({
+                            ...educationData,
+                            bachelor_degree_date: e.target.value,
+                          })
+                        }
+                        label="Bachelor's Pass Out Date"
+                        placeholder="The Date which Mentioned in your marksheet"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        value={
+                          educationData?.bachelor_degree_subject
+                            ? educationData?.bachelor_degree_subject
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setEducationData({
+                            ...educationData,
+                            bachelor_degree_subject: e.target.value,
+                          })
+                        }
+                        label="Bachelor Subject "
+                        placeholder="MM/DD/YYYY"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="row p-2 mt-3">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-3"
+                        type="file"
+                        // value={
+                        //   educationData?.bachelor_degree_score
+                        //     ? educationData?.bachelor_degree_score
+                        //     : ""
+                        // }
+                        onChange={(e) => setBachelorImage(e.target.files[0])}
+                        label="Bachelor's Marksheet"
+                        placeholder="Enter Your Score"
+                        variant="filled"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </div>
+                  </div>
+
                   <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
                     Grade 10th Details
                   </h6>
@@ -923,54 +1075,66 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-5"
                         type="text"
-                        value={educationData?.grade_average}
+                        value={
+                          educationData?.tenth_score
+                            ? educationData?.tenth_score
+                            : ""
+                        }
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
-                            grade_average: e.target.value,
+                            tenth_score: e.target.value,
                           });
                         }}
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        label="Grade Average * "
+                        label="10th Percentage / CGPA/ Score "
                         variant="filled"
                       />
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        value={educationData?.school_end}
+                        type="text"
+                        value={
+                          educationData?.tenth_year
+                            ? educationData?.tenth_year
+                            : ""
+                        }
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
-                            school_end: e.target.value,
+                            tenth_year: e.target.value,
                           });
                         }}
-                        label="Attended School To * "
-                        placeholder="MM/DD/YYYY"
-                        variant="filled"
                         InputLabelProps={{
                           shrink: true,
                         }}
-                      />
+                        label="10th Pass Out Year "
+                        variant="filled"
+                      />{" "}
                     </div>
                     <div className="col-sm-6">
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        value={educationData?.school_start}
+                        type="text"
+                        value={
+                          educationData?.tenth_date
+                            ? educationData?.tenth_date
+                            : ""
+                        }
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
-                            school_start: e.target.value,
+                            tenth_date: e.target.value,
                           });
                         }}
-                        label="Attended School from * "
-                        variant="filled"
-                        placeholder="MM/DD/YYYY"
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        label="10th Pass Out Date mentioned on marksheet "
+                        variant="filled"
                       />
                       <FormControl
                         variant="filled"
@@ -1003,99 +1167,281 @@ const Prifildetails = () => {
                             <em>None</em>
                           </MenuItem>
                           {countryList?.map((ele, index) => (
-                            <MenuItem key={index} value={ele._id}>
+                            <MenuItem key={index} value={ele.name}>
                               {ele.name}
                             </MenuItem>
                           ))}
                         </Select>
-                        {/* <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          // value={age}
-                          onChange={async (e) => {
-                            setEducationData({
-                              ...educationData,
-                              school_country: e.target.value,
-                            });
-                            let res = await getStudentState({
-                              countryCode: e.target.value,
-                            });
-                            setStateList1(res.data);
-                          }}
-                          label="Age"
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          {countryList?.map((ele, index) => {
-                            //   console.log("test", ele._id, "select", selectState);
-                            return ele.name === educationData.school_country ? (
-                              <MenuItem
-                                key={index}
-                                value={ele.countryCode}
-                                style={{ backgroundColor: "grey" }}
-                              >
-                                {ele.name}
-                              </MenuItem>
-                            ) : (
-                              <MenuItem key={index} value={ele.countryCode}>
-                                {ele.name}
-                              </MenuItem>
-                            );
-                          })}
-                        </Select> */}
                       </FormControl>
                     </div>
 
                     <div className="col-sm-6">
                       <TextField
-                        placeholder="Address"
+                        id="standard-basic"
                         className="w-100 mb-5"
-                        label="Address"
-                        value={educationData?.school_address}
-                        onChange={(e) => {
-                          setEducationData({
-                            ...educationData,
-                            school_address: e.target.value,
-                          });
-                        }}
-                        multiline
+                        type="file"
+                        onChange={(e) => setTenthImage(e.target.files[0])}
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        label="10th Marksheet "
                         variant="filled"
-                        rows={2}
-                        maxRows={2}
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
+                    Grade 12th Details
+                  </h6>
+
+                  <div className="row p-2 mt-3">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.twelfth_score
+                            ? educationData?.twelfth_score
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            twelfth_score: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="12th Percentage / CGPA/ Score "
+                        variant="filled"
+                      />
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.twelfth_year
+                            ? educationData?.twelfth_year
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            twelfth_year: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="12th Pass Out Year "
+                        variant="filled"
+                      />{" "}
+                    </div>
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.twelfth_date
+                            ? educationData?.twelfth_date
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            twelfth_date: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="12th Pass Out Date mentioned on marksheet "
+                        variant="filled"
+                      />
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.twelfth_subject
+                            ? educationData?.twelfth_subject
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            twelfth_subject: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="12th Subject "
+                        variant="filled"
+                      />
+                    </div>
+
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="file"
+                        // value={educationData?.school_zip}
+                        onChange={(e) => setTwelveImage(e.target.files[0])}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="12th Marksheet "
+                        variant="filled"
+                      />
+                    </div>
+                  </div>
+
+                  <h6 className="ms-2 mt-2" style={{ color: "#FF723A" }}>
+                    Masters Degree Details
+                  </h6>
+                  <div className="row p-2 mt-3">
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.master_degree
+                            ? educationData?.master_degree
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            master_degree: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="Master Degree Name "
+                        variant="filled"
                       />
                     </div>
                     <div className="col-sm-6">
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-5"
-                        type="number"
-                        value={educationData?.school_zip}
+                        type="text"
+                        value={
+                          educationData?.master_degree_score
+                            ? educationData?.master_degree_score
+                            : ""
+                        }
                         onChange={(e) => {
                           setEducationData({
                             ...educationData,
-                            school_zip: e.target.value,
+                            master_degree_score: e.target.value,
                           });
                         }}
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        label="Postal/Zip Code  * "
+                        label="Master's Percentage / CGPA/ Score "
+                        variant="filled"
+                      />{" "}
+                    </div>
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.master_degree_year
+                            ? educationData?.master_degree_year
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            master_degree_year: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="12th Pass Out Year "
                         variant="filled"
                       />
                     </div>
-
-                    <Button
-                      type="submit"
-                      style={{ backgroundColor: "#FF723A" }}
-                      className="w-100 text-light p-2"
-                    >
-                      Submit
-                    </Button>
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.master_degree_subject
+                            ? educationData?.master_degree_subject
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            master_degree_subject: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="Master's Subject "
+                        variant="filled"
+                      />
+                    </div>
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="text"
+                        value={
+                          educationData?.master_degree_date
+                            ? educationData?.master_degree_date
+                            : ""
+                        }
+                        onChange={(e) => {
+                          setEducationData({
+                            ...educationData,
+                            master_degree_date: e.target.value,
+                          });
+                        }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="Master's Pass Out Date as on Marksheet "
+                        variant="filled"
+                      />
+                    </div>
+                    <div className="col-sm-6">
+                      <TextField
+                        id="standard-basic"
+                        className="w-100 mb-5"
+                        type="file"
+                        // value={educationData?.school_zip}
+                        onChange={(e) => setMasterImage(e.target.files[0])}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        label="Master's Marksheet "
+                        variant="filled"
+                      />
+                    </div>
                   </div>
+
+                  <Button
+                    type="submit"
+                    style={{ backgroundColor: "#FF723A" }}
+                    className="w-100 text-light p-2"
+                  >
+                    Submit
+                  </Button>
                 </form>
               </div>
 
@@ -1116,11 +1462,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.ielts_score ? testData?.ielts_score : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            ielts_score: e.target.value,
                           })
                         }
                         label="IELTS Score"
@@ -1136,11 +1484,15 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.ielts_pass_year
+                            ? testData?.ielts_pass_year
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            ielts_pass_year: e.target.value,
                           })
                         }
                         label="IELTS Pass Year "
@@ -1158,11 +1510,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.ielts_pass_date
+                            ? testData?.ielts_pass_date
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            ielts_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1178,13 +1534,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setIletImage(e.target.files[0])}
                         label="IELTS Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1205,11 +1556,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.gre_score ? testData?.gre_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            gre_score: e.target.value,
                           })
                         }
                         label="GRE Score"
@@ -1225,11 +1576,13 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.gre_pass_year ? testData?.gre_pass_year : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            gre_pass_year: e.target.value,
                           })
                         }
                         label="GRE Pass Year "
@@ -1247,11 +1600,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.gre_pass_date ? testData?.gre_pass_date : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            gre_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1267,13 +1622,9 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+
+                        onChange={(e) => setGreImage(e.target.files[0])}
                         label="GRE Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1294,11 +1645,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.gmat_score ? testData?.gmat_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            gmat_score: e.target.value,
                           })
                         }
                         label="GMAT Score"
@@ -1314,11 +1665,15 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.gmat_pass_year
+                            ? testData?.gmat_pass_year
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            gmat_pass_year: e.target.value,
                           })
                         }
                         label="GMAT Pass Year "
@@ -1336,11 +1691,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.gmat_pass_date
+                            ? testData?.gmat_pass_date
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            gmat_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1356,13 +1715,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setGmatImage(e.target.files[0])}
                         label="GMAT Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1383,11 +1737,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.testas_score ? testData?.testas_score : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            testas_score: e.target.value,
                           })
                         }
                         label="TEST AS Score"
@@ -1403,11 +1759,15 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.testas_pass_year
+                            ? testData?.testas_pass_year
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            testas_pass_year: e.target.value,
                           })
                         }
                         label="TEST AS Pass Year "
@@ -1425,11 +1785,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.testas_pass_date
+                            ? testData?.testas_pass_date
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            testas_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1445,13 +1809,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setTestasImage(e.target.files[0])}
                         label="TEST AS Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1472,11 +1831,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.neet_score ? testData?.neet_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            neet_score: e.target.value,
                           })
                         }
                         label="NEET Score"
@@ -1492,11 +1851,15 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.neet_pass_year
+                            ? testData?.neet_pass_year
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            neet_pass_year: e.target.value,
                           })
                         }
                         label="NEET Pass Year "
@@ -1514,11 +1877,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.neet_pass_date
+                            ? testData?.neet_pass_date
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            neet_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1534,13 +1901,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setNeetImage(e.target.files[0])}
                         label="NEET Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1561,11 +1923,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.iit_mains_score
+                            ? testData?.iit_mains_score
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            iit_mains_score: e.target.value,
                           })
                         }
                         label="IIT JEE Mains Score"
@@ -1581,11 +1947,15 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.iit_mains_pass_year
+                            ? testData?.iit_mains_pass_year
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            iit_mains_pass_year: e.target.value,
                           })
                         }
                         label="IIT JEE Mains Pass Year "
@@ -1603,11 +1973,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.iit_mains_pass_date
+                            ? testData?.iit_mains_pass_date
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            iit_mains_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1623,13 +1997,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setMainsImage(e.target.files[0])}
                         label="IIT JEE Mains Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1650,11 +2019,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.iit_advance_score
+                            ? testData?.iit_advance_score
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            iit_advance_score: e.target.value,
                           })
                         }
                         label="IIT JEE Advanced Score"
@@ -1670,11 +2043,15 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.iit_advance_pass_year
+                            ? testData?.iit_advance_pass_year
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            iit_advance_pass_year: e.target.value,
                           })
                         }
                         label="IIT JEE Advanced Pass Year "
@@ -1692,11 +2069,15 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.iit_advance_pass_date
+                            ? testData?.iit_advance_pass_date
+                            : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            iit_advance_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1712,13 +2093,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setAdvanceImage(e.target.files[0])}
                         label="IIT JEE Advanced Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1739,11 +2115,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.a1_score ? testData?.a1_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            a1_score: e.target.value,
                           })
                         }
                         label="German Language A1 Score"
@@ -1759,11 +2135,13 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.a1_pass_year ? testData?.a1_pass_year : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            a1_pass_year: e.target.value,
                           })
                         }
                         label="German Language A1 Pass Year "
@@ -1781,11 +2159,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.a1_pass_date ? testData?.a1_pass_date : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            a1_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1801,13 +2181,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setA1Image(e.target.files[0])}
                         label="German Language A1 Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1828,11 +2203,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.a2_score ? testData?.a2_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            a2_score: e.target.value,
                           })
                         }
                         label="German Language A2 Score"
@@ -1848,11 +2223,13 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.a2_pass_year ? testData?.a2_pass_year : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            a2_pass_year: e.target.value,
                           })
                         }
                         label="German Language A2 Pass Year "
@@ -1870,11 +2247,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.a2_pass_date ? testData?.a2_pass_date : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            a2_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1890,13 +2269,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setA2Image(e.target.files[0])}
                         label="German Language A2 Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -1917,11 +2291,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.b1_score ? testData?.b1_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            b1_score: e.target.value,
                           })
                         }
                         label="German Language B1 Score"
@@ -1937,11 +2311,13 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.b1_pass_year ? testData?.b1_pass_year : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            b1_pass_year: e.target.value,
                           })
                         }
                         label="German Language B1 Pass Year "
@@ -1959,11 +2335,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.b1_pass_date ? testData?.b1_pass_date : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            b1_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -1979,13 +2357,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setB1Image(e.target.files[0])}
                         label="German Language B1 Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -2006,11 +2379,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.b2_score ? testData?.b2_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            b2_score: e.target.value,
                           })
                         }
                         label="German Language B2 Score"
@@ -2026,11 +2399,13 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.b2_pass_year ? testData?.b2_pass_year : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            b2_pass_year: e.target.value,
                           })
                         }
                         label="German Language B2 Pass Year "
@@ -2048,11 +2423,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.b2_pass_date ? testData?.b2_pass_date : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            b2_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -2068,13 +2445,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setB2Image(e.target.files[0])}
                         label="German Language B2 Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -2095,11 +2467,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.c1_score ? testData?.c1_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            c1_score: e.target.value,
                           })
                         }
                         label="German Language C1 Score"
@@ -2115,11 +2487,13 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.c1_pass_year ? testData?.c1_pass_year : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            c1_pass_year: e.target.value,
                           })
                         }
                         label="German Language C1 Pass Year "
@@ -2137,11 +2511,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.c1_pass_date ? testData?.c1_pass_date : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            c1_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -2157,13 +2533,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setC1Image(e.target.files[0])}
                         label="German Language C1 Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"
@@ -2184,11 +2555,11 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={testData?.c2_score ? testData?.c2_score : ""}
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            c2_score: e.target.value,
                           })
                         }
                         label="German Language C2 Score"
@@ -2204,11 +2575,13 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
+                        value={
+                          testData?.c2_pass_year ? testData?.c2_pass_year : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            c2_pass_year: e.target.value,
                           })
                         }
                         label="German Language C2 Pass Year "
@@ -2226,11 +2599,13 @@ const Prifildetails = () => {
                         id="standard-basic"
                         className="w-100 mb-3"
                         type="number"
-                        value={testData?.test_date}
+                        value={
+                          testData?.c2_pass_date ? testData?.c2_pass_date : ""
+                        }
                         onChange={(e) =>
                           setTestData({
                             ...testData,
-                            test_date: e.target.value,
+                            c2_pass_date: e.target.value,
                           })
                         }
                         label="Pass Date As On Scorecard"
@@ -2246,13 +2621,8 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        value={testData?.test_date}
-                        onChange={(e) =>
-                          setTestData({
-                            ...testData,
-                            test_date: e.target.value,
-                          })
-                        }
+                        // value={testData?.test_date}
+                        onChange={(e) => setC2Image(e.target.files[0])}
                         label="German Language C2 Marksheet "
                         // placeholder="MM/DD/YYYY"
                         type="file"

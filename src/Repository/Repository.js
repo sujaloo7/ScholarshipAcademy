@@ -28,5 +28,5 @@ export const serializeQuery = (query) => {
         (key) => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
       )
       .join("&");
-  } catch { }
+  } catch {}
 };

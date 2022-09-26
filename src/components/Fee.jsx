@@ -1,11 +1,59 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import { addApplication } from "../Repository/UserRepository";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function Fee({ ele }) {
   const [fee, setFee] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("success");
+  const [message, setMessage] = useState("message");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const onApply = async (e, ele) => {
+    let res = await addApplication({
+      course_id: ele._id,
+      university_id: ele.user_id,
+    });
+    if (res.status === 1) {
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
+  };
 
   return (
     <>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
+
       <div className="row inner-row ">
         <h5 className="mt-5" style={{ color: "#a8203b" }}>
           {ele?.course_name}
@@ -95,6 +143,7 @@ function Fee({ ele }) {
             <Button
               className="text-light mt-2"
               style={{ backgroundColor: "#a8203b" }}
+              onClick={(e) => onApply(e, ele)}
             >
               Apply Now
             </Button>

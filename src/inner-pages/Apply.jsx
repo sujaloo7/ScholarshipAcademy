@@ -7,6 +7,7 @@ import Carousel from "./Carousel";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Fee from "../components/Fee";
+
 import {
   getUniversitiesProfile,
   getCourse,
@@ -34,6 +35,7 @@ const Apply = () => {
       setUniversity(res.data[0]);
     }
   };
+
   return (
     <>
       <Navbar />
@@ -210,14 +212,22 @@ const Apply = () => {
                 >
                   Details
                 </button>
-
-                <Button
-                  className="ms-5 px-4"
-                  style={{ backgroundColor: "#a8203b" }}
-                  variant="contained"
-                >
-                  Apply
-                </Button>
+                {/* <a href="#course123">
+                  <Button
+                    className="ms-5 px-4"
+                    style={{ backgroundColor: "#a8203b" }}
+                    variant="contained"
+                    id="nav-profile-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#nav-profile"
+                    type="button"
+                    role="tab"
+                    aria-controls="nav-profile"
+                    aria-selected="false"
+                  >
+                    Apply
+                  </Button>
+                </a> */}
               </div>
             </nav>
             <div class="tab-content p-5" id="nav-tabContent">
@@ -247,7 +257,7 @@ const Apply = () => {
                 tabindex="0"
               >
                 {" "}
-                <div className="row">
+                <div className="row" id="course123">
                   <h3 className="mt-4" style={{ color: "#a8203b" }}>
                     Browse By Courses
                   </h3>

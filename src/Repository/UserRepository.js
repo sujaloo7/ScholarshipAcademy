@@ -305,6 +305,28 @@ export function updateCourse(payload) {
     } catch (error) {}
   });
 }
+export function addApplication(payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await Repository.post(
+        `${baseUrl}/add_application`,
+        payload
+      );
+      return resolve(response.data);
+    } catch (error) {}
+  });
+}
+export function getApplication(payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await Repository.post(
+        `${baseUrl}/get_application`,
+        payload
+      );
+      return resolve(response.data);
+    } catch (error) {}
+  });
+}
 
 // export function getExternalApiCountries(payload) {
 //   return new Promise(async (resolve, reject) => {
