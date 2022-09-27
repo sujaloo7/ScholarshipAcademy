@@ -347,7 +347,7 @@ const Prifildetails = () => {
                   Test Score
                 </button>
               </li>
-              <li class="nav-item" role="presentation">
+              {/* <li class="nav-item" role="presentation">
                 <button
                   class="nav-link px-3 m-2"
                   id="pills-disabled-tab"
@@ -361,7 +361,7 @@ const Prifildetails = () => {
                 >
                   Upload Documents
                 </button>
-              </li>
+              </li> */}
             </ul>
             <div class="tab-content" id="pills-tabContent">
               <div
@@ -983,7 +983,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="Pass Out Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1009,7 +1009,7 @@ const Prifildetails = () => {
                             bachelor_degree_date: e.target.value,
                           })
                         }
-                        label="Bachelor's Pass Out Date"
+                        label="Bachelor's Pass Out Date(DD/MM/YYYY)"
                         placeholder="The Date which Mentioned in your marksheet"
                         variant="filled"
                         InputLabelProps={{
@@ -1034,7 +1034,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="Bachelor Subject "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="Enter Subject"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1111,6 +1111,7 @@ const Prifildetails = () => {
                           shrink: true,
                         }}
                         label="10th Pass Out Year "
+                        placeholder="YYYY"
                         variant="filled"
                       />{" "}
                     </div>
@@ -1134,6 +1135,7 @@ const Prifildetails = () => {
                           shrink: true,
                         }}
                         label="10th Pass Out Date mentioned on marksheet "
+                        placeholder="MM/DD/YYYY"
                         variant="filled"
                       />
                       <FormControl
@@ -1236,6 +1238,7 @@ const Prifildetails = () => {
                           shrink: true,
                         }}
                         label="12th Pass Out Year "
+                        placeholder="YYYY"
                         variant="filled"
                       />{" "}
                     </div>
@@ -1260,6 +1263,7 @@ const Prifildetails = () => {
                         }}
                         label="12th Pass Out Date mentioned on marksheet "
                         variant="filled"
+                        placeholder="MM/DD/YYYY"
                       />
                       <TextField
                         id="standard-basic"
@@ -1370,6 +1374,7 @@ const Prifildetails = () => {
                           shrink: true,
                         }}
                         label="12th Pass Out Year "
+                        placeholder="YYYY"
                         variant="filled"
                       />
                     </div>
@@ -1416,6 +1421,7 @@ const Prifildetails = () => {
                           shrink: true,
                         }}
                         label="Master's Pass Out Date as on Marksheet "
+                        placeholder="MM/DD/YYYY"
                         variant="filled"
                       />
                     </div>
@@ -1496,7 +1502,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="IELTS Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1509,7 +1515,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.ielts_pass_date
                             ? testData?.ielts_pass_date
@@ -1521,7 +1527,7 @@ const Prifildetails = () => {
                             ielts_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -1586,7 +1592,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="GRE Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1599,7 +1605,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.gre_pass_date ? testData?.gre_pass_date : ""
                         }
@@ -1609,7 +1615,7 @@ const Prifildetails = () => {
                             gre_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -1677,7 +1683,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="GMAT Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1690,7 +1696,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.gmat_pass_date
                             ? testData?.gmat_pass_date
@@ -1702,7 +1708,7 @@ const Prifildetails = () => {
                             gmat_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -1771,7 +1777,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="TEST AS Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1784,7 +1790,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.testas_pass_date
                             ? testData?.testas_pass_date
@@ -1796,7 +1802,7 @@ const Prifildetails = () => {
                             testas_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -1863,7 +1869,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="NEET Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1876,7 +1882,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.neet_pass_date
                             ? testData?.neet_pass_date
@@ -1888,7 +1894,7 @@ const Prifildetails = () => {
                             neet_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -1959,7 +1965,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="IIT JEE Mains Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -1972,7 +1978,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.iit_mains_pass_date
                             ? testData?.iit_mains_pass_date
@@ -1984,7 +1990,7 @@ const Prifildetails = () => {
                             iit_mains_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -2055,7 +2061,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="IIT JEE Advanced Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -2068,7 +2074,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.iit_advance_pass_date
                             ? testData?.iit_advance_pass_date
@@ -2080,7 +2086,7 @@ const Prifildetails = () => {
                             iit_advance_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -2145,7 +2151,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="German Language A1 Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -2158,7 +2164,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.a1_pass_date ? testData?.a1_pass_date : ""
                         }
@@ -2168,7 +2174,7 @@ const Prifildetails = () => {
                             a1_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -2233,7 +2239,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="German Language A2 Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -2246,7 +2252,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.a2_pass_date ? testData?.a2_pass_date : ""
                         }
@@ -2256,7 +2262,7 @@ const Prifildetails = () => {
                             a2_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -2321,7 +2327,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="German Language B1 Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -2334,7 +2340,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.b1_pass_date ? testData?.b1_pass_date : ""
                         }
@@ -2344,7 +2350,7 @@ const Prifildetails = () => {
                             b1_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -2409,7 +2415,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="German Language B2 Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -2422,7 +2428,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.b2_pass_date ? testData?.b2_pass_date : ""
                         }
@@ -2432,7 +2438,7 @@ const Prifildetails = () => {
                             b2_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -2497,7 +2503,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="German Language C1 Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -2510,7 +2516,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.c1_pass_date ? testData?.c1_pass_date : ""
                         }
@@ -2520,7 +2526,7 @@ const Prifildetails = () => {
                             c1_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{
@@ -2585,7 +2591,7 @@ const Prifildetails = () => {
                           })
                         }
                         label="German Language C2 Pass Year "
-                        placeholder="MM/DD/YYYY"
+                        placeholder="YYYY"
                         variant="filled"
                         InputLabelProps={{
                           shrink: true,
@@ -2598,7 +2604,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        type="text"
                         value={
                           testData?.c2_pass_date ? testData?.c2_pass_date : ""
                         }
@@ -2608,7 +2614,7 @@ const Prifildetails = () => {
                             c2_pass_date: e.target.value,
                           })
                         }
-                        label="Pass Date As On Scorecard"
+                        label="Pass Date As On Scorecard(DD/MM/YYYY)"
                         placeholder="Enter Mentioned Date As On Scorecard"
                         variant="filled"
                         InputLabelProps={{

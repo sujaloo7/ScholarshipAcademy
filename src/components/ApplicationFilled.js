@@ -49,7 +49,7 @@ const ApplicationFilled = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     GetApplication();
-  }, []);
+  }, [currentpage]);
 
   const GetApplication = async () => {
     let res = await getApplication({ page: currentpage, pagesize: pagesize });
