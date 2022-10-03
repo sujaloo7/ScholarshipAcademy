@@ -997,7 +997,7 @@ const Prifildetails = () => {
                       <TextField
                         id="standard-basic"
                         className="w-100 mb-3"
-                        type="number"
+                        // type="number"
                         value={
                           educationData?.bachelor_degree_date
                             ? educationData?.bachelor_degree_date

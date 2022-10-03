@@ -33,6 +33,11 @@ import { type } from "@testing-library/user-event/dist/type";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -76,6 +81,9 @@ const Universityprofile = () => {
   const [pageCount, setPageCount] = useState(10);
   const [currentpage, setCurrentPage] = useState(1);
   const [ref, setRef] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [courseId, setCourseId] = useState("");
+  const [courseData, setCourseData] = useState({});
 
   const pagesize = 5;
 
@@ -87,9 +95,50 @@ const Universityprofile = () => {
     setOpen(false);
   };
 
+  const handleClickOpen = async (id) => {
+    setOpen2(true);
+    setCourseId(id);
+    onclickUpload();
+    let res = await getCourse({ course_id: id });
+    if (res.status === 1) {
+      setCourseData(res.data);
+      setTableList(res.data.fees);
+    }
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
+  };
+
+  const onsubmitModal = async (e) => {
+    e.preventDefault();
+    setCourseData({ ...courseData, fees: tableList });
+    let res = await updateCourse({
+      ...courseData,
+      fees: tableList,
+      course_id: courseId,
+    });
+    if (res.status === 1) {
+      handleClose2();
+      setType("success");
+      setMessage(res.message);
+      setOpen(true);
+      setRef(!ref);
+      setTableList([]);
+    } else {
+      setType("error");
+      setMessage(res.message);
+      setOpen(true);
+    }
+  };
+
+  const onchangeCourseEdit = async (id) => {
+    setCourseId(id);
+  };
+
   useEffect(() => {
     console.log("fees structure ", tableList);
-  }, [tableList]);
+  }, [tableList, courseList]);
 
   useEffect(() => {
     let authToken = localStorage.getItem("auth_token");
@@ -138,8 +187,12 @@ const Universityprofile = () => {
     console.log("personal data ", personalData);
   }, [personalData]);
 
+  useEffect(() => {
+    onclickCourse();
+  }, [ref, currentpage]);
+
   const onclickCourse = async () => {
-    let res = await getCourse({ page: currentpage, pagesize: 10 });
+    let res = await getCourse({ page: currentpage, pagesize: pagesize });
     if (res.status === 1) {
       setCourseList(res?.data);
       setDataCount(res?.count);
@@ -229,7 +282,7 @@ const Universityprofile = () => {
     console.log("why this is undefine", res);
     if (res.status === 1) {
       console.log("this is success", res);
-      setRef(true);
+      setRef(!ref);
       setType("success");
       setMessage(res.message);
       setOpen(true);
@@ -1132,6 +1185,407 @@ const Universityprofile = () => {
                     </Button>
                   </form>
                 </div>
+
+                <Dialog open={open2} onClose={handleClose2}>
+                  <form action="" onSubmit={onsubmitModal}>
+                    <DialogTitle>Course Details</DialogTitle>
+                    <DialogContent>
+                      <div className="row ">
+                        <div className="col-sm-6 mt-4">
+                          <FormControl variant="filled" className="w-100">
+                            <InputLabel id="demo-simple-select-filled-label">
+                              Select Course
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-filled-label"
+                              id="demo-simple-select-filled"
+                              value={
+                                courseData?.category_id
+                                  ? courseData?.category_id
+                                  : ""
+                              }
+                              onChange={(e) =>
+                                setCourseData({
+                                  ...courseData,
+                                  category_id: e.target.value,
+                                })
+                              }
+
+                              //   value={age}
+                              //   onChange={handleChange}
+                            >
+                              {categoryList?.map((ele, index) => {
+                                //   console.log("test", ele._id, "select", selectState);
+                                return (
+                                  <MenuItem key={index} value={ele._id}>
+                                    {ele.category_name}
+                                  </MenuItem>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </div>
+                        <div className="col-sm-6 mt-4">
+                          <TextField
+                            id="filled-basic"
+                            className="w-100"
+                            label="Course Name	"
+                            value={
+                              courseData?.course_name
+                                ? courseData?.course_name
+                                : ""
+                            }
+                            type="text"
+                            variant="filled"
+                            onChange={(e) =>
+                              setCourseData({
+                                ...courseData,
+                                course_name: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                        <div className="col-sm-6 mt-4">
+                          <TextField
+                            id="filled-basic"
+                            className="w-100"
+                            value={
+                              courseData?.total_course_fees
+                                ? courseData?.total_course_fees
+                                : ""
+                            }
+                            label="Total Course Fees	"
+                            type="number"
+                            variant="filled"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={(e) =>
+                              setCourseData({
+                                ...courseData,
+                                total_course_fees: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+
+                        <div className="col-sm-6 mt-4">
+                          <FormControl variant="filled" className="w-100">
+                            <InputLabel id="demo-simple-select-filled-label">
+                              Course Level
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-filled-label"
+                              id="demo-simple-select-filled"
+                              value={
+                                courseData?.course_level
+                                  ? courseData?.course_level
+                                  : ""
+                              }
+                              onChange={(e) =>
+                                setCourseData({
+                                  ...courseData,
+                                  course_level: e.target.value,
+                                })
+                              }
+
+                              //   value={age}
+                              //   onChange={handleChange}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+
+                              {levelList.map((ele, index) => {
+                                console.log("level lsit", ele);
+                                return (
+                                  <MenuItem key={index} value={ele._id}>
+                                    {ele.attribute_value}
+                                  </MenuItem>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div className="col-sm-6 mt-4">
+                          <FormControl variant="filled" className="w-100">
+                            <InputLabel id="demo-simple-select-filled-label">
+                              Course Type
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-filled-label"
+                              id="demo-simple-select-filled"
+                              value={courseData?.type ? courseData?.type : ""}
+                              onChange={(e) =>
+                                setCourseData({
+                                  ...courseData,
+                                  type: e.target.value,
+                                })
+                              }
+
+                              //   value={age}
+                              //   onChange={handleChange}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              {typeList.map((ele, index) => {
+                                return (
+                                  <MenuItem key={index} value={ele._id}>
+                                    {ele.attribute_value}
+                                  </MenuItem>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </div>
+
+                        <div className="col-sm-6 mt-4">
+                          <FormControl variant="filled" className="w-100">
+                            <InputLabel id="demo-simple-select-filled-label">
+                              Work Experience
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-filled-label"
+                              id="demo-simple-select-filled"
+                              onChange={(e) =>
+                                setCourseData({
+                                  ...courseData,
+                                  work_experience: e.target.value,
+                                })
+                              }
+                              value={
+                                courseData?.work_experience
+                                  ? courseData?.work_experience
+                                  : ""
+                              }
+                              //   onChange={handleChange}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              {expList.map((ele, index) => {
+                                return (
+                                  <MenuItem key={index} value={ele._id}>
+                                    {ele.attribute_value}
+                                  </MenuItem>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </div>
+                        <div className="col-sm-6 mt-4">
+                          <FormControl variant="filled" className="w-100">
+                            <InputLabel id="demo-simple-select-filled-label">
+                              Course Program{" "}
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-filled-label"
+                              id="demo-simple-select-filled"
+                              value={
+                                courseData?.course_program
+                                  ? courseData?.course_program
+                                  : ""
+                              }
+                              onChange={(e) =>
+                                setCourseData({
+                                  ...courseData,
+                                  course_program: e.target.value,
+                                })
+                              }
+
+                              //   value={age}
+                              //   onChange={handleChange}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              {programList.map((ele, index) => {
+                                return (
+                                  <MenuItem key={index} value={ele._id}>
+                                    {ele.attribute_value}
+                                  </MenuItem>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </div>
+                        <div className="col-sm-6 mt-4">
+                          <FormControl variant="filled" className="w-100">
+                            <InputLabel id="demo-simple-select-filled-label">
+                              Course Language{" "}
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-filled-label"
+                              id="demo-simple-select-filled"
+                              value={
+                                courseData?.course_language
+                                  ? courseData?.course_language
+                                  : ""
+                              }
+                              onChange={(e) =>
+                                setCourseData({
+                                  ...courseData,
+                                  course_language: e.target.value,
+                                })
+                              }
+
+                              //   value={age}
+                              //   onChange={handleChange}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              {langList.map((ele, index) => {
+                                return (
+                                  <MenuItem key={index} value={ele._id}>
+                                    {ele.language_name}
+                                  </MenuItem>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </div>
+                        <div className="col-sm-6 mt-4">
+                          <FormControl variant="filled" className="w-100">
+                            <InputLabel id="demo-simple-select-filled-label">
+                              Degree Required{" "}
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-filled-label"
+                              id="demo-simple-select-filled"
+                              value={
+                                courseData?.required_degress
+                                  ? courseData?.required_degress
+                                  : ""
+                              }
+                              onChange={(e) =>
+                                setCourseData({
+                                  ...courseData,
+                                  required_degress: e.target.value,
+                                })
+                              }
+
+                              //   value={age}
+                              //   onChange={handleChange}
+                            >
+                              <MenuItem value="">
+                                <em>None</em>
+                              </MenuItem>
+                              {degreeList.map((ele, index) => {
+                                return (
+                                  <MenuItem key={index} value={ele._id}>
+                                    {ele.attribute_value}
+                                  </MenuItem>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </div>
+                        <div className="col-sm-6 mt-4">
+                          <TextField
+                            id="filled-basic"
+                            className="w-100"
+                            value={
+                              courseData?.course_duration
+                                ? courseData?.course_duration
+                                : ""
+                            }
+                            label="Course Duration		"
+                            variant="filled"
+                            onChange={(e) => {
+                              onchangeDuration(e);
+                              setCourseData({
+                                ...courseData,
+                                course_duration: e.target.value,
+                              });
+                            }}
+                          />
+                        </div>
+
+                        <div className="col-sm-6 mt-4">
+                          <TextField
+                            id="filled-basic"
+                            className="w-100"
+                            label="Intake/Admission	"
+                            variant="filled"
+                            value={
+                              courseData?.admission ? courseData?.admission : ""
+                            }
+                            onChange={(e) =>
+                              setCourseData({
+                                ...courseData,
+                                admission: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                        <div className="col-sm-6 mt-4">
+                          <TextField
+                            id="filled-basic"
+                            className="w-100"
+                            label="Eligibility	"
+                            variant="filled"
+                            value={
+                              courseData?.eligibility
+                                ? courseData?.eligibility
+                                : ""
+                            }
+                            onChange={(e) =>
+                              setCourseData({
+                                ...courseData,
+                                eligibility: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                        <div className="col-sm-12">
+                          <h6
+                            className="ms-2 mt-5 mb-5"
+                            style={{ color: "#FF723A" }}
+                          >
+                            Fees Structure (Per Year)
+                          </h6>
+                          {tableList.map((ele, index) => {
+                            return (
+                              <div className="row">
+                                <div className="col-sm-6 p-3">
+                                  <p className="ms-3">{index + 1} Year Fees</p>
+                                </div>
+                                <div className="col-sm-6">
+                                  <TextField
+                                    id="filled-basic"
+                                    className="w-100"
+                                    label={`${index + 1} Year Fees`}
+                                    variant="filled"
+                                    value={ele.fees}
+                                    onChange={(e) => {
+                                      let object = JSON.parse(
+                                        JSON.stringify(ele)
+                                      );
+                                      let array = JSON.parse(
+                                        JSON.stringify(tableList)
+                                      );
+                                      object.fees = e.target.value;
+                                      array[index] = object;
+                                      setTableList(array);
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose2}>Cancel</Button>
+                      <Button type="submit">Update</Button>
+                    </DialogActions>
+                  </form>
+                </Dialog>
+
                 <div
                   class="tab-pane fade"
                   id="pills-course"
@@ -1158,11 +1612,20 @@ const Universityprofile = () => {
                                   <td>{ele?.total_course_fees} </td>
                                   <td>
                                     <i
+                                      class="fa-solid fa-pen-to-square"
+                                      onClick={(e) => {
+                                        handleClickOpen(ele._id);
+                                      }}
+                                      style={{ cursor: "pointer" }}
+                                    ></i>
+                                    &nbsp;
+                                    <i
                                       class="fa-solid fa-trash"
                                       onClick={(e) => {
                                         onchangeCourseDelete(ele._id);
                                       }}
-                                    ></i>{" "}
+                                      style={{ cursor: "pointer" }}
+                                    />
                                   </td>
                                 </tr>
                               );
